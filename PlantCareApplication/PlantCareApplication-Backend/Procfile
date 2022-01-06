@@ -1,0 +1,1 @@
+web: java -jar PlantCareApplication-Backend/build/libs/PlantCareApplication-Backend-0.0.1-SNAPSHOT.jar
