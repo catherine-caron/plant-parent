@@ -1,12 +1,12 @@
 package ca.plantcare;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class EventRegistrationApplicationTests {
+//@SpringBootTest
+class PlantCareApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 
