@@ -4,6 +4,7 @@ public class WateringSchedule {
 
 	private Integer scheduleId;
 
+	//@Id
 	public Integer getScheduleId() {
 		return scheduleId;
 	}
