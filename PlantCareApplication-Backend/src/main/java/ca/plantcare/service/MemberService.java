@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ca.mcgill.ecse321.vehiclerepairshop.dao.MemberRepository;
-import ca.mcgill.ecse321.vehiclerepairshop.model.Member;
+import ca.plantcare.dao.MemberRepository;
+import ca.plantcare.model.Member;
 
 @Service
 public class MemberService {
@@ -17,13 +17,9 @@ public class MemberService {
 	private MemberRepository memberRepository;
 
     // methods to write:
-    // createMember
-    // getMemberByUsername
-    // getMemberByEmail
-    // updateMember
-    // deleteMember
-    // loginMember
-    // logoutMember
+
+    // loginMember  ???
+    // logoutMember ???
 
 	/**
 	 * Create a Membert with given parameters
@@ -36,8 +32,7 @@ public class MemberService {
 	 * @return the account created
 	 */
 	@Transactional
-	public Member createMember(String username, String password, 
-                                String email, String name, String phoneNumber, int numberOfPlants){
+	public Member createMember(String username, String password, String email, String name, String phoneNumber, int numberOfPlants){
 
         if (username == null || username.replaceAll("\\s+", "").length() == 0 || username.equals("undefined")) {
 			throw new InvalidInputException("Username cannot be empty.");
@@ -79,6 +74,124 @@ public class MemberService {
 		}
     }
 
+	/**
+	 * Find a member by username
+	 * @param username
+	 * @return the member
+	 */
+	@Transactional
+	public Member getMemberByUsername(String username) {
+		Member member = memberRepository.findByUsername(username);
+		return member;
+	}
+
+	/**
+	 * Find a member by email
+	 * @param email
+	 * @return the member
+	 */
+	@Transactional
+	public Member getMemberByEmail(String email) {
+		Member member = memberRepository.findByEmail(email);
+		return member;
+	}
+	
+	/**
+	 * Update member password, name, email, and phoneNumber. 
+	 * If one parameter shouldn't change, pass old value as new value. 
+	 * @param username
+	 * @param newPassword
+	 * @param newName
+	 * @param newEmail
+	 * @param newPhoneNumber - can be empty/erased
+	 * @return the member updated
+	 */
+	@Transactional
+	public Member updateMember(String username, String newPassword, String newEmail, String newName, String newPhoneNumber) {
+		if (username.equals("undefined") || newPassword.equals("undefined") || newName.equals("undefined") || newEmail.equals("undefined")) {
+			throw new InvalidInputException("One or more fields empty. Please try again.");
+			// note that phone number can be empty/undefined
+		}
+		else {
+			Member member = memberRepository.findByUsername(username);
+			if (member == null) {
+				throw new InvalidInputException("The member cannot be found.");
+			}
+			else if ( !member.getEmail.equals(newEmail) && !isEmailAvailable(newEmail)){
+				throw new InvalidInputException("This email is not available.");
+			}
+			else if (newEmail == null || newEmail.replaceAll("\\s+", "").length() == 0 || newEmail.equals("undefined")) {
+				throw new InvalidInputException("Email cannot be empty.");
+			}
+			else if (newEmail.contains(" ")) {
+				throw new InvalidInputException("Email cannot contain spaces.");
+			}
+			else if (newPassword == null || newPassword.replaceAll("\\s+", "").length() == 0 || newPassword.equals("undefined")) {
+				throw new InvalidInputException("Password cannot be empty.");
+			}
+			else if (newPassword.contains(" ")) {
+				throw new InvalidInputException("Password cannot contain spaces.");
+			}
+			else if (newName == null || newName.replaceAll("\\s+", "").length() == 0 || newName.equals("undefined")){
+				throw new InvalidInputException("Name cannot be empty.");
+			}
+			else {
+				member.setPassword(newPassword);
+				member.setName(newName);
+				member.setEmail(newEmail);
+				member.setPhoneNumber(newPhoneNumber);
+				memberRepository.save(member);
+				return member;
+			}
+		}
+	}
+
+	/**
+	 * Update numberOfPlants owned by a member
+	 * @param username
+	 * @param newNumberOfPlants
+	 * @return the member updated
+	 */
+	@Transactional
+	public Member updateNumberOfPlants(String username, int newNumberOfPlants) {
+		Member member = memberRepository.findByUsername(username);
+		if (member == null) {
+			throw new InvalidInputException("The member cannot be found.");
+		}
+		else if (newNumberOfPlants < 0){
+			throw new InvalidInputException("Number of plants cannot be negative.");
+		}
+		else {
+			member.setNumberOfPlants(newNumberOfPlants);
+			memberRepository.save(member);
+			return member;
+		}
+	}
+
+	/**
+	 * Deletes the member
+	 * @param username
+	 * @return member deleted
+	 */
+	@Transactional
+	public Member deleteMember(String username)  {
+		if (username.equals("undefined")) {
+			throw new InvalidInputException("Username empty. Please try again.");
+		}
+		else {
+			Member member = memberRepository.findByUsername(username);
+			if(member == null) {
+				throw new InvalidInputException("The member cannot be found.");
+			}
+			else {
+				memberRepository.delete(member);
+				return member;
+			}
+		}
+	}
+
+
+
 
     // ---------- helper methods --------------
 
@@ -113,3 +226,6 @@ public class MemberService {
 			return available;
 		}
 	}
+
+}
+
