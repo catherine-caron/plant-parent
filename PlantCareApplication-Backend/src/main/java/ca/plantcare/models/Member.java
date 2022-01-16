@@ -1,14 +1,21 @@
 package ca.plantcare.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.*;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Member {
 
-	// private Integer memberId; //not sure if we're keeping it in the databse -> use username
 	private Integer numberOfPlants;
 	private String email;
 	private String password;
-	private String fullName;
+	private String name;
 	private String phoneNumber;
-	private String userName;
+	private String username;
+	private List<Plant> plant;
 	
 	public Integer getNumberOfPlants() {
 		return numberOfPlants;
@@ -28,11 +35,11 @@ public class Member {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getFullName() {
-		return fullName;
+	public String getName() {
+		return name;
 	}
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -42,20 +49,21 @@ public class Member {
 	}
 
 	@Id
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@OneToMany(cascade = {CascadeType.ALL})
+	public List<Plant> getPlant()
+	{
+	  return this.plant;
 	}
 	
-	// no longer used, use username as ID
-	// //@Id
-	// public Integer getMemberId() {
-	// 	return memberId;
-	// }
-	// public void setMemberId(Integer memberId) {
-	// 	this.memberId = memberId;
-	// }
+	public void setPlant(List<Plant> aPlant) {
+		this.plant = aPlant;
+	}
 	
 }

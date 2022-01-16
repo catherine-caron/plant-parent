@@ -9,12 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ca.plantcare.dao.MemberRepository;
 import ca.plantcare.model.Member;
+import ca.plantcare.dao.PlantRepository;
+import ca.plantcare.model.Plant;
 
 @Service
 public class MemberService {
 
     @Autowired
 	private MemberRepository memberRepository;
+	@Autowired
+	private PlantRepository plantRepository;
 
     // methods to write:
 
@@ -32,7 +36,7 @@ public class MemberService {
 	 * @return the account created
 	 */
 	@Transactional
-	public Member createMember(String username, String password, String email, String name, String phoneNumber, int numberOfPlants){
+	public Member createMember(String username, String password, String email, String name, String phoneNumber){
 
         if (username == null || username.replaceAll("\\s+", "").length() == 0 || username.equals("undefined")) {
 			throw new InvalidInputException("Username cannot be empty.");
@@ -153,7 +157,7 @@ public class MemberService {
 	 * @return the member updated
 	 */
 	@Transactional
-	public Member updateNumberOfPlants(String username, int newNumberOfPlants) {
+	public Member updateNumberOfPlants(String username, Integer newNumberOfPlants) {
 		Member member = memberRepository.findByUsername(username);
 		if (member == null) {
 			throw new InvalidInputException("The member cannot be found.");
@@ -184,6 +188,11 @@ public class MemberService {
 				throw new InvalidInputException("The member cannot be found.");
 			}
 			else {
+				if (member.getPlant() != null) {
+					for (Plant plant : member.getPlant()) {
+						plantRepository.delete(plant);
+					}
+				}
 				memberRepository.delete(member);
 				return member;
 			}
@@ -191,9 +200,7 @@ public class MemberService {
 	}
 
 
-
-
-    // ---------- helper methods --------------
+    // ---------- Helper Methods --------------
 
 	/**
 	 * Helper method to search through all members and see if the username is already in use
@@ -225,6 +232,20 @@ public class MemberService {
 			available = true;
 			return available;
 		}
+	}
+
+	/**
+	 *  helper method that converts iterable to list
+	 * @param <T>
+	 * @param iterable
+	 * @return
+	 */
+	private <T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
 	}
 
 }
