@@ -7,8 +7,7 @@ import ca.plantcare.models.Member;
 
 public interface MemberRepository extends CrudRepository<Member, Integer>  {
 
-	Member findMemberByMemberId(Integer memberId);
+	Member findMemberByRsername(Integer username);
 	Member findMemberByEmail(Integer email);
-	Member findMemberByName(Integer name);
 
 }

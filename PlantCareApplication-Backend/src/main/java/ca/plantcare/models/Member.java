@@ -2,7 +2,7 @@ package ca.plantcare.models;
 
 public class Member {
 
-	private Integer memberId; //not sure if we're keeping it in the databse
+	// private Integer memberId; //not sure if we're keeping it in the databse -> use username
 	private Integer numberOfPlants;
 	private String email;
 	private String password;
@@ -40,6 +40,8 @@ public class Member {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+	@Id
 	public String getUserName() {
 		return userName;
 	}
@@ -47,12 +49,13 @@ public class Member {
 		this.userName = userName;
 	}
 	
-	//@Id
-	public Integer getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
-	}
+	// no longer used, use username as ID
+	// //@Id
+	// public Integer getMemberId() {
+	// 	return memberId;
+	// }
+	// public void setMemberId(Integer memberId) {
+	// 	this.memberId = memberId;
+	// }
 	
 }
