@@ -235,7 +235,7 @@ public class MemberService {
 	}
 
 	/**
-	 *  helper method that converts iterable to list
+	 * Helper method that converts iterable to list
 	 * @param <T>
 	 * @param iterable
 	 * @return
