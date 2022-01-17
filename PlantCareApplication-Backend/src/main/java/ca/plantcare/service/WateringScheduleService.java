@@ -64,8 +64,14 @@ public class WateringScheduleService {
 	 */
 	@Transactional
 	public WateringSchedule getWateringScheduleById(Integer scheduleId) {
-		return wateringScheduleRepository.findWateringScheduleByScheduleId(scheduleId);
-	}
+		WateringSchedule wateringSchedule = wateringScheduleRepository.findWateringScheduleByScheduleId(scheduleId);
+        if (wateringSchedule == null){
+            throw new IllegalArgumentException("The schedule cannot be found.");
+        }
+        else {
+            return wateringSchedule;
+        }
+    }
 
     /**
      * Update the hours between watering

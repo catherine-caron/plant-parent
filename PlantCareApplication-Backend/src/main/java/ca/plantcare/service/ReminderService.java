@@ -25,11 +25,6 @@ public class ReminderService {
 	@Autowired
 	private ReminderRepository reminderRepository;
 
-    // get
-    // update
-    // delete
-    // get by watering
-
     /**
      * Create a Reminder with given parameters
      * @param scheduleId
@@ -90,6 +85,95 @@ public class ReminderService {
             return reminder;
 		}
     }
+
+     /**
+	 * Get the Reminder by its ID
+	 * @param reminderId
+	 * @return the reminder
+	 */
+	@Transactional
+	public Reminder getReminderById(Integer reminderId) {
+        Reminder reminder = reminderRepository.findReminderByReminderId(reminderId);
+        if (reminder == null){
+            throw new IllegalArgumentException("The reminder cannot be found.");
+        }
+        else {
+            return reminder;
+        }
+	}
+
+    /**
+     * Update Reminder
+     * @param reminderId
+     * @param newMessage
+     * @param newTime
+     * @param newDate
+     * @return the updated reminder
+     */
+    @Transactional
+    public Reminder updateReminder(Integer reminderId, String newMessage, Time newTime, Date newDate){
+        Reminder reminder = reminderRepository.findReminderByReminderId(reminderId);
+
+        if (reminder == null){
+            throw new IllegalArgumentException("The reminder cannot be found.");
+        }
+        else if (newTime == null){
+            throw new IllegalArgumentException("Time cannot be empty.");
+        }
+        else if (newDate == null){
+            throw new IllegalArgumentException("Date cannot be empty.");
+        }
+        else {
+            if (newMessage == null || newMessage.replaceAll("\\s+", "").length() == 0 || newMessage.equals("undefined")) {
+                // default message
+                newMessage = "Time to water your plant!";
+            }
+            else if ( newMessage.equals("Rajaa") || newMessage.equals("Catherine")){
+                // easter egg
+                newMessage = "Water your plant, idiot!";
+            }
+            reminder.setMessage(newMessage);
+            reminder.setDate(newDate);
+            reminder.setTime(newTime);
+            reminderRepository.save(reminder);
+            return reminder;
+        }
+    }
+
+    /**
+     * Delete Reminder 
+     * @param reminderId
+     * @return the deleted reminder
+     */
+    @Transactional
+    public Reminder deleteReminder(Integer reminderId) {
+        Reminder reminder = reminderRepository.findReminderByReminderId(reminderId);
+        if (reminder == null){
+            throw new IllegalArgumentException("The reminder cannot be found.");
+        }
+        else {
+            reminderRepository.delete(reminder);
+            return reminder;
+        }
+    }
+
+
+    /**
+     * Gets all reminders for a watering schedule
+     * @param scheduleId
+     * @return list of reminders
+     */
+    @Transactional 
+    public List<Reminder> getReminderByWateringSchedule(Integer scheduleId){
+		WateringSchedule wateringSchedule = wateringScheduleRepository.findWateringScheduleByScheduleId(scheduleId);
+		if (wateringSchedule == null){
+			throw new IllegalArgumentException("Schedule not found.");
+		}
+		else{
+			return wateringSchedule.getReminder();
+		}
+	}
+
 
     // --------- Helper Methods ------------
 
