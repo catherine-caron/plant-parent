@@ -15,7 +15,7 @@ public class Member {
 	private String name;
 	private String phoneNumber;
 	private String username;
-	private List<Plant> plant;
+	private List<Plant> plant; 
 	
 	public Integer getNumberOfPlants() {
 		return numberOfPlants;

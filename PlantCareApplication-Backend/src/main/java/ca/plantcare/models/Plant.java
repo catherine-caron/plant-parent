@@ -25,6 +25,7 @@ public class Plant {
 	private List <SoilType> soilType;
 	private List <Toxicity> toxicity;
 	private List <BloomTime> bloomTime;
+	/*TO ADD?*/ private List <BloomTime> wateringRecommendation;
 	private Integer icon;
 	private String givenName;
 	private String botanicalName;
@@ -84,7 +85,7 @@ public class Plant {
 		return this.sunExposure;
 	}
 	
-	public void setLoans (List<SunExposure> aSunExposure) {
+	public void setSunExposure (List<SunExposure> aSunExposure) {
 		this.sunExposure = aSunExposure;
 	}
 	
@@ -110,6 +111,16 @@ public class Plant {
 	
 	public void setBloomTime (List<BloomTime> aBloomTime) {
 		this.bloomTime = aBloomTime;
+	}
+
+
+	public List <BloomTime> getWateringRecommendation() {
+		return wateringRecommendation;
+	}
+
+
+	public void setWateringRecommendation(List <BloomTime> wateringRecommendation) {
+		this.wateringRecommendation = wateringRecommendation;
 	}
 	
 

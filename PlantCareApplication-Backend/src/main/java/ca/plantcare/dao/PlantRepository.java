@@ -12,11 +12,11 @@ import ca.plantcare.models.Plant.Toxicity;
 
 public interface PlantRepository extends CrudRepository<Plant, Integer> {
 
-	Plant findPlantByPlantId(Integer plantId);
-	Plant findPlantByCommonName(String commonName);
-	Plant findPlantByGivenName(String givenName);
+	Plant findPlantByPlantId(Integer plantId); //added to service
+	Plant findPlantByCommonName(String commonName); //added to service
+	Plant findPlantByGivenName(String givenName); //added to service
 	Plant findPlantByBotanicalName(String botanicalName);
-	List<Plant> findPlantBySunExposure(SunExposure sunExposure);
+	List<Plant> findPlantBySunExposure(SunExposure sunExposure); //added to service
 	List<Plant> findPlantBySoilType(SoilType soilType);
 	List<Plant> findPlantByToxicity(Toxicity toxicity);
 	List<Plant> findPlantByBloomTime(BloomTime bloomTime);
