@@ -36,8 +36,8 @@ public class WateringSchedule {
 	  return this.reminder;
 	}
 	
-	public void setReminder(List<Reminder> aReminder) {
-		this.reminder = aReminder;
+	public void setReminder(List<Reminder> reminders) {
+		this.reminder = reminders;
 	}
 
 }
