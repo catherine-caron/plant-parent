@@ -11,6 +11,8 @@ import ca.plantcare.dao.WateringScheduleRepository;
 import ca.plantcare.models.WateringSchedule;
 import ca.plantcare.dao.ReminderRepository;
 import ca.plantcare.models.Reminder;
+import ca.plantcare.dao.PlantRepository;
+import ca.plantcare.models.Plant;
 
 @Service
 public class WateringScheduleService {
@@ -19,11 +21,9 @@ public class WateringScheduleService {
 	private WateringScheduleRepository wateringScheduleRepository;
 	@Autowired
 	private ReminderRepository reminderRepository;
+    @Autowired
+	private PlantRepository plantRepository;
     
-    // create
-    // get by schedule
-    // update 
-    // delete
     // find/get by plant
 
     /**
@@ -33,15 +33,16 @@ public class WateringScheduleService {
 	 * @return the schedule created
      */
 	@Transactional
-	public WateringSchedule createMeWateringSchedule(Integer scheduleId, Integer hoursBetweenWatering){
+	public WateringSchedule createMeWateringSchedule(Integer hoursBetweenWatering){
 
-        if (scheduleId == null){
-            throw new IllegalArgumentException("Schedule ID cannot be empty.");
-        }
-        else if (hoursBetweenWatering == null){
+        if (hoursBetweenWatering == null){
             throw new IllegalArgumentException("Hours Between Watering cannot be empty.");
         }
 		else {
+            int leftLimit = 000001;
+		    int rightLimit = 000100;
+	        int scheduleId = leftLimit + (int) (Math.random() * (rightLimit - leftLimit));
+
             WateringSchedule wateringSchedule = new WateringSchedule();
             wateringSchedule.setScheduleId(scheduleId);
             wateringSchedule.setHoursBetweenWatering(hoursBetweenWatering);
@@ -50,9 +51,80 @@ public class WateringScheduleService {
 		}
     }
 
+    /**
+	 * Get the Watering Schedule by its ID
+	 * @param scheduleId
+	 * @return the schedule
+	 */
+	@Transactional
+	public WateringSchedule getWateringScheduleById(Integer scheduleId) {
+		return wateringScheduleRepository.findWateringScheduleByScheduleId(scheduleId);
+	}
+
+    /**
+     * Update the hours between watering
+     * @param scheduleId
+     * @param newHoursBetweenWatering
+     * @return the updated schedule
+     */
+    @Transactional
+    public WateringSchedule updateWateringSchedule(Integer scheduleId, Integer newHoursBetweenWatering){
+        WateringSchedule wateringSchedule = wateringScheduleRepository.findWateringScheduleByScheduleId(scheduleId);
+
+        if (wateringSchedule == null){
+            throw new IllegalArgumentException("The watering schedule cannot be found.");
+        }
+        else if (newHoursBetweenWatering == null){
+            throw new IllegalArgumentException("Hours Between Watering cannot be empty.");
+        }
+        else {
+            wateringSchedule.setHoursBetweenWatering(newHoursBetweenWatering);
+            wateringScheduleRepository.save(wateringSchedule);
+            return wateringSchedule;
+        }
+    }
+
+    /**
+     * Delete Watering Schedule
+     * @param scheduleId
+     * @return the deleted schedule
+     */
+    @Transactional
+    public WateringSchedule deleteWateringSchedule(Integer scheduleId) {
+        WateringSchedule wateringSchedule = wateringScheduleRepository.findWateringScheduleByScheduleId(scheduleId);
+
+        if (wateringSchedule == null){
+            throw new IllegalArgumentException("The watering schedule cannot be found.");
+        }
+        else {
+            if (wateringSchedule.getReminder() == null) {
+                for (Reminder reminder : wateringSchedule.getReminder()) {
+                    reminderRepository.delete(reminder);
+                }
+            }
+            wateringScheduleRepository.delete(wateringSchedule);
+            return wateringSchedule;
+        }
+    }
+
+    /**
+     * Gets the watering schedule for a plant
+     * @param plantId
+     * @return schedule
+     */
+    @Transactional 
+    public WateringSchedule getWateringScheduleByPlant(Integer plantId){
+		Plant plant = plantRepository.findPlantByPlantId(plantId);
+		if (plant == null){
+			throw new IllegalArgumentException("Plant not found.");
+		}
+		else{
+			return plant.getWateringRecommendation();
+		}
+	}
 
 
-
+    // --------- Helper Methods ------------
 
     /**
 	 * Helper method that converts iterable to list

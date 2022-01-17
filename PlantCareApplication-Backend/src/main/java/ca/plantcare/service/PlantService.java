@@ -10,6 +10,7 @@ import ca.plantcare.dao.MemberRepository;
 import ca.plantcare.models.Member;
 import ca.plantcare.dao.PlantRepository;
 import ca.plantcare.models.Plant;
+import ca.plantcare.models.WateringSchedule;
 import ca.plantcare.models.Plant.BloomTime;
 import ca.plantcare.models.Plant.SoilType;
 import ca.plantcare.models.Plant.SunExposure;
@@ -33,13 +34,13 @@ public class PlantService {
 	 */
 	@Transactional
 	public List<Plant> getPlantsByMember(String memberUsername){
-		List<Member> members = toList(memberRepository.findAll());
-		for (Member member:members) {
-			if (member.getUsername().equals(memberUsername)) {
-				return member.getPlant();
-			}
+		Member member = memberRepository.findMemberByUsername(memberUsername);
+		if (member == null){
+			throw new IllegalArgumentException("Member not found.");
 		}
-		throw new IllegalArgumentException("Username not found.");
+		else{
+			return member.getPlant();
+		}
 	}
 	
 	@Transactional
@@ -80,7 +81,7 @@ public class PlantService {
 	//create plant by admin needs an admin member id
 	public Plant createPlant(Integer icon, String givenName, String botanicalName,
 			String commonName,List <SunExposure> sunExposure,List <SoilType> soilType,
-			List <Toxicity> toxicity, List <BloomTime> bloomTime, List <BloomTime> wateringRecommendation){
+			List <Toxicity> toxicity, List <BloomTime> bloomTime, WateringSchedule wateringRecommendation){
 		
 		if (icon == null ||  icon.equals("undefined")) {
             throw new IllegalArgumentException("Icon cannot be null or empty");
@@ -138,7 +139,7 @@ public class PlantService {
 	 * @param 
 	 * @return plant
 	 */
-	public Plant addPlant(Integer plantId, Integer memberId){
+	public Plant addPlant(Integer plantId, String memberId){
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
 		int leftLimit = 000101; //starting after the original plantid
 		int rightLimit = 999999;
@@ -146,7 +147,7 @@ public class PlantService {
 		Plant newPlant = plant;
 		newPlant.setPlantId(plantIdNew); //idk if this works
 		plantRepository.save(newPlant);
-	    Member member = memberRepository.findMemberbyMemberId(memberId);
+	    Member member = memberRepository.findMemberByUsername(memberId);
 	    member.getPlant().add(newPlant);
 	    memberRepository.save(member);
 	    return newPlant;

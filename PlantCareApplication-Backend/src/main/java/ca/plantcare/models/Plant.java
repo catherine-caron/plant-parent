@@ -25,7 +25,7 @@ public class Plant {
 	private List <SoilType> soilType;
 	private List <Toxicity> toxicity;
 	private List <BloomTime> bloomTime;
-	/*TO ADD?*/ private List <BloomTime> wateringRecommendation;
+	private WateringSchedule wateringRecommendation;
 	private Integer icon;
 	private String givenName;
 	private String botanicalName;
@@ -114,12 +114,12 @@ public class Plant {
 	}
 
 
-	public List <BloomTime> getWateringRecommendation() {
+	public WateringSchedule getWateringRecommendation() {
 		return wateringRecommendation;
 	}
 
 
-	public void setWateringRecommendation(List <BloomTime> wateringRecommendation) {
+	public void setWateringRecommendation(WateringSchedule wateringRecommendation) {
 		this.wateringRecommendation = wateringRecommendation;
 	}
 	
