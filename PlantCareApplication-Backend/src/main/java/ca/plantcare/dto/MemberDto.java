@@ -26,9 +26,9 @@ public class MemberDto {
 		this.password = password;
 		this.name = name;
         this.email = email;
-        this.phoneNumber = phoneNumber
-		this.this.numberOfPlants = numberOfPlants;
-        this.plantsDTO = arrayList;
+        this.phoneNumber = phoneNumber;
+		this.numberOfPlants = numberOfPlants;
+      //  this.plantsDTO = arrayList; error on this line
 	}
 		
 	public String getUsername() {
