@@ -25,15 +25,19 @@ public class WateringScheduleService {
 	private PlantRepository plantRepository;
 
     /**
-     * Create a Watering Schedule with given parameters
-	 * @param scheduleId
+     * Create a Watering Schedule with given parameters for a plant
+     * @param plantId
 	 * @param hoursBetweenWatering
 	 * @return the schedule created
      */
 	@Transactional
-	public WateringSchedule createMeWateringSchedule(Integer hoursBetweenWatering){
+	public WateringSchedule createWateringSchedule(Integer plantId, Integer hoursBetweenWatering){
+        Plant plant = plantRepository.findPlantByPlantId(plantId);
 
-        if (hoursBetweenWatering == null){
+        if (plant == null){
+            throw new IllegalArgumentException("Plant was not found.");
+        }
+        else if (hoursBetweenWatering == null){
             throw new IllegalArgumentException("Hours Between Watering cannot be empty.");
         }
 		else {
@@ -45,6 +49,10 @@ public class WateringScheduleService {
             wateringSchedule.setScheduleId(scheduleId);
             wateringSchedule.setHoursBetweenWatering(hoursBetweenWatering);
             wateringScheduleRepository.save(wateringSchedule);
+            
+            plant.setWateringRecommendation(wateringSchedule);
+            plantRepository.save(plant);
+
             return wateringSchedule;
 		}
     }
