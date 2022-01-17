@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.plantcare.dao.WateringScheduleRepository;
-import ca.plantcare.model.WateringSchedule;
+import ca.plantcare.models.WateringSchedule;
 import ca.plantcare.dao.PlantRepository;
-import ca.plantcare.model.Plant;
+import ca.plantcare.models.Plant;
 
 @Service
 public class WateringScheduleService {

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.plantcare.dao.MemberRepository;
-import ca.plantcare.model.Member;
+import ca.plantcare.models.Member;
 import ca.plantcare.dao.PlantRepository;
-import ca.plantcare.model.Plant;
+import ca.plantcare.models.Plant;
 
 @Service
 public class MemberService {
@@ -53,7 +53,7 @@ public class MemberService {
 		else if (password.contains(" ")) {
 			throw new InvalidInputException("Password cannot contain spaces.");
 		}
-		else if ((email == null || email.replaceAll("\\s+", "").length() == 0 || email.equals("undefined")) {
+		else if ((email == null || email.replaceAll("\\s+", "").length() == 0 || email.equals("undefined"))) {
 			throw new InvalidInputException("Email cannot be empty.");
 		}
 		else if (email.contains(" ")) {
@@ -61,7 +61,7 @@ public class MemberService {
 		}
 		else if (isEmailAvailable(email) == false) {
 			throw new InvalidInputException("This email is not available.");
-
+		}
 		else if (name == null || name.replaceAll("\\s+", "").length() == 0 || name.equals("undefined")){ //name.trim().length() == 0
 			throw new InvalidInputException("Name cannot be empty.");
 		}
@@ -71,7 +71,7 @@ public class MemberService {
 			member.setPassword(password);
 			member.setName(name);
 			member.setEmail(email);
-			member.setPhoneNumber(phoneNumeber);
+			member.setPhoneNumber(phoneNumber);
 			member.setNumberOfPlants(0); // initally no plants
 			memberRepository.save(member);
 			return member;
@@ -85,7 +85,7 @@ public class MemberService {
 	 */
 	@Transactional
 	public Member getMemberByUsername(String username) {
-		Member member = memberRepository.findByUsername(username);
+		Member member = memberRepository.findMemberByUsername(username);
 		return member;
 	}
 
@@ -96,7 +96,7 @@ public class MemberService {
 	 */
 	@Transactional
 	public Member getMemberByEmail(String email) {
-		Member member = memberRepository.findByEmail(email);
+		Member member = memberRepository.findMemberByEmail(email);
 		return member;
 	}
 	
@@ -117,11 +117,11 @@ public class MemberService {
 			// note that phone number can be empty/undefined
 		}
 		else {
-			Member member = memberRepository.findByUsername(username);
+			Member member = memberRepository.findMemberByUsername(username);
 			if (member == null) {
 				throw new InvalidInputException("The member cannot be found.");
 			}
-			else if ( !member.getEmail.equals(newEmail) && !isEmailAvailable(newEmail)){
+			else if ( !member.getEmail().equals(newEmail) && !isEmailAvailable(newEmail)){
 				throw new InvalidInputException("This email is not available.");
 			}
 			else if (newEmail == null || newEmail.replaceAll("\\s+", "").length() == 0 || newEmail.equals("undefined")) {
@@ -158,7 +158,7 @@ public class MemberService {
 	 */
 	@Transactional
 	public Member updateNumberOfPlants(String username, Integer newNumberOfPlants) {
-		Member member = memberRepository.findByUsername(username);
+		Member member = memberRepository.findMemberByUsername(username);
 		if (member == null) {
 			throw new InvalidInputException("The member cannot be found.");
 		}
@@ -183,7 +183,7 @@ public class MemberService {
 			throw new InvalidInputException("Username empty. Please try again.");
 		}
 		else {
-			Member member = memberRepository.findByUsername(username);
+			Member member = memberRepository.findMemberByUsername(username);
 			if(member == null) {
 				throw new InvalidInputException("The member cannot be found.");
 			}
@@ -209,7 +209,7 @@ public class MemberService {
 	 */
 	private boolean isUsernameAvailable(String username) {
 		boolean available = false;
-		if (memberRepository.findByUsername(username) != null) {
+		if (memberRepository.findMemberByUsername(username) != null) {
 			return available;
 		}
 		else{ 
@@ -225,7 +225,7 @@ public class MemberService {
 	 */
 	private boolean isEmailAvailable(String email) {
 		boolean available = false;
-		if (memberRepository.findByEmail(email) != null) {
+		if (memberRepository.findMemberByEmail(email) != null) {
 			return available;
 		}
 		else{ 
