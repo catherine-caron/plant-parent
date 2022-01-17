@@ -23,8 +23,6 @@ public class WateringScheduleService {
 	private ReminderRepository reminderRepository;
     @Autowired
 	private PlantRepository plantRepository;
-    
-    // find/get by plant
 
     /**
      * Create a Watering Schedule with given parameters
