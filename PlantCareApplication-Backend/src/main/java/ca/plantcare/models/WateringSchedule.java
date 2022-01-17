@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 public class WateringSchedule {
 
 	private Integer scheduleId;
+	private Integer hoursBetweenWatering;
 	private List<Reminder> reminder;
 
 	@Id
@@ -19,6 +20,14 @@ public class WateringSchedule {
 
 	public void setScheduleId(Integer scheduleId) {
 		this.scheduleId = scheduleId;
+	}
+
+	public Integer getHoursBetweenWatering() {
+		return hoursBetweenWatering;
+	}
+
+	public void setHoursBetweenWatering(Integer hoursBetweenWatering) {
+		this.hoursBetweenWatering = hoursBetweenWatering;
 	}
 
 	@OneToMany(cascade = {CascadeType.ALL})
