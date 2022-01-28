@@ -98,7 +98,7 @@ public class MemberService {
 	 * @return the member updated
 	 */
 	@Transactional
-	public Member updateMember(String username, String newName, String newPhoneNumber) {
+	public Member updateMember(String username, String newName) {
 		// public Member updateMember(String username, String newPassword, String newEmail, String newName, String newPhoneNumber)
 		if (username.equals("undefined") || newName.equals("undefined")) {
 			throw new IllegalArgumentException("One or more fields empty. Please try again.");
