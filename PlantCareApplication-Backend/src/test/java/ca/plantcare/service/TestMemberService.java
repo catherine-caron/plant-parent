@@ -29,8 +29,6 @@ import ca.plantcare.models.*;
 @ExtendWith(MockitoExtension.class)
 public class TestMemberService {
 
-	// member has username, numberOfPlants, name, List<Plant> plant
-
 	private static final String USERNAME1 = "Username1";
 	private static final String NAME1 = "Rajaa Bk";
 
@@ -125,15 +123,6 @@ public class TestMemberService {
 		// Used for Delete Tests
 		lenient().when(plantRepository.save(any(Plant.class))).thenAnswer(returnParameterAsAnswer);
 	}
-
-	// todo:
-
-	// update numplant user not found
-	// update numplant negative number
-
-	// delete member successfully
-	// delete username empty
-	// delete username not found
 
 	/**
 	 * Create member successfully
@@ -248,7 +237,7 @@ public class TestMemberService {
 	 */
 	@Test
 	public void testUpdateMemberEmptyUsername() {
-		String username = "";
+		String username = "undefined";
 		String newName = "New Name";
 		Member user = null; 
 		String error = null;
@@ -330,8 +319,7 @@ public class TestMemberService {
 		try {
 			user = memberService.updateNumberOfPlants(username, newNumOfPlants);
 		} catch (IllegalArgumentException e) {
-			// Check that no error occurred
-			fail();
+			error = e.getMessage();
 		}
 		assertNull(user);
 		// check error
@@ -349,15 +337,66 @@ public class TestMemberService {
 		try {
 			user = memberService.updateNumberOfPlants(USERNAME1, newNumOfPlants);
 		} catch (IllegalArgumentException e) {
-			// Check that no error occurred
-			fail();
+			error = e.getMessage();
 		}
 		assertNull(user);
 		// check error
 		assertEquals("Number of plants cannot be negative.", error);
 	}
 
-	
+	/**
+	 * Delete member successfully
+	 */
+	@Test
+	public void testDeleteMemberSuccessfully() {
+		Member user = null; 
+		try {
+			user = memberService.deleteMember(USERNAME1);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		Member savedUser = memberService.getMemberByUsername(USERNAME1);
+		assertNotNull(user);
+		assertEquals(savedUser.getUsername(), user.getUsername());
+		assertEquals(savedUser.getName(), user.getName());
+	}
+
+	/**
+	 * Delete member with empty username
+	 */
+	@Test
+	public void testDeleteMemberEmptyUsername() {
+		String username = "undefined";
+		Member user = null; 
+		String error = null;
+		try {
+			user = memberService.deleteMember(username);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNull(user);
+		// check error
+		assertEquals("Username empty. Please try again.", error);
+	}
+
+	/**
+	 * Delete member with username not found
+	 */
+	@Test
+	public void testDeleteMemberUsernameNotFound() {
+		String username = "Joe42";
+		Member user = null; 
+		String error = null;
+		try {
+			user = memberService.deleteMember(username);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNull(user);
+		// check error
+		assertEquals("The member cannot be found.", error);
+	}
+
 
 
 }
