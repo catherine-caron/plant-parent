@@ -20,23 +20,15 @@ public class MemberService {
 	@Autowired
 	private PlantRepository plantRepository;
 
-    // methods to write:
-
-    // loginMember  ???
-    // logoutMember ???
-
 	/**
 	 * Create a Member with given parameters
 	 * @param username
-	 * @param password
-	 * @param email
 	 * @param name
-	 * @param phoneNumber can be empty if they don't want a phone number
 	 * @param numberOfPlants
 	 * @return the account created
 	 */
 	@Transactional
-	public Member createMember(String username, String name, String phoneNumber){
+	public Member createMember(String username, String name){
 
         if (username == null || username.replaceAll("\\s+", "").length() == 0 || username.equals("undefined")) {
 			throw new IllegalArgumentException("Username cannot be empty.");
@@ -69,10 +61,7 @@ public class MemberService {
 		else {
 			Member member = new Member();
 			member.setUsername(username);
-			// member.setPassword(password);
 			member.setName(name);
-			// member.setEmail(email);
-			// member.setPhoneNumber(phoneNumber);
 			member.setNumberOfPlants(0); // initally no plants
 			memberRepository.save(member);
 			return member;
@@ -102,13 +91,10 @@ public class MemberService {
 	// }
 	
 	/**
-	 * Update member password, name, email, and phoneNumber. 
-	 * If one parameter shouldn't change, pass old value as new value. 
+	 * Update member name. 
+	 * Allowed to pass same old name.
 	 * @param username
-	 * @param newPassword
 	 * @param newName
-	 * @param newEmail
-	 * @param newPhoneNumber - can be empty/erased
 	 * @return the member updated
 	 */
 	@Transactional
@@ -116,7 +102,6 @@ public class MemberService {
 		// public Member updateMember(String username, String newPassword, String newEmail, String newName, String newPhoneNumber)
 		if (username.equals("undefined") || newName.equals("undefined")) {
 			throw new IllegalArgumentException("One or more fields empty. Please try again.");
-			// note that phone number can be empty/undefined
 		}
 		else {
 			Member member = memberRepository.findMemberByUsername(username);
@@ -142,10 +127,7 @@ public class MemberService {
 				throw new IllegalArgumentException("Name cannot be empty.");
 			}
 			else {
-				// member.setPassword(newPassword);
 				member.setName(newName);
-				// member.setEmail(newEmail);
-				// member.setPhoneNumber(newPhoneNumber);
 				memberRepository.save(member);
 				return member;
 			}

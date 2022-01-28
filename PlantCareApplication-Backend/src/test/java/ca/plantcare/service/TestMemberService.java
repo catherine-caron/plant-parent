@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.lenient;
 
 import java.util.ArrayList;
@@ -28,122 +29,89 @@ import ca.plantcare.models.*;
 @ExtendWith(MockitoExtension.class)
 public class TestMemberService {
 
-	// member has username, 
+	// member has username, numberOfPlants, name, List<Plant> plant
 
 	private static final String USERNAME1 = "Username1";
-	private static final String NAME1 = "Alicia";
-	private static final String PASSWORD1 = "PassWord123!";
-	private static final int TOKEN1 = 1000000;
+	private static final String NAME1 = "Rajaa Bk";
+
+	private static final String GIVENNAME1 = "Elia";
+	private static final String BOTANICALNAME1 = "Sunflower";
+	private static final String COMMONNAME1 = "Sunflower";
+	private static final Integer PLANTID1 = 123;
 
 	private static final String USERNAME2 = "Username2";
-	private static final String NAME2 = "Catherine The 1st";
-	private static final String PASSWORD2 = "GhostPassword101?!";
-	private static final int TOKEN2 = 0; //invalid
+	private static final String NAME2 = "Catherine Carbon";
 
-	private static final String LICENSE = "123ABC";
-	private static final String LICENSE2 = "123ABCD";
-	Car addCar = new Car();
-	CustomerAccount ownerWithCar = new CustomerAccount();
-
-
+	Plant addedPlant = new Plant();
+	Member addedMember = new Member();
 
 	@Mock
-	private CustomerAccountRepository customerAccountRepository;
+	private MemberRepository memberRepository;
 	@Mock
-	private CarRepository carRepository;
-	@Mock
-	private AdminAccountRepository adminAccountRepository;
-	@Mock
-	private TechnicianAccountRepository technicianAccountRepository;
-
+	private PlantRepository plantRepository;
 
 	@InjectMocks
-	private CustomerAccountService customerAccountService;
-
+	private MemberService memberService;
 
 	@BeforeEach
 	public void setMockOutput() {
-		lenient().when(customerAccountRepository.findByUsername(anyString())).thenAnswer((InvocationOnMock invocation) -> {
+		lenient().when(memberRepository.findMemberByUsername(anyString())).thenAnswer((InvocationOnMock invocation) -> {
 			if (invocation.getArgument(0).equals(USERNAME1)) {
-				CustomerAccount user = new CustomerAccount();
+				Member user = new Member();
 				user.setUsername(USERNAME1);
-				user.setPassword(PASSWORD1);
 				user.setName(NAME1);
-				user.setToken(TOKEN1);
-				List<Car> cars = new ArrayList<Car>();
-				Car car = new Car();
-				car.setLicensePlate(LICENSE2);
-				cars.add(car);
-				user.setCar(cars);
+				List<Plant> plants = new ArrayList<Plant>();
+				Plant plant1 = new Plant();
+				plant1.setGivenName(GIVENNAME1);
+				plant1.setCommonName(COMMONNAME1);
+				plant1.setBotanicalName(BOTANICALNAME1);
+				plant1.setPlantId(PLANTID1);
+				plants.add(plant1);
+				user.setPlant(plants);
+				user.setNumberOfPlants(plants.size());
 				return user;
 			} 
 			else if (invocation.getArgument(0).equals(USERNAME2)) {
-				CustomerAccount user = new CustomerAccount();
+				Member user = new Member();
 				user.setUsername(USERNAME2);
-				user.setPassword(PASSWORD2);
 				user.setName(NAME2);
-				user.setToken(TOKEN2);
 				return user;
 			}
 			else {
 				return null;
 			}
 		});
-		lenient().when(customerAccountRepository.findAll()).thenAnswer( (InvocationOnMock invocation) -> {
-			CustomerAccount user = new CustomerAccount();
+		lenient().when(memberRepository.findAll()).thenAnswer( (InvocationOnMock invocation) -> {
+			Member user = new Member();
 			user.setUsername(USERNAME1);
-			user.setPassword(PASSWORD1);
 			user.setName(NAME1);
-			user.setToken(TOKEN1);
-			List<Car> cars = new ArrayList<Car>();
-			Car car = new Car();
-			car.setLicensePlate(LICENSE2);
-			cars.add(car);
-			user.setCar(cars);
-			CustomerAccount user2 = new CustomerAccount();
+			List<Plant> plants = new ArrayList<Plant>();
+			Plant plant1 = new Plant();
+			plant1.setGivenName(GIVENNAME1);
+			plant1.setCommonName(COMMONNAME1);
+			plant1.setBotanicalName(BOTANICALNAME1);
+			plant1.setPlantId(PLANTID1);
+			plants.add(plant1);
+			user.setPlant(plants);
+			user.setNumberOfPlants(plants.size());
+
+			Member user2 = new Member();
 			user2.setUsername(USERNAME2);
-			user2.setPassword(PASSWORD2);
 			user2.setName(NAME2);
-			user2.setToken(TOKEN2);
-			List<CustomerAccount> customerAccounts = new ArrayList<CustomerAccount>();
-			customerAccounts.add(user);
-			customerAccounts.add(user2);
-			return customerAccounts;
+
+			List<Member> members = new ArrayList<Member>();
+			members.add(user);
+			members.add(user2);
+			return members;
 		});
-		lenient().when(customerAccountRepository.findCustomerAccountByName(anyString())).thenAnswer((InvocationOnMock invocation) -> {
-			if (invocation.getArgument(0).equals(NAME1)) {
-				CustomerAccount user = new CustomerAccount();
-				user.setUsername(USERNAME1);
-				user.setPassword(PASSWORD1);
-				user.setName(NAME1);
-				user.setToken(TOKEN1);
-				List<CustomerAccount> customerAccounts = new ArrayList<CustomerAccount>();
-				customerAccounts.add(user);
-				return customerAccounts;
-			} 
-			else if (invocation.getArgument(0).equals(NAME2)) {
-				CustomerAccount user = new CustomerAccount();
-				user.setUsername(USERNAME2);
-				user.setPassword(PASSWORD2);
-				user.setName(NAME2);
-				user.setToken(TOKEN2);
-				List<CustomerAccount> customerAccounts = new ArrayList<CustomerAccount>();
-				customerAccounts.add(user);
-				return customerAccounts;
-			}
-			else {
-				return null;
-			}
-		});
-		lenient().when(carRepository.findByLicensePlate(anyString())).thenAnswer( (InvocationOnMock invocation) -> {
-			if(invocation.getArgument(0).equals(LICENSE)) {
-				Car car = new Car();
-				car.setLicensePlate(LICENSE);
-				return car;
-			} 
-			else if(invocation.getArgument(0).equals(LICENSE2)) {
-				addCar.setLicensePlate(LICENSE2);
-				return addCar;
+		lenient().when(plantRepository.findById(anyInt())).thenAnswer( (InvocationOnMock invocation) -> {
+			if(invocation.getArgument(0).equals(PLANTID1)) {
+				Plant plant1 = new Plant();
+				plant1.setGivenName(GIVENNAME1);
+				plant1.setCommonName(COMMONNAME1);
+				plant1.setBotanicalName(BOTANICALNAME1);
+				plant1.setPlantId(PLANTID1);
+				return plant1;
 			} 
 			else {
 				return null;
@@ -153,33 +121,117 @@ public class TestMemberService {
 		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
 			return invocation.getArgument(0);
 		};
-		lenient().when(customerAccountRepository.save(any(CustomerAccount.class))).thenAnswer(returnParameterAsAnswer);
-		// Used for Delete, Authenticate, and Login/out Tests
-		lenient().when(carRepository.save(any(Car.class))).thenAnswer(returnParameterAsAnswer);
-		lenient().when(adminAccountRepository.save(any(AdminAccount.class))).thenAnswer(returnParameterAsAnswer);
-		lenient().when(technicianAccountRepository.save(any(TechnicianAccount.class))).thenAnswer(returnParameterAsAnswer);
-
+		lenient().when(memberRepository.save(any(Member.class))).thenAnswer(returnParameterAsAnswer);
+		// Used for Delete Tests
+		lenient().when(plantRepository.save(any(Plant.class))).thenAnswer(returnParameterAsAnswer);
 	}
 
+	// todo:
+
+	// find by username
+
+	// update name successfully
+	// update name empty username
+	// update name empty name
+	// update name username not found
+	// update name empty name/only spaces
+
+	// update numplant successfully
+	// update numplant user not found
+	// update numplant negative number
+
+	// delete member successfully
+	// delete username empty
+	// delete username not found
+
 	/**
-	 * Create Customer Account successfully
+	 * Create member successfully
 	 */
 	@Test
-	public void testCreateCustomerAccountSuccessfully() {
-		assertEquals(2, customerAccountService.getAllCustomerAccounts().size());
-
+	public void testCreateMemberSuccessfully() {
 		String username = "newUsername";
-		CustomerAccount user = null;
+		Member user = null;
 		try {
-			user = customerAccountService.createCustomerAccount(username, PASSWORD1, NAME1);
-		} catch (InvalidInputException e) {
+			user = memberService.createMember(username, NAME1);
+		} catch (IllegalArgumentException e) {
 			// Check that no error occurred
 			fail();
 		}
-		//CustomerAccount savedUser = customerAccountService.getCustomerAccountByUsername(USERNAME1);
 		assertNotNull(user);
 		assertEquals(username, user.getUsername());
-		assertEquals(PASSWORD1, user.getPassword());
 		assertEquals(NAME1, user.getName());
 	}
+
+	/**
+	 * Create member with empty username
+	 */
+	@Test
+	public void testCreateMemberEmptyUsername(){
+		String username = "";
+		Member user = null;
+		String error = null;
+		try {
+			user = memberService.createMember(username, NAME1);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNull(user);
+		// check error
+		assertEquals("Username cannot be empty.", error);
+	}
+
+	/** 
+	 * Create member with spaces in username
+	 */
+	@Test
+	public void testCreateMemberSpacesInUsername(){
+		String username = "this is a bad username";
+		Member user = null;
+		String error = null;
+		try {
+			user = memberService.createMember(username, NAME1);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNull(user);
+		// check error
+		assertEquals("Username cannot contain spaces.", error);
+	}
+
+	/**
+	 * Create member with a taken username
+	 */
+	@Test
+	public void testCreateMemberTakenUsername(){
+		Member user = null;
+		String error = null;
+		try {
+			user = memberService.createMember(USERNAME1, NAME1);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNull(user);
+		// check error
+		assertEquals("This username is not available.", error);
+	}
+
+	/**
+	 * Create member with empty name
+	 */
+	@Test
+	public void testCreateMemberEmptyName(){
+		String username = "Joe";
+		String name = "";
+		Member user = null;
+		String error = null;
+		try {
+			user = memberService.createMember(username, name);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNull(user);
+		// check error
+		assertEquals("Name cannot be empty.", error);
+	}
+
 }

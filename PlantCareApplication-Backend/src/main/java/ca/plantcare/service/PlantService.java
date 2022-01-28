@@ -178,7 +178,7 @@ public class PlantService {
 	public Plant deletePlant(Integer plantId ){
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
 		if (plant == null) {
-			throw new IllegalArgumentException("Loan does not exist");
+			throw new IllegalArgumentException("Loan does not exist"); // @TODO loooooool
 		}
 		deletePlantForMember( plantId );
 		plantRepository.delete(plant);
