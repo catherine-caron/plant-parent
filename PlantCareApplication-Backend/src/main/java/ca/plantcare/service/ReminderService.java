@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.plantcare.dao.WateringScheduleRepository;
@@ -58,7 +57,7 @@ public class ReminderService {
                 Plant foundPlant = null; 
                 List<Plant> plants = toList(plantRepository.findAll());
                 for (Plant plant:plants) {
-                    if (plant.getWateringRecommendation() == wateringSchedule) {
+                    if (plant.getWateringRecommendation().getScheduleId() == scheduleId) {
                         foundPlant = plant;
                         break;
                     }

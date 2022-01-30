@@ -3,10 +3,8 @@ package ca.plantcare.models;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import java.sql.Date;
 import java.sql.Time;
-import java.util.*;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Reminder {
