@@ -151,11 +151,10 @@ public class TestReminderService {
 		assertEquals(MESSAGE1, reminder.getMessage());
 		assertEquals(TIME1, reminder.getTime());
 		assertEquals(DATE1, reminder.getDate());
-		// assertTrue(wateringScheduleRepository.findWateringScheduleByScheduleId(SCHEDULEID1).getReminder().contains(reminder));
 	}
 
 	/**
-	 * Create member with non-existing watering schedule
+	 * Create reminder with non-existing watering schedule
 	 */
 	@Test
 	public void testCreateReminderNullSchedule(){
@@ -172,7 +171,7 @@ public class TestReminderService {
 	}
 
 	/**
-	 * Create member with null date
+	 * Create reminder with null date
 	 */
 	@Test
 	public void testCreateReminderNullDate(){
@@ -188,7 +187,7 @@ public class TestReminderService {
 	}
     
 	/**
-	 * Create member with null time
+	 * Create reminder with null time
 	 */
 	@Test
 	public void testCreateReminderNullTime(){
