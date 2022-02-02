@@ -232,7 +232,7 @@ public class TestMemberService {
 		assertEquals(newName, user.getName());
 	}
 
-	/**
+	/**isEmailAvailable
 	 * Update member with empty username	
 	 */
 	@Test

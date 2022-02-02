@@ -1,5 +1,6 @@
 package ca.plantcare.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.GeneratedValue;
@@ -21,12 +22,15 @@ public class Plant {
 	public enum BloomTime {
 		None, Winter, Spring, Summer, Fall 
 	}
-	private List <SunExposure> sunExposure;
-	private List <SoilType> soilType;
-	private List <Toxicity> toxicity;
-	private List <BloomTime> bloomTime;
+	//private List <SunExposure> sunExposure= new ArrayList<>();
+	//private List <SoilType> soilType=new ArrayList<>();
+	//private List <Toxicity> toxicity=new ArrayList<>();
+	private List <BloomTime> bloomTime=new ArrayList<>();
 	private WateringSchedule wateringRecommendation;
 	private Integer icon;
+	private SunExposure sunExposure;
+	private SoilType soilType;
+	private Toxicity toxicity;
 	private String givenName;
 	private String botanicalName;
 	private String commonName;
@@ -81,7 +85,7 @@ public class Plant {
 		return commonName;
 	}
 	
-	public List<SunExposure> getSunExposure() {
+	/*public List<SunExposure> getSunExposure() {
 		return this.sunExposure;
 	}
 	
@@ -103,7 +107,9 @@ public class Plant {
 	
 	public void setToxicity (List<Toxicity> aToxicity) {
 		this.toxicity = aToxicity;
-	}
+	}*/
+	
+
 	
 	public List<BloomTime> getBloomTime() {
 		return this.bloomTime;
@@ -121,6 +127,54 @@ public class Plant {
 
 	public void setWateringRecommendation(WateringSchedule wateringRecommendation) {
 		this.wateringRecommendation = wateringRecommendation;
+	}
+
+
+	/**
+	 * @return the sunExposure
+	 */
+	public SunExposure getSunExposure() {
+		return sunExposure;
+	}
+
+
+	/**
+	 * @param sunExposure the sunExposure to set
+	 */
+	public void setSunExposure(SunExposure sunExposure) {
+		this.sunExposure = sunExposure;
+	}
+
+
+	/**
+	 * @return the soilType
+	 */
+	public SoilType getSoilType() {
+		return soilType;
+	}
+
+
+	/**
+	 * @param soilType the soilType to set
+	 */
+	public void setSoilType(SoilType soilType) {
+		this.soilType = soilType;
+	}
+
+
+	/**
+	 * @return the toxicity
+	 */
+	public Toxicity getToxicity() {
+		return toxicity;
+	}
+
+
+	/**
+	 * @param toxicity the toxicity to set
+	 */
+	public void setToxicity(Toxicity toxicity) {
+		this.toxicity = toxicity;
 	}
 	
 

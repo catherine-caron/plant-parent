@@ -35,7 +35,7 @@ public class PlantService {
 	@Transactional
 	public List<Plant> getPlantsByMember(String memberUsername){
 		Member member = memberRepository.findMemberByUsername(memberUsername);
-		if (member == null){
+		if (memberUsername == null){
 			throw new IllegalArgumentException("Member not found.");
 		}
 		else{
@@ -45,20 +45,28 @@ public class PlantService {
 	
 	@Transactional
 	public Plant getPlantByBotanicalName(String botanicalName) {
-		return null;
+		if (botanicalName == null){
+			throw new IllegalArgumentException("Plant not found.");
+		}
+		Plant plant = plantRepository.findPlantByBotanicalName(botanicalName);
+		return plant;
 		
 	}
 	
 	@Transactional
-	public Plant getPlantByGivenName(String botanicalName) {
-		return null;
+	public Plant getPlantByCommonName(String commonName) {
+		if (commonName == null){
+			throw new IllegalArgumentException("Plant not found.");
+		}
+		Plant plant = plantRepository.findPlantByCommonName(commonName);
+		return plant;
 		
 	}
 	
-	@Transactional
+/*	@Transactional
 	public List<Plant> getPlantBySunExposure(String memberUsername){
 		return null;
-	}
+	}*/
 	
 	/**
      * Find specific plant by its id. Admin function needed to assign right id to plants
@@ -80,8 +88,8 @@ public class PlantService {
 	
 	//create plant by admin needs an admin member id
 	public Plant createPlant(Integer icon, String givenName, String botanicalName,
-			String commonName,List <SunExposure> sunExposure,List <SoilType> soilType,
-			List <Toxicity> toxicity, List <BloomTime> bloomTime, WateringSchedule wateringRecommendation){
+			String commonName,SunExposure sunExposure,SoilType soilType,
+			Toxicity toxicity, List <BloomTime> bloomTime, WateringSchedule wateringRecommendation){
 		
 		if (icon == null ||  icon.equals("undefined")) {
             throw new IllegalArgumentException("Icon cannot be null or empty");
@@ -140,6 +148,12 @@ public class PlantService {
 	 * @return plant
 	 */
 	public Plant addPlant(Integer plantId, String memberId){
+		if (plantId == null){
+			throw new IllegalArgumentException("Plant not found.");
+		}
+		if (memberId == null){
+			throw new IllegalArgumentException("Member not found.");
+		}
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
 		int leftLimit = 000101; //starting after the original plantid
 		int rightLimit = 999999;
@@ -161,11 +175,32 @@ public class PlantService {
 	 * @param plantId
 	 * @return plant
 	 */
-	public Plant updatePlant(Integer plantId ){
+	public Plant updatePlant(Integer plantId, String givenName, Integer icon, String botanicalName,
+			String commonName,SunExposure sunExposure,SoilType soilType,
+			Toxicity toxicity, List <BloomTime> bloomTime, WateringSchedule wateringRecommendation){
+		if (plantId == null){
+			throw new IllegalArgumentException("Plant not found.");
+		}
+		if (givenName == null){
+			throw new IllegalArgumentException("Plant not found.");
+		}
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
-		updatePlantToxicity(plantId);
-		updatePlantSun( plantId );
-		updatePlantSoil( plantId );
+		//updatePlantToxicity(plantId);
+		//updatePlantSun( plantId );
+		//updatePlantSoil( plantId );
+		plant.setBloomTime(bloomTime);
+		plant.getBotanicalName();
+		plant.setCommonName(commonName);
+		plant.setGivenName(givenName);
+		plant.setIcon(icon);
+		plant.setSunExposure(sunExposure);
+		plant.setSoilType(soilType);
+		plant.setToxicity(toxicity);
+		plant.setWateringRecommendation(wateringRecommendation);
+		updateBloom(plantId, null);
+		plant.setGivenName(givenName);
+		plantRepository.save(plant);
+
 		return plant;
 		
 	}
@@ -176,9 +211,12 @@ public class PlantService {
 	 * @return plant
 	 */
 	public Plant deletePlant(Integer plantId ){
+		if (plantId == null){
+			throw new IllegalArgumentException("Plant not found.");
+		}
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
 		if (plant == null) {
-			throw new IllegalArgumentException("Loan does not exist"); // @TODO loooooool
+			throw new IllegalArgumentException("Plant does not exist"); // @TODO loooooool
 		}
 		deletePlantForMember( plantId );
 		plantRepository.delete(plant);
@@ -190,20 +228,38 @@ public class PlantService {
 								/* HELPER METHODS*/
 			
 	
-	public Plant updatePlantToxicity(Integer plantId ){
+	/*public Plant updatePlantToxicity(Integer plantId,List <Toxicity> toxicity ){
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
+		plant.setToxicity(toxicity);
+		plantRepository.save(plant);
+
 		return plant;
 		
 	}
 	
-	public Plant updatePlantSoil(Integer plantId ){
+	public Plant updatePlantSoil(Integer plantId,List <SoilType> soilType){
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
+		plant.setSoilType(soilType);
+		plantRepository.save(plant);
+
 		return plant;
 		
 	}
 	
-	public Plant updatePlantSun(Integer plantId ){
+	public Plant updatePlantSun(Integer plantId,List <SunExposure> sunExposure){
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
+		plant.setSunExposure(sunExposure);
+		plantRepository.save(plant);
+
+		return plant;
+		
+	}*/
+	
+	public Plant updateBloom(Integer plantId,List <BloomTime> bloomTime){
+		Plant plant = plantRepository.findPlantByPlantId(plantId);
+		plant.setBloomTime(bloomTime);
+		plantRepository.save(plant);
+
 		return plant;
 		
 	}
