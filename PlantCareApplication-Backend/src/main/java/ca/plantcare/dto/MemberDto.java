@@ -21,9 +21,8 @@ public class MemberDto {
 	public MemberDto(String username, String name,  Integer numberOfPlants, List<PlantDto> arrayList) {
 		this.username = username;
 		this.name = name;
-        // this.phoneNumber = phoneNumber;
 		this.numberOfPlants = numberOfPlants;
-      //  this.plantsDTO = arrayList; error on this line
+        this.plantsDTO = arrayList; // error on this line
 	}
 		
 	public String getUsername() {
@@ -33,14 +32,6 @@ public class MemberDto {
 	public String getName() {
 		return name;
 	}
-
-    // public String getEmail() {
-	// 	return email;
-	// }
-
-    // public String getPhoneNumber() {
-	// 	return phoneNumber;
-	// }
 
     public Integer getNumberOfPlants() {
 		return numberOfPlants;
@@ -53,19 +44,10 @@ public class MemberDto {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-
-    // public void setEmail(String email) {
-	// 	this.email = email;
-	// }
-
-    // public void setPhoneNumber(String phoneNumber) {
-	// 	this.phoneNumber = phoneNumber;
-	// }
 	
 	public void setNumberOfPlants(Integer numberOfPlants) {
 		this.numberOfPlants = numberOfPlants;
