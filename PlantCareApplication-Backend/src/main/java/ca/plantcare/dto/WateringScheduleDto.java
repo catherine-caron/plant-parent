@@ -1,14 +1,7 @@
 package ca.plantcare.dto;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.Collections;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import ca.plantcare.models.Reminder;
 
 public class WateringScheduleDto {
 

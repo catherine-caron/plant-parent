@@ -1,10 +1,6 @@
 package ca.plantcare.dto;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.Collections;
-import java.util.List;
-
-import javax.persistence.Id;
 
 public class ReminderDto {
 
