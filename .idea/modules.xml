@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PlantCareApplication.iml" filepath="$PROJECT_DIR$/.idea/modules/PlantCareApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PlantCareApplication-Backend/PlantCareApplication.PlantCareApplication-Backend.iml" filepath="$PROJECT_DIR$/.idea/modules/PlantCareApplication-Backend/PlantCareApplication.PlantCareApplication-Backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lib/PlantCareApplication.lib.iml" filepath="$PROJECT_DIR$/.idea/modules/lib/PlantCareApplication.lib.iml" />
+    </modules>
+  </component>
+</project>

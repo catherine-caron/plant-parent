@@ -287,14 +287,13 @@ public class TestPlantService {
 	public void addPlantWrongId() {
 
 		Plant plant2 = null;
-		String error = "";
+		String error = null;
 		String memberId = "1";
 		Integer myPlantId = 2;
 		try {
 
 			plant2 = plantService.addPlant(myPlantId, memberId);
 		} catch (Exception e) {
-			// Check that no error occurred
 			error = e.getMessage();
 		}
 		assertNull(plant2);
