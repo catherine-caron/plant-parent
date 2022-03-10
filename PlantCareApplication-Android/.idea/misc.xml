@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/clarity_not.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/homepage.xml" value="0.263" />
+        <entry key="app/src/main/res/layout-v31/homepage.xml" value="0.20606884057971014" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/home_page.xml" value="0.14175724637681159" />
-        <entry key="app/src/main/res/layout/homepage.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/homepage.xml" value="0.2803009033203125" />
       </map>
     </option>
   </component>
