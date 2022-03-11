@@ -30,8 +30,8 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginStart="184dp"
-        android:layout_marginTop="680dp"
+        android:layout_marginStart="192dp"
+        android:layout_marginTop="668dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_circle_24" />
