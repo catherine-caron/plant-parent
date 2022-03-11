@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_lens_24" />
 
+    <!--Nav Bar -->
     <!--Don't edit this or I will kill you-->
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="1600dp"
@@ -28,13 +29,32 @@
         app:srcCompat="@drawable/ic_wifi_bar_24" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="192dp"
-        android:layout_marginTop="668dp"
+        android:layout_width="83dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="660dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_circle_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="680dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="680dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_notifications_active_24" />
+    <!--Nav Bar End -->
 
     <TextView
         android:id="@+id/home"

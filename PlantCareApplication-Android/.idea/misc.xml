@@ -9,6 +9,9 @@
         <entry key="app/src/main/res/drawable/home_page.xml" value="0.256" />
         <entry key="app/src/main/res/drawable/homepage.xml" value="0.263" />
         <entry key="app/src/main/res/drawable/ic_baseline_lens_24.xml" value="0.256" />
+        <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.256" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.256" />
+        <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.256" />
         <entry key="app/src/main/res/drawable/top_rectang.xml" value="0.256" />
         <entry key="app/src/main/res/layout-v31/homepage.xml" value="0.20606884057971014" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14175724637681159" />
@@ -18,10 +21,12 @@
         <entry key="app/src/main/res/layout/editplant.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1983695652173913" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/home_page.xml" value="0.14175724637681159" />
-        <entry key="app/src/main/res/layout/homepage.xml" value="0.17695770263671876" />
+        <entry key="app/src/main/res/layout/homepage.xml" value="0.18795166015624998" />
         <entry key="app/src/main/res/layout/login.xml" value="0.1983695652173913" />
+        <entry key="app/src/main/res/layout/main2.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/navigation.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/plantinfo.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/reminderpage.xml" value="0.1983695652173913" />
