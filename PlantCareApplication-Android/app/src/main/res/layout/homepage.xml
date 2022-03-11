@@ -7,10 +7,10 @@
     android:background="@color/beige">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="1000dp"
-        android:layout_height="1000dp"
-        android:layout_marginStart="-270dp"
-        android:layout_marginTop="-750dp"
+        android:layout_width="1100dp"
+        android:layout_height="1100dp"
+        android:layout_marginStart="-330dp"
+        android:layout_marginTop="-800dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_lens_24" />
