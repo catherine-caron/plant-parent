@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="1000dp"
         android:layout_height="1000dp"
-        android:layout_marginStart="-330dp"
+        android:layout_marginStart="-270dp"
         android:layout_marginTop="-750dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
