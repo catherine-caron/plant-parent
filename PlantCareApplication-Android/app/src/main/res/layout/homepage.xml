@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     android:background="@color/beige">
 
+    <!--Don't edit this or I will kill you-->
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="1100dp"
-        android:layout_height="1100dp"
-        android:layout_marginStart="-330dp"
-        android:layout_marginTop="-800dp"
+        android:layout_width="1300dp"
+        android:layout_height="1300dp"
+        android:layout_marginStart="-430dp"
+        android:layout_marginTop="-1040dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_lens_24" />
@@ -29,5 +30,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="57sp" />
+
+    <TextView
+        android:id="@+id/home_desc"
+        android:layout_width="245dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="72dp"
+        android:fontFamily="@font/livvic"
+        android:text="@string/home_description"
+        android:textAlignment="textStart"
+        android:textColor="@color/off_white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="18sp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

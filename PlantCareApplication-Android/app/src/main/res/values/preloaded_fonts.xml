@@ -3,6 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
         <item>@font/libre_caslon_text</item>
+        <item>@font/livvic</item>
         <item>@font/livvic_thin</item>
         <item>@font/londrina_solid</item>
     </array>
