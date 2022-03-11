@@ -8,7 +8,6 @@
 
     <!--Don't edit this or I will kill you-->
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView3"
         android:layout_width="1300dp"
         android:layout_height="1300dp"
         android:layout_marginStart="-430dp"
@@ -16,25 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_lens_24" />
-
-    <!--Don't edit this or I will kill you-->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="1600dp"
-        android:layout_height="800dp"
-        android:layout_marginStart="-570dp"
-        android:layout_marginTop="562dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_wifi_bar_24" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="184dp"
-        android:layout_marginTop="680dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_circle_24" />
 
     <TextView
         android:id="@+id/home"
