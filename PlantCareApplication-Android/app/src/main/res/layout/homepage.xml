@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige">
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/home_page"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:clipToOutline="true"
-    android:background="@drawable/home_page"
-    />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="1000dp"
+        android:layout_height="1000dp"
+        android:layout_marginStart="-330dp"
+        android:layout_marginTop="-750dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_lens_24" />
+
+    <TextView
+        android:id="@+id/home"
+        android:layout_width="176dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/londrina_solid"
+        android:text="@string/home"
+        android:textAlignment="textStart"
+        android:textColor="@color/off_white"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="57sp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

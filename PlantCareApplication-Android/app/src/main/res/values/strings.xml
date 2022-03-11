@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">PlantCareApplication-Android</string>
+    <string name="welcome">Welcome to Plant Parent Care</string>
+    <string name="welcome_description">Make owning plants fun and easy</string>
+    <string name="sign_in_description">Sign in to start caring for your plants</string>
+
+    <string name="home">Home</string>
+    <string name="home_description">View and water your plants</string>
+
+    <string name="plant_info_description">Everything you need to know</string>
+    <string name="common_name">Common Name:</string>
+    <string name="botanical_name">Botanical Name:</string>
+    <string name="watering">Watering:</string>
+    <string name="bloom_time">Bloom Time:</string>
+    <string name="sun_exposure">Sun Exposure:</string>
+    <string name="soil_type">Soil Type:</string>
+    <string name="toxicity">Toxicity:</string>
+
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+
 </resources>
