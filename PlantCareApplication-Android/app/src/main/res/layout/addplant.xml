@@ -23,7 +23,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/londrina_solid"
-        android:text="@string/home"
+        android:text="Add"
         android:textAlignment="textStart"
         android:textColor="@color/off_white"
         android:textSize="48sp"
@@ -38,12 +38,45 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="72dp"
         android:fontFamily="@font/livvic"
-        android:text="@string/home_description"
+        android:text="Add a Plant"
         android:textAlignment="textStart"
         android:textColor="@color/off_white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="18sp" />
+
+    <TextView
+        android:id="@+id/plantNew"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="308dp"
+        android:fontFamily="@font/livvic"
+        android:gravity="center"
+        android:text="Create a Plant"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="18sp" />
+
+    <TextView
+        android:id="@+id/PlantChosen"
+        android:layout_width="245dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="420dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:fontFamily="@font/livvic"
+        android:text="Chose an Existing Plant"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineHeight="30sp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

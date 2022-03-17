@@ -23,7 +23,7 @@
         android:layout_width="1600dp"
         android:layout_height="800dp"
         android:layout_marginStart="-570dp"
-        android:layout_marginTop="562dp"
+        android:layout_marginTop="540dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_wifi_bar_24" />
@@ -32,7 +32,7 @@
         android:layout_width="83dp"
         android:layout_height="91dp"
         android:layout_marginStart="184dp"
-        android:layout_marginTop="660dp"
+        android:layout_marginTop="640dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_circle_24" />
@@ -41,7 +41,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="284dp"
-        android:layout_marginTop="680dp"
+        android:layout_marginTop="660dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
@@ -50,7 +50,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="104dp"
-        android:layout_marginTop="680dp"
+        android:layout_marginTop="660dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_notifications_active_24" />
@@ -85,5 +85,133 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="18sp" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:fillViewport="false"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
 
+            <TextView
+                android:id="@+id/plant_Pic2"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginTop="60dp"
+                android:fontFamily="@font/livvic"
+                android:text="Picture Plant #1 Here"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lineHeight="18sp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/givenname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/livvic"
+                    android:gravity="center"
+                    android:text="Name:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+
+                <TextView
+                    android:id="@+id/entergivenname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/livvic"
+                    android:gravity="center"
+                    android:text="Name Here"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/water"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/livvic"
+                    android:gravity="center"
+                    android:text="Water Plant"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+                         </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/livvic"
+                    android:gravity="center"
+                    android:text="View Plant"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

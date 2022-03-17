@@ -23,7 +23,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/londrina_solid"
-        android:text="@string/home"
+        android:text="Calendar"
         android:textAlignment="textStart"
         android:textColor="@color/off_white"
         android:textSize="48sp"

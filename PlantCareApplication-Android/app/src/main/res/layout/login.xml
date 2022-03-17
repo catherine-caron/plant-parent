@@ -23,7 +23,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/londrina_solid"
-        android:text="@string/home"
+        android:text="Log In"
         android:textAlignment="textStart"
         android:textColor="@color/off_white"
         android:textSize="48sp"
@@ -38,12 +38,96 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="72dp"
         android:fontFamily="@font/livvic"
-        android:text="@string/home_description"
+        android:text="Enter Log In Information"
         android:textAlignment="textStart"
         android:textColor="@color/off_white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="18sp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="320dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/givenname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/livvic"
+            android:gravity="center"
+            android:text="Username:"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+
+        <TextView
+            android:id="@+id/entergivenname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/livvic"
+            android:gravity="center"
+            android:text="Enter Username"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="440dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/botanicalname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/livvic"
+            android:gravity="center"
+            android:text="Password :"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+
+        <TextView
+            android:id="@+id/enterbotanicalname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/livvic"
+            android:gravity="center"
+            android:text="Enter Password"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

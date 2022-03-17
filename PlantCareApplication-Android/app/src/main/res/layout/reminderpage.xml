@@ -8,6 +8,7 @@
 
     <!--Don't edit this or I will kill you-->
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView3"
         android:layout_width="1300dp"
         android:layout_height="1300dp"
         android:layout_marginStart="-430dp"
@@ -16,14 +17,53 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_lens_24" />
 
+    <!--Nav Bar -->
+    <!--Don't edit this or I will kill you-->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="1600dp"
+        android:layout_height="800dp"
+        android:layout_marginStart="-570dp"
+        android:layout_marginTop="540dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_wifi_bar_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="83dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="645dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/home_icon_white" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="660dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="660dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_notifications_active_24" />
+    <!--Nav Bar End -->
+
     <TextView
         android:id="@+id/home"
-        android:layout_width="176dp"
-        android:layout_height="49dp"
+        android:layout_width="207dp"
+        android:layout_height="51dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/londrina_solid"
-        android:text="@string/home"
+        android:text="Reminders"
         android:textAlignment="textStart"
         android:textColor="@color/off_white"
         android:textSize="48sp"
@@ -33,12 +73,12 @@
 
     <TextView
         android:id="@+id/home_desc"
-        android:layout_width="245dp"
-        android:layout_height="31dp"
+        android:layout_width="329dp"
+        android:layout_height="37dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="72dp"
         android:fontFamily="@font/livvic"
-        android:text="@string/home_description"
+        android:text="Plants are to be watered on Home Page"
         android:textAlignment="textStart"
         android:textColor="@color/off_white"
         android:textSize="18sp"
@@ -46,4 +86,71 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="18sp" />
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="false"
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-2dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/givenname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/livvic"
+                    android:gravity="center"
+                    android:text="Reminder Date"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+
+                <TextView
+                    android:id="@+id/entergivenname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/livvic"
+                    android:gravity="center"
+                    android:text="Name of Plant"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
