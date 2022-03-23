@@ -23,7 +23,6 @@ public class PlantDto {
 	private Integer plantId;
 	private WateringSchedule wateringRecommendation;
 	private Member member;
-	
 	//default constructor
 	public PlantDto(){
 		
