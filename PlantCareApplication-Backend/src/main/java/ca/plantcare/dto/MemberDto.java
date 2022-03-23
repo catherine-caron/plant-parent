@@ -1,6 +1,7 @@
 package ca.plantcare.dto;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import ca.plantcare.models.Member;
 import ca.plantcare.models.Plant;
@@ -23,12 +24,13 @@ public class MemberDto {
 		this(email, password,username, name, numberOfPlants, Collections.EMPTY_LIST);
 	} */
 		
-	public MemberDto(String email, String password, String username, String name,  Integer numberOfPlants, List<Plant> arrayList) {
+	public MemberDto(String email, String password, String username, String name,  Integer numberOfPlants, List<Plant> plants) {
 		this.username = username;
 		this.name = name;
 		this.email= email;
 		this.password = password;
-		this.setPlants(arrayList);
+		List<Integer> aPlantsDto = plants.stream().map(plant -> plant.getPlantId()).collect(Collectors.toList());
+		this.plants = plants;
         // this.phoneNumber = phoneNumber;
 		this.numberOfPlants = numberOfPlants;
       //  this.plantsDTO = arrayList; error on this line
