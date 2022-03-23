@@ -2,28 +2,47 @@ package ca.plantcare.dto;
 import java.util.Collections;
 import java.util.List;
 
+import ca.plantcare.models.Member;
+import ca.plantcare.models.Plant;
+
 public class MemberDto {
 
 	private String username;
 	private String name;
+	 private String email;
+	 private String password;
     private Integer numberOfPlants;
-	private List<PlantDto> plantsDTO;
+	private List<Plant> plants;
 	
 
 	public MemberDto() {
 	}
 	
-    @SuppressWarnings("unchecked") // added
-	public MemberDto(String username,  String name, Integer numberOfPlants) {
-		this(username, name, numberOfPlants, Collections.EMPTY_LIST);
-	}
+   /* @SuppressWarnings("unchecked") // added
+	public MemberDto(String email, String password,String username,  String name, Integer numberOfPlants) {
+		this(email, password,username, name, numberOfPlants, Collections.EMPTY_LIST);
+	} */
 		
-	public MemberDto(String username, String name,  Integer numberOfPlants, List<PlantDto> arrayList) {
+	public MemberDto(String email, String password, String username, String name,  Integer numberOfPlants, List<Plant> arrayList) {
 		this.username = username;
 		this.name = name;
+		this.email= email;
+		this.password = password;
+		this.setPlants(arrayList);
         // this.phoneNumber = phoneNumber;
 		this.numberOfPlants = numberOfPlants;
       //  this.plantsDTO = arrayList; error on this line
+	}
+	
+	public static MemberDto converToDto(Member member) {
+		MemberDto memberDto = new MemberDto(member.getEmail(),
+				member.getPassword(),
+				member.getUsername(),
+				member.getName(),
+				member.getNumberOfPlants(),
+				member.getPlant());
+		return memberDto;
+		
 	}
 		
 	public String getUsername() {
@@ -46,9 +65,6 @@ public class MemberDto {
 		return numberOfPlants;
 	}
 
-    public List<PlantDto> getPlants() {
-		return plantsDTO;
-	}
 	
 	public void setUsername(String username) {
 		this.username = username;
@@ -71,8 +87,46 @@ public class MemberDto {
 		this.numberOfPlants = numberOfPlants;
 	}
 
-    public void setPlants(List<PlantDto> arrayList) {
-		this.plantsDTO = arrayList;
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @return the plants
+	 */
+	public List<Plant> getPlants() {
+		return plants;
+	}
+
+	/**
+	 * @param plants the plants to set
+	 */
+	public void setPlants(List<Plant> plants) {
+		this.plants = plants;
 	}
 	
 }

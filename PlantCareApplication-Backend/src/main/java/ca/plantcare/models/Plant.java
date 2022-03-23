@@ -3,11 +3,15 @@ package ca.plantcare.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
+@Entity
 public class Plant {
 
 	public enum SunExposure {
@@ -25,17 +29,20 @@ public class Plant {
 	//private List <SunExposure> sunExposure= new ArrayList<>();
 	//private List <SoilType> soilType=new ArrayList<>();
 	//private List <Toxicity> toxicity=new ArrayList<>();
-	private List <BloomTime> bloomTime=new ArrayList<>();
-	private WateringSchedule wateringRecommendation;
+	//private List <BloomTime> bloomTime=new ArrayList<>();
+	
 	private Integer icon;
 	private SunExposure sunExposure;
 	private SoilType soilType;
 	private Toxicity toxicity;
+	private BloomTime bloomTime;
 	private String givenName;
 	private String botanicalName;
 	private String commonName;
 	private Integer plantId;
 	
+	private Member member;
+	private WateringSchedule wateringRecommendation;
 	/**
 	 * Default constructor.
 	 */
@@ -107,7 +114,7 @@ public class Plant {
 	
 	public void setToxicity (List<Toxicity> aToxicity) {
 		this.toxicity = aToxicity;
-	}*/
+	}
 	
 
 	
@@ -117,14 +124,14 @@ public class Plant {
 	
 	public void setBloomTime (List<BloomTime> aBloomTime) {
 		this.bloomTime = aBloomTime;
-	}
+	}*/
 
-
+	@OneToOne(cascade = CascadeType.ALL)
 	public WateringSchedule getWateringRecommendation() {
 		return wateringRecommendation;
 	}
 
-
+	//@OneToOne(cascade = CascadeType.ALL)
 	public void setWateringRecommendation(WateringSchedule wateringRecommendation) {
 		this.wateringRecommendation = wateringRecommendation;
 	}
@@ -175,6 +182,39 @@ public class Plant {
 	 */
 	public void setToxicity(Toxicity toxicity) {
 		this.toxicity = toxicity;
+	}
+
+
+	/**
+	 * @return the bloomtime
+	 */
+	public BloomTime getBloomtime() {
+		return bloomTime;
+	}
+
+
+	/**
+	 * @param bloomtime the bloomtime to set
+	 */
+	public void setBloomtime(BloomTime bloomtime) {
+		this.bloomTime = bloomtime;
+	}
+
+
+	/**
+	 * @return the member
+	 */
+	@OneToOne(cascade = CascadeType.ALL)
+	public Member getMember() {
+		return member;
+	}
+
+
+	/**
+	 * @param member the member to set
+	 */
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	
 

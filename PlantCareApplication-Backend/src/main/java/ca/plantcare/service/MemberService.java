@@ -28,7 +28,7 @@ public class MemberService {
 	 * @return the account created
 	 */
 	@Transactional
-	public Member createMember(String username, String name){
+	public Member createMember(String email, String username, String name, String password){
 
         if (username == null || username.replaceAll("\\s+", "").length() == 0 || username.equals("undefined")) {
 			throw new IllegalArgumentException("Username cannot be empty.");
@@ -61,6 +61,8 @@ public class MemberService {
 		else {
 			Member member = new Member();
 			member.setUsername(username);
+			member.setEmail(email);
+			member.setPassword(password);
 			member.setName(name);
 			member.setNumberOfPlants(0); // initally no plants
 			memberRepository.save(member);
@@ -98,7 +100,7 @@ public class MemberService {
 	 * @return the member updated
 	 */
 	@Transactional
-	public Member updateMember(String username, String newName) {
+	public Member updateMember(String email,String username, String newName,String password) {
 		// public Member updateMember(String username, String newPassword, String newEmail, String newName, String newPhoneNumber)
 		if (username.equals("undefined") || newName.equals("undefined")) {
 			throw new IllegalArgumentException("One or more fields empty. Please try again.");
@@ -127,6 +129,8 @@ public class MemberService {
 				throw new IllegalArgumentException("Name cannot be empty.");
 			}
 			else {
+				member.setEmail(email);
+				member.setPassword(password);
 				member.setName(newName);
 				memberRepository.save(member);
 				return member;
@@ -141,7 +145,7 @@ public class MemberService {
 	 * @return the member updated
 	 */
 	@Transactional
-	public Member updateNumberOfPlants(String username, Integer newNumberOfPlants) {
+	public Member updateNumberOfPlants( String username, Integer newNumberOfPlants) {
 		Member member = memberRepository.findMemberByUsername(username);
 		if (member == null) {
 			throw new IllegalArgumentException("The member cannot be found.");
@@ -150,6 +154,7 @@ public class MemberService {
 			throw new IllegalArgumentException("Number of plants cannot be negative.");
 		}
 		else {
+			
 			member.setNumberOfPlants(newNumberOfPlants);
 			memberRepository.save(member);
 			return member;

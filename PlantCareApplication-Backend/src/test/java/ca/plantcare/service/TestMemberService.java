@@ -31,6 +31,9 @@ public class TestMemberService {
 
 	private static final String USERNAME1 = "Username1";
 	private static final String NAME1 = "Rajaa Bk";
+	private static final String PASSWORD1 = "RajaaBk";
+	private static final String EMAIL1 = "RajaaBK@icloud.com";
+
 
 	private static final String GIVENNAME1 = "Elia";
 	private static final String BOTANICALNAME1 = "Sunflower";
@@ -132,7 +135,7 @@ public class TestMemberService {
 		String username = "newUsername";
 		Member user = null;
 		try {
-			user = memberService.createMember(username, NAME1);
+			user = memberService.createMember(EMAIL1, PASSWORD1,username, NAME1);
 		} catch (IllegalArgumentException e) {
 			// Check that no error occurred
 			fail();
@@ -151,7 +154,7 @@ public class TestMemberService {
 		Member user = null;
 		String error = null;
 		try {
-			user = memberService.createMember(username, NAME1);
+			user = memberService.createMember(EMAIL1, PASSWORD1,username, NAME1);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -169,7 +172,7 @@ public class TestMemberService {
 		Member user = null;
 		String error = null;
 		try {
-			user = memberService.createMember(username, NAME1);
+			user = memberService.createMember(EMAIL1, PASSWORD1,username, NAME1);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -186,7 +189,7 @@ public class TestMemberService {
 		Member user = null;
 		String error = null;
 		try {
-			user = memberService.createMember(USERNAME1, NAME1);
+			user = memberService.createMember(EMAIL1, PASSWORD1,USERNAME1, NAME1);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -201,11 +204,13 @@ public class TestMemberService {
 	@Test
 	public void testCreateMemberEmptyName(){
 		String username = "Joe";
+		String email = "test@gmail.com";
+		String password = "123";
 		String name = "";
 		Member user = null;
 		String error = null;
 		try {
-			user = memberService.createMember(username, name);
+			user = memberService.createMember(email,username, name,password);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -222,7 +227,7 @@ public class TestMemberService {
 		String newName = "New Name";
 		Member user = null; 
 		try {
-			user = memberService.updateMember(USERNAME1, newName);
+			user = memberService.updateMember(EMAIL1,USERNAME1, newName,PASSWORD1);
 		} catch (IllegalArgumentException e) {
 			// Check that no error occurred
 			fail();
@@ -241,8 +246,10 @@ public class TestMemberService {
 		String newName = "New Name";
 		Member user = null; 
 		String error = null;
+		String email = "test@gmail.com";
+		String password = "123";
 		try {
-			user = memberService.updateMember(username, newName);
+			user = memberService.updateMember(email,username, newName,password);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -258,10 +265,12 @@ public class TestMemberService {
 	public void testUpdateMemberUsernameNotFound() {
 		String username = "Joe42";
 		String newName = "New Name";
+		String email = "test@gmail.com";
+		String password = "123";
 		Member user = null; 
 		String error = null;
 		try {
-			user = memberService.updateMember(username, newName);
+			user = memberService.updateMember(email,username, newName,password);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -279,7 +288,7 @@ public class TestMemberService {
 		Member user = null; 
 		String error = null;
 		try {
-			user = memberService.updateMember(USERNAME1, newName);
+			user = memberService.updateMember(EMAIL1,USERNAME1, newName, PASSWORD1);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}

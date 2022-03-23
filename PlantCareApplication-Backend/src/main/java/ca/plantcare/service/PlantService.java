@@ -89,7 +89,7 @@ public class PlantService {
 
 	// create plant by admin needs an admin member id
 	public Plant createPlant(Integer icon, String givenName, String botanicalName, String commonName,
-			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, List<BloomTime> bloomTime,
+			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
 			WateringSchedule wateringRecommendation) {
 
 		if (icon == null || icon.equals("undefined")) {
@@ -130,10 +130,10 @@ public class PlantService {
 			throw new IllegalArgumentException("PlantId is too large. Contact Admin");
 		} // need expection for wrong inputs
 		Plant plant = new Plant();
-		plant.setBloomTime(bloomTime);
+		plant.setBloomtime(bloomTime);
 		plant.getBotanicalName();
 		plant.setCommonName(commonName);
-		plant.setGivenName(givenName);
+		//plant.setGivenName(givenName);
 		plant.setIcon(icon);
 		plant.setSunExposure(sunExposure);
 		plant.setSoilType(soilType);
@@ -152,7 +152,7 @@ public class PlantService {
 	 * @param
 	 * @return plant
 	 */
-	public Plant addPlant(Integer plantId, String memberId) {
+	public Plant addPlant(Integer plantId, String memberId, String givenName) {
 		/*
 		 * if (plantId == null){ throw new IllegalArgumentException("Plant not found.");
 		 * } if (memberId == null){ throw new
@@ -188,11 +188,14 @@ public class PlantService {
 		 * newPlant.setWateringRecommendation(wateringSchedule);
 		 * newPlant.setSoilType(newPlantSoil); newPlant.setToxicity(newPlantToxicity);
 		 */
+		newPlant.setGivenName(givenName);
 		newPlant.setPlantId(plantIdNew); // idk if this works
 		plantRepository.save(newPlant);
 		Member member = memberRepository.findMemberByUsername(memberId);
 		member.getPlant().add(newPlant);
 		memberRepository.save(member);
+		/*memberUpdated.getPlant().add(newPlant);
+		memberRepository.save(memberUpdated);*/
 		return newPlant;
 
 	}
@@ -205,7 +208,7 @@ public class PlantService {
 	 * @return plant
 	 */
 	public Plant updatePlant(Integer plantId, String givenName, Integer icon, String botanicalName, String commonName,
-			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, List<BloomTime> bloomTime,
+			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
 			WateringSchedule wateringRecommendation) {
 		if (plantId == null) {
 			throw new IllegalArgumentException("Plant not found.");
@@ -217,7 +220,7 @@ public class PlantService {
 		// updatePlantToxicity(plantId);
 		// updatePlantSun( plantId );
 		// updatePlantSoil( plantId );
-		plant.setBloomTime(bloomTime);
+		plant.setBloomtime(bloomTime);
 		plant.getBotanicalName();
 		plant.setCommonName(commonName);
 		plant.setGivenName(givenName);
@@ -282,9 +285,9 @@ public class PlantService {
 	 * }
 	 */
 
-	public Plant updateBloom(Integer plantId, List<BloomTime> bloomTime) {
+	public Plant updateBloom(Integer plantId, BloomTime bloomTime) {
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
-		plant.setBloomTime(bloomTime);
+		plant.setBloomtime(bloomTime);
 		plantRepository.save(plant);
 
 		return plant;

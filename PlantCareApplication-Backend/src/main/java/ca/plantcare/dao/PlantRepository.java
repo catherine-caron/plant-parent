@@ -16,10 +16,10 @@ public interface PlantRepository extends CrudRepository<Plant, Integer> {
 	Plant findPlantByCommonName(String commonName); //added to service
 	Plant findPlantByGivenName(String givenName); //added to service
 	Plant findPlantByBotanicalName(String botanicalName);
-	List<Plant> findPlantBySunExposure(SunExposure sunExposure); //added to service
-	List<Plant> findPlantBySoilType(SoilType soilType);
-	List<Plant> findPlantByToxicity(Toxicity toxicity);
-	List<Plant> findPlantByBloomTime(BloomTime bloomTime);
+	Plant findPlantBySunExposure(SunExposure sunExposure); //added to service
+	Plant findPlantBySoilType(SoilType soilType);
+	Plant findPlantByToxicity(Toxicity toxicity);
+	//Plant findPlantByBloomTime(BloomTime bloomTime);
 
 
 }
