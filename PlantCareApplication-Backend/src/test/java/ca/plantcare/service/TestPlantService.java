@@ -39,6 +39,7 @@ public class TestPlantService {
 	// Plant myPlant = new Plant();
 	// Member myMember = new Member();
 	Integer PLANTID = 7;
+	Integer SCHEDULEID = 8;
 	String BOTANICALNAME = "Botanical";
 	String GIVENNAME = "MyPlant";
 	String COMMONNAME = "Common";
@@ -128,6 +129,7 @@ public class TestPlantService {
 		Plant plant = null;
 		try {
 			Integer myPlantId = 5;
+			Integer id =5;
 			String myBotanicalName = "Botanical";
 			String myGivenName = "MyPlant";
 			String myCommonName = "Common";
@@ -141,7 +143,7 @@ public class TestPlantService {
 			Toxicity myToxic = Toxicity.MajorToxicity;
 			WateringSchedule myWateringSchedule = new WateringSchedule();
 			plant = plantService.createPlant(myPlantId, myGivenName, myBotanicalName, myCommonName, mySun, mySoilType,
-					myToxic, myBloomTime, myWateringSchedule);
+					myToxic, myBloomTime, id);
 		} catch (IllegalArgumentException e) {
 			// Check that no error occurred
 			fail();
@@ -155,6 +157,7 @@ public class TestPlantService {
 		String error = "";
 		try {
 			Integer myPlantId = 2;
+			Integer id =5;
 			String myBotanicalName = "Botanical";
 			String myGivenName = "MyPlant";
 			String myCommonName = "Common";
@@ -167,7 +170,7 @@ public class TestPlantService {
 			Toxicity myToxic = Toxicity.MajorToxicity;
 			WateringSchedule myWateringSchedule = null;
 			plant = plantService.createPlant(myPlantId, myGivenName, myBotanicalName, myCommonName, mySun, mySoilType,
-					myToxic, myBloomTime, myWateringSchedule);
+					myToxic, myBloomTime, id);
 		} catch (Exception e) {
 			// Check that no error occurred
 			error = e.getMessage();
@@ -195,7 +198,7 @@ public class TestPlantService {
 			Toxicity myToxic = Toxicity.MajorToxicity;
 			WateringSchedule myWateringSchedule = null;
 			plant = plantService.createPlant(myPlantId, myGivenName, myBotanicalName, myCommonName, mySun, mySoilType,
-					myToxic, myBloomTime, myWateringSchedule);
+					myToxic, myBloomTime, null);
 
 		} catch (Exception e) {
 			// Check that no error occurred
@@ -224,7 +227,7 @@ public class TestPlantService {
 			Toxicity myToxic = Toxicity.MajorToxicity;
 			WateringSchedule myWateringSchedule = null;
 			plant = plantService.createPlant(myPlantId, myGivenName, myBotanicalName, myCommonName, mySun, mySoilType,
-					myToxic, myBloomTime, myWateringSchedule);
+					myToxic, myBloomTime, myPlantId);
 		} catch (Exception e) {
 			// Check that no error occurred
 			error = e.getMessage();

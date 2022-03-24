@@ -21,7 +21,7 @@ public class PlantDto {
 	private String botanicalName;
 	private String commonName;
 	private Integer plantId;
-	private WateringSchedule wateringRecommendation;
+	private WateringSchedule wateringSchedule;
 	private Member member;
 	//default constructor
 	public PlantDto(){
@@ -38,7 +38,7 @@ public class PlantDto {
 		this.soilType = soilType;
 		this.sunExposure = sunExposure;
 		this.toxicity = toxicity;
-		this.wateringRecommendation = wateringRecommendation;
+		this.wateringSchedule = wateringRecommendation;
 		
 		if(memberId == null || plantId ==null) { //admin plant
 			this.plantId = plantId;
@@ -196,14 +196,14 @@ public class PlantDto {
 	 * @return the wateringRecommendation
 	 */
 	public WateringSchedule getWateringRecommendation() {
-		return wateringRecommendation;
+		return wateringSchedule;
 	}
 
 	/**
 	 * @param wateringRecommendation the wateringRecommendation to set
 	 */
 	public void setWateringRecommendation(WateringSchedule wateringRecommendation) {
-		this.wateringRecommendation = wateringRecommendation;
+		this.wateringSchedule = wateringRecommendation;
 	}
 	
 }

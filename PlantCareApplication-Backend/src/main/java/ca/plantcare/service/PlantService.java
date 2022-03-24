@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ca.plantcare.dao.MemberRepository;
 import ca.plantcare.models.Member;
 import ca.plantcare.dao.PlantRepository;
+import ca.plantcare.dao.WateringScheduleRepository;
 import ca.plantcare.models.Plant;
 import ca.plantcare.models.WateringSchedule;
 import ca.plantcare.models.Plant.BloomTime;
@@ -25,7 +26,8 @@ public class PlantService {
 	private MemberRepository memberRepository;
 	@Autowired
 	private PlantRepository plantRepository;
-
+	@Autowired
+	private WateringScheduleRepository wateringScheduleRepository;
 	/**
 	 * Find all plants owned by specific member
 	 * 
@@ -90,7 +92,7 @@ public class PlantService {
 	// create plant by admin needs an admin member id
 	public Plant createPlant(Integer icon, String givenName, String botanicalName, String commonName,
 			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
-			WateringSchedule wateringRecommendation) {
+			Integer wateringRecommendation) {
 
 		if (icon == null || icon.equals("undefined")) {
 			throw new IllegalArgumentException("Icon cannot be null or empty");
@@ -138,7 +140,8 @@ public class PlantService {
 		plant.setSunExposure(sunExposure);
 		plant.setSoilType(soilType);
 		plant.setToxicity(toxicity);
-		plant.setWateringRecommendation(wateringRecommendation);
+		WateringSchedule wateringSchedule = wateringScheduleRepository.findWateringScheduleByScheduleId(wateringRecommendation);
+		plant.setWateringRecommendation(wateringSchedule);
 		plant.setPlantId(plantId);
 		plantRepository.save(plant);
 		return plant;
