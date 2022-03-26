@@ -219,83 +219,83 @@ public class TestMemberService {
 		assertEquals("Name cannot be empty.", error);
 	}
 
-	/**
-	 * Update member successfully	
-	 */
-	@Test
-	public void testUpdateMemberSuccessfully() {
-		String newName = "New Name";
-		Member user = null; 
-		try {
-			user = memberService.updateMember(EMAIL1,USERNAME1, newName,PASSWORD1);
-		} catch (IllegalArgumentException e) {
-			// Check that no error occurred
-			fail();
-		}
-		assertNotNull(user);
-		assertEquals(USERNAME1, user.getUsername());
-		assertEquals(newName, user.getName());
-	}
+	// /**
+	//  * Update member successfully	
+	//  */
+	// @Test
+	// public void testUpdateMemberSuccessfully() {
+	// 	String newName = "New Name";
+	// 	Member user = null; 
+	// 	try {
+	// 		user = memberService.updateMember(EMAIL1,USERNAME1, newName, PASSWORD1);
+	// 	} catch (IllegalArgumentException e) {
+	// 		// Check that no error occurred
+	// 		fail();
+	// 	}
+	// 	assertNotNull(user);
+	// 	assertEquals(USERNAME1, user.getUsername());
+	// 	assertEquals(newName, user.getName());
+	// }
 
-	/**isEmailAvailable
-	 * Update member with empty username	
-	 */
-	@Test
-	public void testUpdateMemberEmptyUsername() {
-		String username = "undefined";
-		String newName = "New Name";
-		Member user = null; 
-		String error = null;
-		String email = "test@gmail.com";
-		String password = "123";
-		try {
-			user = memberService.updateMember(email,username, newName,password);
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertNull(user);
-		// check error
-		assertEquals("One or more fields empty. Please try again.", error);
-	}
+	// /**isEmailAvailable
+	//  * Update member with empty username	
+	//  */
+	// @Test
+	// public void testUpdateMemberEmptyUsername() {
+	// 	String username = "undefined";
+	// 	String newName = "New Name";
+	// 	Member user = null; 
+	// 	String error = null;
+	// 	String email = "test@gmail.com";
+	// 	String password = "123";
+	// 	try {
+	// 		user = memberService.updateMember(email,username, newName,password);
+	// 	} catch (IllegalArgumentException e) {
+	// 		error = e.getMessage();
+	// 	}
+	// 	assertNull(user);
+	// 	// check error
+	// 	assertEquals("One or more fields empty. Please try again.", error);
+	// }
 
-	/**
-	 * Update member with username not found	
-	 */
-	@Test
-	public void testUpdateMemberUsernameNotFound() {
-		String username = "Joe42";
-		String newName = "New Name";
-		String email = "test@gmail.com";
-		String password = "123";
-		Member user = null; 
-		String error = null;
-		try {
-			user = memberService.updateMember(email,username, newName,password);
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertNull(user);
-		// check error
-		assertEquals("The member cannot be found.", error);
-	}
+	// /**
+	//  * Update member with username not found	
+	//  */
+	// @Test
+	// public void testUpdateMemberUsernameNotFound() {
+	// 	String username = "Joe42";
+	// 	String newName = "New Name";
+	// 	String email = "test@gmail.com";
+	// 	String password = "123";
+	// 	Member user = null; 
+	// 	String error = null;
+	// 	try {
+	// 		user = memberService.updateMember(email,username, newName,password);
+	// 	} catch (IllegalArgumentException e) {
+	// 		error = e.getMessage();
+	// 	}
+	// 	assertNull(user);
+	// 	// check error
+	// 	assertEquals("The member cannot be found.", error);
+	// }
 
-	/**
-	 * Update member with empty name	
-	 */
-	@Test
-	public void testUpdateMemberEmptyName() {
-		String newName = "      ";
-		Member user = null; 
-		String error = null;
-		try {
-			user = memberService.updateMember(EMAIL1,USERNAME1, newName, PASSWORD1);
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertNull(user);
-		// check error
-		assertEquals("Name cannot be empty.", error);
-	}
+	// /**
+	//  * Update member with empty name	
+	//  */
+	// @Test
+	// public void testUpdateMemberEmptyName() {
+	// 	String newName = "      ";
+	// 	Member user = null; 
+	// 	String error = null;
+	// 	try {
+	// 		user = memberService.updateMember(EMAIL1,USERNAME1, newName, PASSWORD1);
+	// 	} catch (IllegalArgumentException e) {
+	// 		error = e.getMessage();
+	// 	}
+	// 	assertNull(user);
+	// 	// check error
+	// 	assertEquals("Name cannot be empty.", error);
+	// }
 
 	/**
 	 * Update number of plants successfully
