@@ -10,10 +10,11 @@ public class MemberDto {
 
 	private String username;
 	private String name;
-	 private String email;
-	 private String password;
+	private String email;
+	private String password;
     private Integer numberOfPlants;
 	private List<Plant> plants;
+	private int token;
 	
 
 	public MemberDto() {
@@ -129,6 +130,14 @@ public class MemberDto {
 	 */
 	public void setPlants(List<Plant> plants) {
 		this.plants = plants;
+	}
+
+	public int getToken() {
+		return token;
+	}
+
+	public void setToken(int token) {
+		this.token = token;
 	}
 	
 }

@@ -101,7 +101,7 @@ public class MemberService {
 	 * @return the member updated
 	 */
 	@Transactional
-	public Member updateMember(String email, String username, String newName, String newEmail, String newPassword) {
+	public Member updateMember(String username, String newName, String newEmail, String newPassword) {
 		// public Member updateMember(String username, String newPassword, String newEmail, String newName, String newPhoneNumber)
 		if (username.equals("undefined") || newName.equals("undefined")) {
 			throw new IllegalArgumentException("One or more fields empty. Please try again.");
@@ -130,7 +130,7 @@ public class MemberService {
 				throw new IllegalArgumentException("Name cannot be empty.");
 			}
 			else {
-				member.setEmail(email);
+				member.setEmail(newEmail);
 				member.setPassword(newPassword);
 				member.setName(newName);
 				memberRepository.save(member);
@@ -189,6 +189,88 @@ public class MemberService {
 		}
 	}
 
+	/**
+	 * Login the account and create a token for the account
+	 * @param username
+	 * @param password
+	 * @return user
+	 */
+	@Transactional
+	public Member loginMember(String username, String password)   {
+		if (username.equals("undefined")) {
+			throw new IllegalArgumentException("Username cannot be null.");
+		}
+		else {
+			Member user = memberRepository.findMemberByUsername(username);
+			if (user == null) {
+				throw new IllegalArgumentException("The member cannot be found. Please sign up if you do not have an account yet.");
+			}
+			else if (!user.getPassword().equals(password)) {
+				throw new IllegalArgumentException("Username or password incorrect. Please try again.");
+			}
+			else {
+				user.setToken(username.hashCode());
+				memberRepository.save(user);
+				return user;
+			}
+		}
+	}
+
+	/**
+	 * Logout the account and delete token for the account
+	 * @param username
+	 * @return user
+	 * @throws IllegalArgumentException
+	 */
+	@Transactional
+	public Member logoutMember(String username) {
+		if (username.equals("undefined")) {
+			throw new IllegalArgumentException("Username cannot be null.");
+		}
+		else {
+			Member user = memberRepository.findMemberByUsername(username);
+			
+			if (user == null) {
+				throw new IllegalArgumentException("The member cannot be found.");
+			}
+			else if (user.getToken() == 0){
+				throw new IllegalArgumentException("You do not have permission to access this account.");
+			}
+			else {
+				user.setToken(0);
+				memberRepository.save(user);
+				return user;
+			}
+		}
+	}
+
+	/**
+	 * Authenticate token
+	 * @author Catherine
+	 * @param username
+	 * @return user
+	 * @throws IllegalArgumentException
+	 */
+	@Transactional
+	public Member authenticateMember(String username) {
+		if (username.equals("undefined")) {
+			throw new IllegalArgumentException("Username cannot be null.");
+		}
+		else {
+			Member user = memberRepository.findMemberByUsername(username);
+			
+			if(user == null) {
+				throw new IllegalArgumentException("The member cannot be found.");
+			}
+			else if (user.getToken() != 0) {
+				return user;
+			}
+			else {
+				//General error message to capture if the session expired or the user does not have permission
+				throw new IllegalArgumentException("An error occured. Please try again."); 
+			}
+		}
+	}
 
     // ---------- Helper Methods --------------
 
