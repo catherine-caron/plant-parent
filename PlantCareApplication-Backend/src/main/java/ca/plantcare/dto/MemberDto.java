@@ -20,10 +20,10 @@ public class MemberDto {
 	public MemberDto() {
 	}
 	
-   /* @SuppressWarnings("unchecked") // added
+   @SuppressWarnings("unchecked") // added
 	public MemberDto(String email, String password,String username,  String name, Integer numberOfPlants) {
 		this(email, password,username, name, numberOfPlants, Collections.EMPTY_LIST);
-	} */
+	} 
 		
 	public MemberDto(String email, String password, String username, String name,  Integer numberOfPlants, List<Plant> plants) {
 		this.username = username;
@@ -56,10 +56,6 @@ public class MemberDto {
 		return name;
 	}
 
-    // public String getEmail() {
-	// 	return email;
-	// }
-
     // public String getPhoneNumber() {
 	// 	return phoneNumber;
 	// }
@@ -77,10 +73,6 @@ public class MemberDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-    // public void setEmail(String email) {
-	// 	this.email = email;
-	// }
 
     // public void setPhoneNumber(String phoneNumber) {
 	// 	this.phoneNumber = phoneNumber;

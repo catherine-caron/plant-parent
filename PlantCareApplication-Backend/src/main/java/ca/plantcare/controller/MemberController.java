@@ -14,6 +14,9 @@ import antlr.collections.List;
 
 import static ca.plantcare.extra.HttpUtil.httpFailureMessage;
 import static ca.plantcare.extra.HttpUtil.httpSuccess;
+
+import java.util.stream.Collectors;
+
 import static ca.plantcare.extra.HttpUtil.httpFailure;
 
 import ca.plantcare.dto.*;
@@ -27,16 +30,6 @@ public class MemberController {
     @Autowired
 	private MemberService memberService;
 
-	// /**
-	//  * Return a list of all Member Dtos 
-	//  * 
-	//  * @return list of Member Dtos
-	//  */
-	// @GetMapping(value = { "/getAllMembers", "/getAllMembers/" })
-	// public List<MemberDto> getAllMembers() {
-	// 	return memberService.getAllMembers().stream().map(u -> convertToDto(u)).collect(Collectors.toList());
-	// }
-
 	/**
 	 * Return the member with specified username
 	 * 
@@ -45,8 +38,15 @@ public class MemberController {
 	 */
 	@GetMapping(value = { "/getMemberByUsername/{username}", "/getMemberByUsername/{username}/" })
 	public MemberDto getMemberByUsername(@PathVariable("username") String username) {
-		return convertToDto(memberService.getMemberByUsername(username));
+		Member member = memberService.getMemberByUsername(username);
+        return MemberDto.converToDto(member);
 	}
+
+
+    // todo:
+    // getMemberByEmail
+    // updateNumberOfPlants
+
 
 	/**
 	 * Create a Member Dto with provided parameters
@@ -127,57 +127,45 @@ public class MemberController {
 		return convertToDto(user);
 	}
 
-	/**
-	 * Get the member associated to specified car
-	 * 
-	 * @param license plate for car
-	 * @return
-	 */
-	@GetMapping(value = { "/getMemberByCar/{licensePlate}", "/getMemberByCar/{licensePlate}/" })
-	public MemberDto getMemberByCar(@PathVariable("licensePlate") String licensePlate) {
-		return convertToDto(memberService.getMemberWithCar(licensePlate));
-	}
-
-
 
 	//-------------------------- Helper Methods -----------------------------
 
-	/**
-	 * Helper Method to convert an member to a Dto
-	 * 
-	 * @param user
-	 * @return MemberDto
-	 */
-	private MemberDto convertToDto(Member user){
-		if (user == null) {
-			throw new InvalidInputException("This user does not exist");
-		}
-		MemberDto memberDto = new MemberDto(user.getUsername(), user.getPassword(), user.getName());
+	// /**
+	//  * Helper Method to convert an member to a Dto
+	//  * 
+	//  * @param user
+	//  * @return MemberDto
+	//  */
+	// private MemberDto convertToDto(Member user){
+	// 	if (user == null) {
+	// 		throw new IllegalArgumentException("This member does not exist");
+	// 	}
+	// 	MemberDto memberDto = new MemberDto(user.getEmail(), user.getPassword(), user.getUsername(), user.getName(), user.getNumberOfPlants());
 
-		if (user.getCar() != null) {
-			memberDto.setCars(user.getCar().stream().map(c -> convertToDto(c)).collect(Collectors.toList()));
-		}
-		memberDto.setToken(user.getToken());
+	// 	if (user.getPlant() != null) {
+	// 		memberDto.setPlants(user.getPlant().stream().map(c -> convertToDto(c)).collect(Collectors.toList()));
+	// 	}
+	// 	memberDto.setToken(user.getToken());
 
-		return memberDto;
-	}
+	// 	return memberDto;
+	// }
 
-	/**
-	 * Helper Method to convert a car to a Dto
-	 * Will return null if you pass null
-	 * 
-	 * @param car
-	 * @return CarDto
-	 */
-	private CarDto convertToDto(Car car)  {
-		if (car == null) {
-			return null;
-		}
-		else {
-			CarDto carDto = new CarDto(car.getLicensePlate(), car.getModel(), car.getYear(), car.getMotorType());
-			return carDto;
-		}
-	}	
-
+    // /**
+	//  * Helper Method to convert a plant to a Dto
+	//  * Will return null if you pass null
+	//  * @author Catherine
+	//  * @param plant
+	//  * @return PlantDto
+	//  */
+	// private PlantDto convertToDto(Plant plant)  {
+	// 	if (plant == null) {
+	// 		return null;
+	// 	}
+	// 	else {
+	// 		PlantDto plantDto = new PlantDto(plant.getIcon(), plant.getGivenName(), plant.getBotanicalName(), plant.getCommonName(), plant.getSunExposure(),
+    //                 plant.getSoilType(), plant.getToxicity(), plant.getBloomtime(), plant.getWateringRecommendation(), plant.getPlantId(), plant.getMember());
+	// 		return plantDto;
+	// 	}
+	// }
 
 }
