@@ -43,8 +43,20 @@ public class MemberController {
 	}
 
 
+	/**
+	 * Return the member with specified email
+	 * 
+	 * @param email
+	 * @return Member Dto
+	 */
+	@GetMapping(value = { "/getMemberByEmail/{email}", "/getMemberByEmail/{email}/" })
+	public MemberDto getMemberByEmail(@PathVariable("email") String email) {
+		Member member = memberService.getMemberByEmail(email);
+        return MemberDto.converToDto(member);
+	}
+
+
     // todo:
-    // getMemberByEmail
     // updateNumberOfPlants
 
 
