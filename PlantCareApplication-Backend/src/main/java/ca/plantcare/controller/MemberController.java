@@ -38,7 +38,7 @@ public class MemberController {
 	 * @param username
 	 * @return Member Dto
 	 */
-	@GetMapping(value = { "/getMemberByUsername/{username}", "/getMemberByUsername/{username}/" })
+	@GetMapping(value = { BASE_URL+ "/getMemberByUsername/{username}", BASE_URL+ "/getMemberByUsername/{username}/" })
 	public MemberDto getMemberByUsername(@PathVariable("username") String username) {
 		Member member = memberService.getMemberByUsername(username);
         return MemberDto.converToDto(member);
