@@ -21,24 +21,28 @@ public class MemberDto {
 	}
 	
    @SuppressWarnings("unchecked") // added
-	public MemberDto(String email, String password,String username,  String name, Integer numberOfPlants) {
-		this(email, password,username, name, numberOfPlants, Collections.EMPTY_LIST);
+	public MemberDto( String password,String username,  String name, Integer numberOfPlants) {
+		this( password,username, name, numberOfPlants, Collections.EMPTY_LIST);
 	} 
 		
-	public MemberDto(String email, String password, String username, String name,  Integer numberOfPlants, List<Plant> plants) {
+	public MemberDto(String password, String username, String name,  Integer numberOfPlants, List<Plant> plants) {
 		this.username = username;
 		this.name = name;
 		this.email= email;
 		this.password = password;
-		List<Integer> aPlantsDto = plants.stream().map(plant -> plant.getPlantId()).collect(Collectors.toList());
 		this.plants = plants;
+		if (plants != null) {
+		//List<Integer> aPlantsDto = plants.stream().map(plant -> plant.getPlantId()).collect(Collectors.toList());
+		this.setPlants(plants);
+		}
+		
         // this.phoneNumber = phoneNumber;
 		this.numberOfPlants = numberOfPlants;
-      //  this.plantsDTO = arrayList; error on this line
+       // this.plantsDTO = arrayList; //error on this line
 	}
 	
 	public static MemberDto converToDto(Member member) {
-		MemberDto memberDto = new MemberDto(member.getEmail(),
+		MemberDto memberDto = new MemberDto(//member.getEmail(),
 				member.getPassword(),
 				member.getUsername(),
 				member.getName(),

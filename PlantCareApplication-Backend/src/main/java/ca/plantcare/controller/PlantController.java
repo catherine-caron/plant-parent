@@ -3,12 +3,18 @@ package ca.plantcare.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import static ca.plantcare.extra.HttpUtil.httpFailureMessage;
 import static ca.plantcare.extra.HttpUtil.httpSuccess;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static ca.plantcare.extra.HttpUtil.httpFailure;
 
 
@@ -49,4 +55,36 @@ public class PlantController {
 			return httpFailure("Error: " + e.getMessage());
 		}
 	}
+	
+	/**
+	 * Get Plant by id.
+	 * @param plantId
+	 * @return
+	 */
+	@GetMapping(value = {BASE_URL + "/{id}", BASE_URL + "/{id}/"})
+	public ResponseEntity<?> getPlantbyId(@PathVariable("id") Integer plantId)  {
+		try {
+			Plant plant = plantService.getPlantbyId(plantId);
+			return httpSuccess(PlantDto.convertToDto(plant));
+		} catch (Exception e) {
+			return httpFailure("Error: " + e.getMessage());
+		}
+	}
+	
+	/**
+	 * Get all plants. This is the endpoint for the base url 
+	 *  * @return
+	 */
+	@GetMapping(value = { BASE_URL, BASE_URL + "/", BASE_URL + "/get-all", BASE_URL + "/get-all/" })
+	public ResponseEntity<?> getAllPlants() {
+		List<PlantDto> plants = null;
+		try {
+			plants = plantService.getAllPlants().stream().map(plant -> PlantDto.convertToDto(plant)).collect(Collectors.toList());
+			} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+		return httpSuccess(plants);
+	}
+	
+	
 }

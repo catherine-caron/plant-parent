@@ -30,7 +30,7 @@ public class MemberService {
 	 * @return the account created
 	 */
 	@Transactional
-	public Member createMember(String email, String username, String name, String password){
+	public Member createMember( String username, String name, String password){
 
         if (username == null || username.replaceAll("\\s+", "").length() == 0 || username.equals("undefined")) {
 			throw new IllegalArgumentException("Username cannot be empty.");
@@ -47,7 +47,7 @@ public class MemberService {
 		else if (password.contains(" ")) {
 			throw new IllegalArgumentException("Password cannot contain spaces.");
 		}
-		else if ((email == null || email.replaceAll("\\s+", "").length() == 0 || email.equals("undefined"))) {
+		/*else if ((email == null || email.replaceAll("\\s+", "").length() == 0 || email.equals("undefined"))) {
 			throw new IllegalArgumentException("Email cannot be empty.");
 		}
 		else if (email.contains(" ")) {
@@ -55,14 +55,14 @@ public class MemberService {
 		}
 		else if (isEmailAvailable(email) == false) {
 			throw new IllegalArgumentException("This email is not available.");
-		}
+		}*/
 		else if (name == null || name.replaceAll("\\s+", "").length() == 0 || name.equals("undefined")){ //name.trim().length() == 0
 			throw new IllegalArgumentException("Name cannot be empty.");
 		}
 		else {
 			Member member = new Member();
 			member.setUsername(username);
-			member.setEmail(email);
+			//member.setEmail(email);
 			member.setPassword(password);
 			member.setName(name);
 			member.setNumberOfPlants(0); // initally no plants
@@ -305,6 +305,12 @@ public class MemberService {
 			return available;
 		}
 	}
+	
+	@Transactional
+	public List<Member> getAllMembers() {
+		return toList(memberRepository.findAll());
+	}
+
 
 	/**
 	 * Helper method that converts iterable to list

@@ -10,16 +10,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import antlr.collections.List;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static ca.plantcare.extra.HttpUtil.httpFailureMessage;
 import static ca.plantcare.extra.HttpUtil.httpSuccess;
 
-import java.util.stream.Collectors;
 
 import static ca.plantcare.extra.HttpUtil.httpFailure;
 
-import ca.plantcare.dto.*;
+import ca.plantcare.dto.MemberDto;
+import ca.plantcare.dto.PlantDto;
 import ca.plantcare.models.*;
 import ca.plantcare.service.*;
 
@@ -29,7 +30,8 @@ public class MemberController {
 
     @Autowired
 	private MemberService memberService;
-
+    
+	private static final String BASE_URL = "/member";
 	/**
 	 * Return the member with specified username
 	 * 
@@ -41,6 +43,11 @@ public class MemberController {
 		Member member = memberService.getMemberByUsername(username);
         return MemberDto.converToDto(member);
 	}
+	
+
+
+	
+	
 
 
 	/**
@@ -68,10 +75,33 @@ public class MemberController {
 	 * @param name
 	 * @return Member  Dto
 	 */
-	@PostMapping(value = { "/createMember/{username}/{email}/{password}/{name}", "/createMember/{username}/{email}/{password}/{name}/" })
-	public MemberDto createMember(@PathVariable("username") String username, @PathVariable("email") String email, @PathVariable("password") String password, @PathVariable("name") String name)  {
-		Member user = memberService.createMember(username, email, password, name);
-		return MemberDto.converToDto(user);
+	@PostMapping(value = { BASE_URL+"/create", BASE_URL+"/create/" })
+	public ResponseEntity<?>createMember(
+			@RequestParam("username") String username,
+			@RequestParam("name") String name,
+			@RequestParam("password") String password)
+			{
+		
+		try {
+			Member member = memberService.createMember(username, name, password);
+			return httpSuccess(MemberDto.converToDto(member));
+
+		}
+		catch(Exception e){
+			return httpFailure("Error: " + e.getMessage());
+		}
+	}
+	
+	@GetMapping(value = { BASE_URL, BASE_URL + "/", BASE_URL + "/get-all", BASE_URL + "/get-all/" })
+	public ResponseEntity<?> getAllMembers() {
+		List<MemberDto> members = null;
+		try {
+		//	members = memberService.getAllMembers().stream().map(member -> MemberDto.convertToDto(member)).collect(Collectors.toList());
+			members = memberService.getAllMembers().stream().map(member -> MemberDto.converToDto(member)).collect(Collectors.toList());
+		} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+		return httpSuccess(members);
 	}
 
 

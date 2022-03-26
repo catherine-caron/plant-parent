@@ -1,11 +1,11 @@
 package ca.plantcare.service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ca.plantcare.dao.MemberRepository;
 import ca.plantcare.models.Member;
 import ca.plantcare.dao.PlantRepository;
@@ -311,7 +311,19 @@ public class PlantService {
 		}
 		throw new IllegalArgumentException("Member not found.");
 	}
+	
+	public Plant getPlantbyId(Integer plantId) {
 
+		Plant plant = plantRepository.findPlantByPlantId(plantId);
+		return plant;
+	}
+
+	@Transactional
+	public List<Plant> getAllPlants() {
+		return toList(plantRepository.findAll());
+	}
+
+	
 	public boolean isIdAvailable(Integer plantId) {
 
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
