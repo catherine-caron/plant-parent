@@ -93,7 +93,7 @@ public class PlantService {
 	@Transactional
 	public Plant createPlant(Integer icon, String givenName, String botanicalName, String commonName,
 			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
-			Integer wateringRecommendation) {
+			Integer wateringRecommendation, Integer addedPlantId) {
 
 		if (icon == null || icon.equals("undefined")) {
 			throw new IllegalArgumentException("Icon cannot be null or empty");
@@ -136,6 +136,7 @@ public class PlantService {
 		plant.setBloomtime(bloomTime);
 		plant.getBotanicalName();
 		plant.setCommonName(commonName);
+		plant.setBotanicalName(botanicalName);
 		//plant.setGivenName(givenName);
 		plant.setIcon(icon);
 		plant.setSunExposure(sunExposure);
@@ -174,26 +175,21 @@ public class PlantService {
 		 * IllegalArgumentException("PlantId is Taken. Contact Admin"); }
 		 */
 		// Plant newPlant = plant;
-		Plant newPlant = plant;
-		/*
-		 * Toxicity newPlantToxicity = plant.getToxicity(); String newPlantCommonName =
-		 * plant.getCommonName(); String newPlantBotanicalName =
-		 * plant.getBotanicalName(); String newPlantGivenName = plant.getGivenName();
-		 * Integer newPlantIcon= plant.getIcon(); SoilType newPlantSoil=
-		 * plant.getSoilType(); SunExposure newPlantSun = plant.getSunExposure();
-		 * WateringSchedule wateringSchedule = plant.getWateringRecommendation(); List
-		 * <BloomTime> newPlantBloom = plant.getBloomTime();
-		 * 
-		 * newPlant.setBloomTime(newPlantBloom);
-		 * newPlant.setGivenName(newPlantGivenName);
-		 * newPlant.setBotanicalName(newPlantBotanicalName);
-		 * newPlant.setCommonName(newPlantCommonName); newPlant.setPlantId(plantIdNew);
-		 * newPlant.setSunExposure(newPlantSun);
-		 * newPlant.setWateringRecommendation(wateringSchedule);
-		 * newPlant.setSoilType(newPlantSoil); newPlant.setToxicity(newPlantToxicity);
-		 */
+		Plant newPlant = new Plant();
+		newPlant.setAddedPlantId(plantIdNew);
+		newPlant.setPlantId(plantIdNew);
+		newPlant.setBloomtime(plant.getBloomtime());
+		newPlant.setBotanicalName(plant.getBotanicalName());
+		newPlant.setCommonName(plant.getCommonName());
 		newPlant.setGivenName(givenName);
-		newPlant.setPlantId(plantIdNew); // idk if this works
+		newPlant.setIcon(plant.getIcon());
+		newPlant.setMember(memberRepository.findMemberByUsername(memberId));
+		newPlant.setSoilType(plant.getSoilType());
+		newPlant.setSunExposure(plant.getSunExposure());
+		newPlant.setToxicity(plant.getToxicity());
+		newPlant.setWateringRecommendation(plant.getWateringRecommendation());
+		//newPlant.setPlantId(null); // idk if this works
+		//newPlant.setAddedPlantId(plantIdNew);
 		plantRepository.save(newPlant);
 		Member member = memberRepository.findMemberByUsername(memberId);
 		member.getPlant().add(newPlant);

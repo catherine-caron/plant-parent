@@ -43,6 +43,9 @@ public class Plant {
 	private String botanicalName;
 	private String commonName;
 	private Integer plantId;
+	private Integer addedPlantId;
+	private Integer originalPlantId;
+
 	
 	private Member member;
 	private WateringSchedule wateringRecommendation;
@@ -218,6 +221,38 @@ public class Plant {
 	 */
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+
+	/**
+	 * @return the addedPlantId
+	 */
+	public Integer getAddedPlantId() {
+		return addedPlantId;
+	}
+
+
+	/**
+	 * @param addedPlantId the addedPlantId to set
+	 */
+	public void setAddedPlantId(Integer addedPlantId) {
+		this.addedPlantId = addedPlantId;
+	}
+
+
+	/**
+	 * @return the originalPlantId
+	 */
+	public Integer getOriginalPlantId() {
+		return originalPlantId;
+	}
+
+
+	/**
+	 * @param originalPlantId the originalPlantId to set
+	 */
+	public void setOriginalPlantId(Integer originalPlantId) {
+		this.originalPlantId = originalPlantId;
 	}
 	
 

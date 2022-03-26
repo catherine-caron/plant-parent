@@ -1,12 +1,14 @@
 package ca.plantcare.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import static ca.plantcare.extra.HttpUtil.httpFailureMessage;
@@ -45,10 +47,26 @@ public class PlantController {
 			@RequestParam("soilType") SoilType soilType, 
 			@RequestParam("toxicity") Toxicity toxicity,
 			@RequestParam("bloomTime") BloomTime bloomTime,
-			@RequestParam("wateringRecommendation") Integer wateringRecommendation)  {
+			@RequestParam("wateringRecommendation") Integer wateringRecommendation,
+			@RequestParam("addedPlantId") Integer addedPlantId)  {
 		try {
-			Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation);
+			Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation,addedPlantId);
 					return httpSuccess(PlantDto.convertToDto(plant));
+
+		}
+		catch(Exception e){
+			return httpFailure("Error: " + e.getMessage());
+		}
+	}
+	
+	@PostMapping(value = { BASE_URL + "/addPlant", BASE_URL + "/addPlant/" })
+	public ResponseEntity<?> addPlant(@RequestParam("plantId") Integer plantId, 
+			@RequestParam("memberId") String memberId, 
+			@RequestParam("givenName") String givenName){
+			try {
+			//Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation);
+				Plant plant = plantService.addPlant(plantId, memberId, givenName);
+				return httpSuccess(PlantDto.convertToDto(plant));
 
 		}
 		catch(Exception e){
@@ -62,6 +80,7 @@ public class PlantController {
 	 * @return
 	 */
 	@GetMapping(value = {BASE_URL + "/{id}", BASE_URL + "/{id}/"})
+	@ResponseStatus(value=HttpStatus.OK)
 	public ResponseEntity<?> getPlantbyId(@PathVariable("id") Integer plantId)  {
 		try {
 			Plant plant = plantService.getPlantbyId(plantId);

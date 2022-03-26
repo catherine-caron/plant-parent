@@ -23,6 +23,7 @@ public class PlantDto {
 	private Integer plantId;
 	private WateringSchedule wateringSchedule;
 	private Member member;
+	private Integer addedPlantId;
 	//default constructor
 	public PlantDto(){
 		
@@ -30,7 +31,7 @@ public class PlantDto {
 	
 	public PlantDto (Integer icon, String givenName, String botanicalName, String commonName,
 			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
-			WateringSchedule wateringRecommendation,Integer plantId, Member memberId) {
+			WateringSchedule wateringRecommendation,Integer plantId, Member memberId, Integer addedPlantId) {
 		this.bloomTime = bloomTime;
 		this.botanicalName = botanicalName;
 		this.commonName = commonName;
@@ -39,6 +40,7 @@ public class PlantDto {
 		this.sunExposure = sunExposure;
 		this.toxicity = toxicity;
 		this.wateringSchedule = wateringRecommendation;
+		this.setAddedPlantId(addedPlantId);
 		
 		if(memberId == null || plantId ==null) { //admin plant
 			this.plantId = plantId;
@@ -60,7 +62,9 @@ public class PlantDto {
 				plant.getBloomtime(),
 				plant.getWateringRecommendation(),
 				plant.getPlantId(),
-				plant.getMember());
+				plant.getMember(),
+				plant.getAddedPlantId())
+				;
 		
 		return plantDto;
 		
@@ -204,6 +208,20 @@ public class PlantDto {
 	 */
 	public void setWateringRecommendation(WateringSchedule wateringRecommendation) {
 		this.wateringSchedule = wateringRecommendation;
+	}
+
+	/**
+	 * @return the addedPlantId
+	 */
+	public Integer getAddedPlantId() {
+		return addedPlantId;
+	}
+
+	/**
+	 * @param addedPlantId the addedPlantId to set
+	 */
+	public void setAddedPlantId(Integer addedPlantId) {
+		this.addedPlantId = addedPlantId;
 	}
 	
 }
