@@ -23,6 +23,8 @@ public class MemberService {
 	/**
 	 * Create a Member with given parameters
 	 * @param username
+	 * @param email
+	 * @param password
 	 * @param name
 	 * @param numberOfPlants
 	 * @return the account created
@@ -39,22 +41,21 @@ public class MemberService {
 		else if (isUsernameAvailable(username) == false) {
 			throw new IllegalArgumentException("This username is not available.");
 		}
-		// else if (password == null || password.replaceAll("\\s+", "").length() == 0 || password.equals("undefined")) {
-		// 	throw new IllegalArgumentException("Password cannot be empty.");
-		// }
-		// else if (password.contains(" ")) {
-		// 	throw new IllegalArgumentException("Password cannot contain spaces.");
-		// }
-		// else if ((email == null || email.replaceAll("\\s+", "").length() == 0 || email.equals("undefined"))) {
-		// 	throw new IllegalArgumentException("Email cannot be empty.");
-		// }
-		// else if (email.contains(" ")) {
-		// 	throw new IllegalArgumentException("Email cannot contain spaces.");
-		// }
-		// else if (isEmailAvailable(email) == false) {
-		// 	throw new IllegalArgumentException("This email is not available.");
-		// }
-
+		else if (password == null || password.replaceAll("\\s+", "").length() == 0 || password.equals("undefined")) {
+			throw new IllegalArgumentException("Password cannot be empty.");
+		}
+		else if (password.contains(" ")) {
+			throw new IllegalArgumentException("Password cannot contain spaces.");
+		}
+		else if ((email == null || email.replaceAll("\\s+", "").length() == 0 || email.equals("undefined"))) {
+			throw new IllegalArgumentException("Email cannot be empty.");
+		}
+		else if (email.contains(" ")) {
+			throw new IllegalArgumentException("Email cannot contain spaces.");
+		}
+		else if (isEmailAvailable(email) == false) {
+			throw new IllegalArgumentException("This email is not available.");
+		}
 		else if (name == null || name.replaceAll("\\s+", "").length() == 0 || name.equals("undefined")){ //name.trim().length() == 0
 			throw new IllegalArgumentException("Name cannot be empty.");
 		}
@@ -81,16 +82,16 @@ public class MemberService {
 		return member;
 	}
 
-	// /**
-	//  * Find a member by email
-	//  * @param email
-	//  * @return the member
-	//  */
-	// @Transactional
-	// public Member getMemberByEmail(String email) {
-	// 	Member member = memberRepository.findMemberByEmail(email);
-	// 	return member;
-	// }
+	/**
+	 * Find a member by email
+	 * @param email
+	 * @return the member
+	 */
+	@Transactional
+	public Member getMemberByEmail(String email) {
+		Member member = memberRepository.findMemberByEmail(email);
+		return member;
+	}
 	
 	/**
 	 * Update member name. 
@@ -100,7 +101,7 @@ public class MemberService {
 	 * @return the member updated
 	 */
 	@Transactional
-	public Member updateMember(String email,String username, String newName,String password) {
+	public Member updateMember(String email, String username, String newName, String newEmail, String newPassword) {
 		// public Member updateMember(String username, String newPassword, String newEmail, String newName, String newPhoneNumber)
 		if (username.equals("undefined") || newName.equals("undefined")) {
 			throw new IllegalArgumentException("One or more fields empty. Please try again.");
@@ -110,27 +111,27 @@ public class MemberService {
 			if (member == null) {
 				throw new IllegalArgumentException("The member cannot be found.");
 			}
-			// else if ( !member.getEmail().equals(newEmail) && !isEmailAvailable(newEmail)){
-			// 	throw new IllegalArgumentException("This email is not available.");
-			// }
-			// else if (newEmail == null || newEmail.replaceAll("\\s+", "").length() == 0 || newEmail.equals("undefined")) {
-			// 	throw new IllegalArgumentException("Email cannot be empty.");
-			// }
-			// else if (newEmail.contains(" ")) {
-			// 	throw new IllegalArgumentException("Email cannot contain spaces.");
-			// }
-			// else if (newPassword == null || newPassword.replaceAll("\\s+", "").length() == 0 || newPassword.equals("undefined")) {
-			// 	throw new IllegalArgumentException("Password cannot be empty.");
-			// }
-			// else if (newPassword.contains(" ")) {
-			// 	throw new IllegalArgumentException("Password cannot contain spaces.");
-			// }
+			else if ( !member.getEmail().equals(newEmail) && !isEmailAvailable(newEmail)){
+				throw new IllegalArgumentException("This email is not available.");
+			}
+			else if (newEmail == null || newEmail.replaceAll("\\s+", "").length() == 0 || newEmail.equals("undefined")) {
+				throw new IllegalArgumentException("Email cannot be empty.");
+			}
+			else if (newEmail.contains(" ")) {
+				throw new IllegalArgumentException("Email cannot contain spaces.");
+			}
+			else if (newPassword == null || newPassword.replaceAll("\\s+", "").length() == 0 || newPassword.equals("undefined")) {
+				throw new IllegalArgumentException("Password cannot be empty.");
+			}
+			else if (newPassword.contains(" ")) {
+				throw new IllegalArgumentException("Password cannot contain spaces.");
+			}
 			else if (newName == null || newName.replaceAll("\\s+", "").length() == 0 || newName.equals("undefined")){
 				throw new IllegalArgumentException("Name cannot be empty.");
 			}
 			else {
 				member.setEmail(email);
-				member.setPassword(password);
+				member.setPassword(newPassword);
 				member.setName(newName);
 				memberRepository.save(member);
 				return member;
