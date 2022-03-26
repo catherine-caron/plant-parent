@@ -16,6 +16,7 @@ public class Member {
 	// private String phoneNumber;
 	private String username;
 	private List<Plant> plant; 
+	private int token; // for login
 	
 	public Integer getNumberOfPlants() {
 		return numberOfPlants;
@@ -65,5 +66,14 @@ public class Member {
 	public void setPlant(List<Plant> aPlant) {
 		this.plant = aPlant;
 	}
+
+	public void setToken(int token) {
+		this.token = token;
+	}
+  
+	public int getToken() {
+		return this.token;
+	}
+
 	
 }
