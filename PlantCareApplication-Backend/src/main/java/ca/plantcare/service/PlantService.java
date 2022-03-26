@@ -76,7 +76,7 @@ public class PlantService {
 	 * @param plantId
 	 * @return plant
 	 */
-	@Transactional
+	//@Transactional
 	private Plant getPlantByPlantId(Integer plantId) {
 		if (plantId == null || plantId < 0) {
 			throw new IllegalArgumentException("Id must not be null.");
@@ -90,6 +90,7 @@ public class PlantService {
 	}
 
 	// create plant by admin needs an admin member id
+	@Transactional
 	public Plant createPlant(Integer icon, String givenName, String botanicalName, String commonName,
 			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
 			Integer wateringRecommendation) {
@@ -210,6 +211,7 @@ public class PlantService {
 	 * @param plantId
 	 * @return plant
 	 */
+	@Transactional
 	public Plant updatePlant(Integer plantId, String givenName, Integer icon, String botanicalName, String commonName,
 			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
 			WateringSchedule wateringRecommendation) {
@@ -246,6 +248,7 @@ public class PlantService {
 	 * @param plantId
 	 * @return plant
 	 */
+	@Transactional
 	public Plant deletePlant(Integer plantId) {
 		if (plantId == null) {
 			throw new IllegalArgumentException("Plant not found.");

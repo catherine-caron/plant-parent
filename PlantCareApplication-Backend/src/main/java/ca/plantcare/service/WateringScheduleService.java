@@ -30,7 +30,7 @@ public class WateringScheduleService {
 	 * @param hoursBetweenWatering
 	 * @return the schedule created
      */
-	@Transactional
+	@Transactional(readOnly=false)
 	public WateringSchedule createWateringSchedule(Integer plantId, Integer hoursBetweenWatering){
         Plant plant = plantRepository.findPlantByPlantId(plantId);
 
@@ -50,8 +50,8 @@ public class WateringScheduleService {
             wateringSchedule.setHoursBetweenWatering(hoursBetweenWatering);
             wateringScheduleRepository.save(wateringSchedule);
             
-            plant.setWateringRecommendation(wateringSchedule);
-            plantRepository.save(plant);
+         /*   plant.setWateringRecommendation(wateringSchedule);
+            plantRepository.save(plant);*/
 
             return wateringSchedule;
 		}

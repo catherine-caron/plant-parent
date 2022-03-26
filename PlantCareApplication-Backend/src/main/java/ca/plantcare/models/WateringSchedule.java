@@ -5,13 +5,17 @@ import javax.persistence.Id;
 import java.util.*;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table (name = "wateringSchedule")
 public class WateringSchedule {
 
 	private Integer scheduleId;
 	private Integer hoursBetweenWatering;
 	private List<Reminder> reminder;
+	private Plant plant;
 
 	@Id
 	public Integer getScheduleId() {
@@ -38,6 +42,21 @@ public class WateringSchedule {
 	
 	public void setReminder(List<Reminder> reminders) {
 		this.reminder = reminders;
+	}
+
+	/**
+	 * @return the plant
+	 */
+	@OneToOne(cascade = CascadeType.ALL)
+	public Plant getPlant() {
+		return plant;
+	}
+
+	/**
+	 * @param plant the plant to set
+	 */
+	public void setPlant(Plant plant) {
+		this.plant = plant;
 	}
 
 }
