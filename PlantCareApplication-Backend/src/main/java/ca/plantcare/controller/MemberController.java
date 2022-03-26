@@ -59,7 +59,7 @@ public class MemberController {
 	@PostMapping(value = { "/createMember/{username}/{email}/{password}/{name}", "/createMember/{username}/{email}/{password}/{name}/" })
 	public MemberDto createMember(@PathVariable("username") String username, @PathVariable("email") String email, @PathVariable("password") String password, @PathVariable("name") String name)  {
 		Member user = memberService.createMember(username, email, password, name);
-		return convertToDto(user);
+		return MemberDto.converToDto(user);
 	}
 
 
@@ -75,7 +75,7 @@ public class MemberController {
 	@PutMapping(value = {"/updateMember/{username}/{newName}/{newEmail}/{newPassword}", "/updateMember/{username}/{newName}/{newEmail}/{newPassword}/" })
 	public MemberDto updateMember(@PathVariable("username") String username, @PathVariable("newName") String newName, @PathVariable("newEmail") String newEmail, @PathVariable("newPassword") String newPassword)   {
 		Member user = memberService.updateMember(username, newName, newEmail, newPassword);
-		return convertToDto(user);
+		return MemberDto.converToDto(user);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class MemberController {
 	@PutMapping(value = { "/deleteMember/{username}", "/deleteMember/{username}/" })
 	public MemberDto deleteMember(@PathVariable("username") String username)   {
 		Member user = memberService.deleteMember(username);
-		return convertToDto(user);
+		return MemberDto.converToDto(user);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class MemberController {
 	@PutMapping(value = {"/loginMember/{username}/{password}", "/loginMember/{username}/{password}/" })
 	public MemberDto loginMember(@PathVariable("username") String username, @PathVariable("password") String password)   {
 		Member user = memberService.loginMember(username, password);
-		return convertToDto(user);
+		return MemberDto.converToDto(user);
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class MemberController {
 	@PutMapping(value = {"/logoutMember/{username}", "/logoutMember/{username}/" })
 	public MemberDto logoutMember(@PathVariable("username") String username)   {
 		Member user = memberService.logoutMember(username);
-		return convertToDto(user);
+		return MemberDto.converToDto(user);
 	}
 
 	/**
@@ -124,48 +124,8 @@ public class MemberController {
 	@PostMapping(value = {"/authenticateMember/{username}", "/authenticateMember/{username}/" })
 	public MemberDto authenticateMember(@PathVariable("username") String username)  {
 		Member user = memberService.authenticateMember(username);
-		return convertToDto(user);
+		return MemberDto.converToDto(user);
 	}
 
-
-	//-------------------------- Helper Methods -----------------------------
-
-	// /**
-	//  * Helper Method to convert an member to a Dto
-	//  * 
-	//  * @param user
-	//  * @return MemberDto
-	//  */
-	// private MemberDto convertToDto(Member user){
-	// 	if (user == null) {
-	// 		throw new IllegalArgumentException("This member does not exist");
-	// 	}
-	// 	MemberDto memberDto = new MemberDto(user.getEmail(), user.getPassword(), user.getUsername(), user.getName(), user.getNumberOfPlants());
-
-	// 	if (user.getPlant() != null) {
-	// 		memberDto.setPlants(user.getPlant().stream().map(c -> convertToDto(c)).collect(Collectors.toList()));
-	// 	}
-	// 	memberDto.setToken(user.getToken());
-
-	// 	return memberDto;
-	// }
-
-    // /**
-	//  * Helper Method to convert a plant to a Dto
-	//  * Will return null if you pass null
-	//  * @author Catherine
-	//  * @param plant
-	//  * @return PlantDto
-	//  */
-	// private PlantDto convertToDto(Plant plant)  {
-	// 	if (plant == null) {
-	// 		return null;
-	// 	}
-	// 	else {
-	// 		PlantDto plantDto = new PlantDto(plant.getIcon(), plant.getGivenName(), plant.getBotanicalName(), plant.getCommonName(), plant.getSunExposure(),
-    //                 plant.getSoilType(), plant.getToxicity(), plant.getBloomtime(), plant.getWateringRecommendation(), plant.getPlantId(), plant.getMember());
-	// 		return plantDto;
-	// 	}
-	// }
 
 }
