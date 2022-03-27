@@ -99,6 +99,10 @@ public class PlantService {
 			throw new IllegalArgumentException("Icon cannot be null or empty");
 		}
 
+		if (memberRepository.findById(memberId) == null) {
+			throw new IllegalArgumentException("Member not found");
+		}
+
 		if (givenName == null || givenName == "") {
 			throw new IllegalArgumentException("Given Name cannot be null or empty");
 		}
@@ -146,6 +150,14 @@ public class PlantService {
 		plant.setWateringRecommendation(wateringSchedule);
 		plant.setPlantId(plantId);
 		plantRepository.save(plant);
+
+		// add to member's plants
+		Member member = memberRepository.findMemberByUsername(memberId);
+		List <Plant> plants = member.getPlant();
+		plants.add(plant);
+		member.setPlant(plants);
+		memberRepository.save(member);
+
 		return plant;
 
 	}
@@ -254,6 +266,7 @@ public class PlantService {
 			throw new IllegalArgumentException("Plant does not exist"); // @TODO loooooool
 		}
 		deletePlantForMember(plantId);
+		
 		plantRepository.delete(plant);
 		return plant;
 
