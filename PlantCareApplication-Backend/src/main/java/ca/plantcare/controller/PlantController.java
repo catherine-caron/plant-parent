@@ -76,7 +76,7 @@ public class PlantController {
 	}
 	
 	@GetMapping(value = { BASE_URL + "/get-by-member/{memberId}", BASE_URL + "/get-by-member/{memberId}/" })
-	public ResponseEntity<?> getAllLoansByMember(@PathVariable("memberId") String memberId)  {
+	public ResponseEntity<?> getAllPlantsByMember(@PathVariable("memberId") String memberId)  {
 		try {
 			List<Plant> plants = plantService.getPlantsByMember(memberId);
 			return httpSuccess(PlantDto.convertToDtos(plants));
