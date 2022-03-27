@@ -21,11 +21,11 @@ public class MemberDto {
 	}
 	
    @SuppressWarnings("unchecked") // added
-	public MemberDto( String password,String username,  String name, Integer numberOfPlants) {
-		this( password,username, name, numberOfPlants, Collections.EMPTY_LIST);
+	public MemberDto( String password,String username,  String name, String email, Integer numberOfPlants) {
+		this( password,username, name, email, numberOfPlants, Collections.EMPTY_LIST);
 	} 
 		
-	public MemberDto(String password, String username, String name,  Integer numberOfPlants, List<Plant> plants) {
+	public MemberDto(String password, String username, String name, String email, Integer numberOfPlants, List<Plant> plants) {
 		this.username = username;
 		this.name = name;
 		this.email= email;
@@ -42,10 +42,11 @@ public class MemberDto {
 	}
 	
 	public static MemberDto converToDto(Member member) {
-		MemberDto memberDto = new MemberDto(//member.getEmail(),
+		MemberDto memberDto = new MemberDto(
 				member.getPassword(),
 				member.getUsername(),
 				member.getName(),
+				member.getEmail(),
 				member.getNumberOfPlants(),
 				member.getPlant());
 		return memberDto;

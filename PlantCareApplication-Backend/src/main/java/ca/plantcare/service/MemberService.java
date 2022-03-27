@@ -30,7 +30,7 @@ public class MemberService {
 	 * @return the account created
 	 */
 	@Transactional
-	public Member createMember( String username, String name, String password){
+	public Member createMember( String username, String name, String password, String email){
 
         if (username == null || username.replaceAll("\\s+", "").length() == 0 || username.equals("undefined")) {
 			throw new IllegalArgumentException("Username cannot be empty.");
@@ -47,22 +47,22 @@ public class MemberService {
 		else if (password.contains(" ")) {
 			throw new IllegalArgumentException("Password cannot contain spaces.");
 		}
-		/*else if ((email == null || email.replaceAll("\\s+", "").length() == 0 || email.equals("undefined"))) {
+		else if ((email == null || email.replaceAll("\\s+", "").length() == 0 || email.equals("undefined"))) {
 			throw new IllegalArgumentException("Email cannot be empty.");
 		}
 		else if (email.contains(" ")) {
 			throw new IllegalArgumentException("Email cannot contain spaces.");
 		}
-		else if (isEmailAvailable(email) == false) {
-			throw new IllegalArgumentException("This email is not available.");
-		}*/
+		// else if (isEmailAvailable(email) == false) {
+		// 	throw new IllegalArgumentException("This email is not available.");
+		// }
 		else if (name == null || name.replaceAll("\\s+", "").length() == 0 || name.equals("undefined")){ //name.trim().length() == 0
 			throw new IllegalArgumentException("Name cannot be empty.");
 		}
 		else {
 			Member member = new Member();
 			member.setUsername(username);
-			//member.setEmail(email);
+			member.setEmail(email);
 			member.setPassword(password);
 			member.setName(name);
 			member.setNumberOfPlants(0); // initally no plants
@@ -82,16 +82,16 @@ public class MemberService {
 		return member;
 	}
 
-	/**
-	 * Find a member by email
-	 * @param email
-	 * @return the member
-	 */
-	@Transactional
-	public Member getMemberByEmail(String email) {
-		Member member = memberRepository.findMemberByEmail(email);
-		return member;
-	}
+	// /**
+	//  * Find a member by email
+	//  * @param email
+	//  * @return the member
+	//  */
+	// @Transactional
+	// public Member getMemberByEmail(String email) {
+	// 	Member member = memberRepository.findMemberByEmail(email);
+	// 	return member;
+	// }
 	
 	/**
 	 * Update member name. 
@@ -111,9 +111,9 @@ public class MemberService {
 			if (member == null) {
 				throw new IllegalArgumentException("The member cannot be found.");
 			}
-			else if ( !member.getEmail().equals(newEmail) && !isEmailAvailable(newEmail)){
-				throw new IllegalArgumentException("This email is not available.");
-			}
+			// else if ( !member.getEmail().equals(newEmail) && !isEmailAvailable(newEmail)){
+			// 	throw new IllegalArgumentException("This email is not available.");
+			// }
 			else if (newEmail == null || newEmail.replaceAll("\\s+", "").length() == 0 || newEmail.equals("undefined")) {
 				throw new IllegalArgumentException("Email cannot be empty.");
 			}
@@ -290,21 +290,21 @@ public class MemberService {
 		}
 	}
 
-    /**
-	 * Helper method to search through all members and see if the email is already in use
-	 * @param email
-	 * @return
-	 */
-	private boolean isEmailAvailable(String email) {
-		boolean available = false;
-		if (memberRepository.findMemberByEmail(email) != null) {
-			return available;
-		}
-		else{ 
-			available = true;
-			return available;
-		}
-	}
+    // /**
+	//  * Helper method to search through all members and see if the email is already in use
+	//  * @param email
+	//  * @return
+	//  */
+	// private boolean isEmailAvailable(String email) {
+	// 	boolean available = false;
+	// 	if (memberRepository.findMemberByEmail(email) != null) {
+	// 		return available;
+	// 	}
+	// 	else{ 
+	// 		available = true;
+	// 		return available;
+	// 	}
+	// }
 	
 	@Transactional
 	public List<Member> getAllMembers() {

@@ -45,17 +45,17 @@ public class MemberController {
 	}
 	
 
-	/**
-	 * Return the member with specified email
-	 * 
-	 * @param email
-	 * @return Member Dto
-	 */
-	@GetMapping(value = { "/getMemberByEmail/{email}", "/getMemberByEmail/{email}/" })
-	public MemberDto getMemberByEmail(@PathVariable("email") String email) {
-		Member member = memberService.getMemberByEmail(email);
-        return MemberDto.converToDto(member);
-	}
+	// /**
+	//  * Return the member with specified email
+	//  * 
+	//  * @param email
+	//  * @return Member Dto
+	//  */
+	// @GetMapping(value = { "/getMemberByEmail/{email}", "/getMemberByEmail/{email}/" })
+	// public MemberDto getMemberByEmail(@PathVariable("email") String email) {
+	// 	Member member = memberService.getMemberByEmail(email);
+    //     return MemberDto.converToDto(member);
+	// }
 
 
 	/**
@@ -92,17 +92,19 @@ public class MemberController {
 	 * @param username
 	 * @param password
 	 * @param name
+	 * @param email
 	 * @return Member  Dto
 	 */
 	@PostMapping(value = { BASE_URL+"/create", BASE_URL+"/create/" })
 	public ResponseEntity<?>createMember(
 			@RequestParam("username") String username,
 			@RequestParam("name") String name,
-			@RequestParam("password") String password)
+			@RequestParam("password") String password,
+			@RequestParam("email") String email)
 			{
 		
 		try {
-			Member member = memberService.createMember(username, name, password);
+			Member member = memberService.createMember(username, name, password, email);
 			return httpSuccess(MemberDto.converToDto(member));
 
 		}
@@ -111,6 +113,10 @@ public class MemberController {
 		}
 	}
 	
+	/**
+	 * Get all members
+	 * @return
+	 */
 	@GetMapping(value = { BASE_URL, BASE_URL + "/", BASE_URL + "/get-all", BASE_URL + "/get-all/" })
 	public ResponseEntity<?> getAllMembers() {
 		List<MemberDto> members = null;
@@ -133,22 +139,50 @@ public class MemberController {
 	 * @param newName
 	 * @return Member  Dto
 	 */
-	@PutMapping(value = {"/updateMember/{username}/{newName}/{newEmail}/{newPassword}", "/updateMember/{username}/{newName}/{newEmail}/{newPassword}/" })
-	public MemberDto updateMember(@PathVariable("username") String username, @PathVariable("newName") String newName, @PathVariable("newEmail") String newEmail, @PathVariable("newPassword") String newPassword)   {
-		Member user = memberService.updateMember(username, newName, newEmail, newPassword);
-		return MemberDto.converToDto(user);
+	// @PutMapping(value = {"/updateMember/{username}/{newName}/{newEmail}/{newPassword}", "/updateMember/{username}/{newName}/{newEmail}/{newPassword}/" })
+	// public MemberDto updateMember(@PathVariable("username") String username, @PathVariable("newName") String newName, @PathVariable("newEmail") String newEmail, @PathVariable("newPassword") String newPassword)   {
+	// 	Member user = memberService.updateMember(username, newName, newEmail, newPassword);
+	// 	return MemberDto.converToDto(user);
+	// }
+	@PutMapping(value = { BASE_URL + "/updateMember", BASE_URL+"/updateMember/" })
+	public ResponseEntity<?>updateMember(
+			@RequestParam("username") String username,
+			@RequestParam("newName") String newName, 
+			@RequestParam("newEmail") String newEmail, 
+			@RequestParam("newPassword") String newPassword)
+			{
+		
+		try {
+			Member member = memberService.updateMember(username, newName, newEmail, newPassword);
+			return httpSuccess(MemberDto.converToDto(member));
+		}
+		catch(Exception e){
+			return httpFailure("Error: " + e.getMessage());
+		}
 	}
 
 	/**
 	 * Delete member
 	 * 
 	 * @param username
-	 * @return boolean if successful
 	 */
-	@PutMapping(value = { "/deleteMember/{username}", "/deleteMember/{username}/" })
-	public MemberDto deleteMember(@PathVariable("username") String username)   {
-		Member user = memberService.deleteMember(username);
-		return MemberDto.converToDto(user);
+	// @PutMapping(value = { "/deleteMember/{username}", "/deleteMember/{username}/" })
+	// public MemberDto deleteMember(@PathVariable("username") String username)   {
+	// 	Member user = memberService.deleteMember(username);
+	// 	return MemberDto.converToDto(user);
+	// }
+	@PutMapping(value = { BASE_URL + "/deleteMember", BASE_URL+"/deleteMember/" })
+	public ResponseEntity<?>deleteMember(
+			@RequestParam("username") String username)
+			{
+		
+		try {
+			Member member = memberService.deleteMember(username);
+			return httpSuccess(MemberDto.converToDto(member));
+		}
+		catch(Exception e){
+			return httpFailure("Error: " + e.getMessage());
+		}
 	}
 
 	/**
@@ -158,34 +192,73 @@ public class MemberController {
 	 * @param password
 	 * @return boolean if successful
 	 */
-	@PutMapping(value = {"/loginMember/{username}/{password}", "/loginMember/{username}/{password}/" })
-	public MemberDto loginMember(@PathVariable("username") String username, @PathVariable("password") String password)   {
-		Member user = memberService.loginMember(username, password);
-		return MemberDto.converToDto(user);
+	// @PutMapping(value = {"/loginMember/{username}/{password}", "/loginMember/{username}/{password}/" })
+	// public MemberDto loginMember(@PathVariable("username") String username, @PathVariable("password") String password)   {
+	// 	Member user = memberService.loginMember(username, password);
+	// 	return MemberDto.converToDto(user);
+	// }
+	@PutMapping(value = { BASE_URL + "/loginMember", BASE_URL+"/loginMember/" })
+	public ResponseEntity<?>loginMember(
+			@RequestParam("username") String username,
+			@RequestParam("password") String password)
+			{
+		
+		try {
+			Member member = memberService.loginMember(username, password);
+			return httpSuccess(MemberDto.converToDto(member));
+		}
+		catch(Exception e){
+			return httpFailure("Error: " + e.getMessage());
+		}
 	}
+	
 
 	/**
 	 * Logout and delete token
 	 * 
 	 * @param username
-	 * @return boolean if successful
 	 */
-	@PutMapping(value = {"/logoutMember/{username}", "/logoutMember/{username}/" })
-	public MemberDto logoutMember(@PathVariable("username") String username)   {
-		Member user = memberService.logoutMember(username);
-		return MemberDto.converToDto(user);
+	// @PutMapping(value = {"/logoutMember/{username}", "/logoutMember/{username}/" })
+	// public MemberDto logoutMember(@PathVariable("username") String username)   {
+	// 	Member user = memberService.logoutMember(username);
+	// 	return MemberDto.converToDto(user);
+	// }
+	@PutMapping(value = { BASE_URL + "/logoutMember", BASE_URL+"/logoutMember/" })
+	public ResponseEntity<?>logoutMember(
+			@RequestParam("username") String username)
+			{
+		
+		try {
+			Member member = memberService.logoutMember(username);
+			return httpSuccess(MemberDto.converToDto(member));
+		}
+		catch(Exception e){
+			return httpFailure("Error: " + e.getMessage());
+		}
 	}
 
 	/**
 	 * Authenticate token
 	 * 
 	 * @param username
-	 * @return boolean authenticity
 	 */
-	@PostMapping(value = {"/authenticateMember/{username}", "/authenticateMember/{username}/" })
-	public MemberDto authenticateMember(@PathVariable("username") String username)  {
-		Member user = memberService.authenticateMember(username);
-		return MemberDto.converToDto(user);
+	// @PostMapping(value = {"/authenticateMember/{username}", "/authenticateMember/{username}/" })
+	// public MemberDto authenticateMember(@PathVariable("username") String username)  {
+	// 	Member user = memberService.authenticateMember(username);
+	// 	return MemberDto.converToDto(user);
+	// }
+	@PutMapping(value = { BASE_URL + "/authenticateMember", BASE_URL+"/authenticateMember/" })
+	public ResponseEntity<?>authenticateMember(
+			@RequestParam("username") String username)
+			{
+		
+		try {
+			Member member = memberService.authenticateMember(username);
+			return httpSuccess(MemberDto.converToDto(member));
+		}
+		catch(Exception e){
+			return httpFailure("Error: " + e.getMessage());
+		}
 	}
 
 
