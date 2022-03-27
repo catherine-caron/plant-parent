@@ -58,32 +58,32 @@ public class MemberController {
 	// }
 
 
-	/**
-	 * Update the number of plants 
-	 * 
-	 * @param username
-	 * @param numPlants
-	 * @return Member  Dto
-	 */
-	// @PutMapping(value = {BASE_URL+ "/updateNumberOfPlants/{username}/{numPlants}", BASE_URL+ "/updateNumberOfPlants/{username}/{numPlants}/" })
-	// public MemberDto updateNumberOfPlants(@PathVariable("username") String username, @PathVariable("numPlants") int numPlants)   {
-	// 	Member user = memberService.updateNumberOfPlants(username, numPlants);
-	// 	return MemberDto.converToDto(user);
-	// }
-	@PutMapping(value = { BASE_URL + "/updateNumberOfPlants", BASE_URL+"/updateNumberOfPlants/" })
-	public ResponseEntity<?>updateNumberOfPlants(
-			@RequestParam("username") String username,
-			@RequestParam("numPlants") int numPlants)
-			{
+	// /**
+	//  * Update the number of plants 
+	//  * 
+	//  * @param username
+	//  * @param numPlants
+	//  * @return Member  Dto
+	//  */
+	// // @PutMapping(value = {BASE_URL+ "/updateNumberOfPlants/{username}/{numPlants}", BASE_URL+ "/updateNumberOfPlants/{username}/{numPlants}/" })
+	// // public MemberDto updateNumberOfPlants(@PathVariable("username") String username, @PathVariable("numPlants") int numPlants)   {
+	// // 	Member user = memberService.updateNumberOfPlants(username, numPlants);
+	// // 	return MemberDto.converToDto(user);
+	// // }
+	// @PutMapping(value = { BASE_URL + "/updateNumberOfPlants", BASE_URL+"/updateNumberOfPlants/" })
+	// public ResponseEntity<?>updateNumberOfPlants(
+	// 		@RequestParam("username") String username,
+	// 		@RequestParam("numPlants") int numPlants)
+	// 		{
 		
-		try {
-			Member member = memberService.updateNumberOfPlants(username, numPlants);
-			return httpSuccess(MemberDto.converToDto(member));
-		}
-		catch(Exception e){
-			return httpFailure("Error: " + e.getMessage());
-		}
-	}
+	// 	try {
+	// 		Member member = memberService.updateNumberOfPlants(username, numPlants);
+	// 		return httpSuccess(MemberDto.converToDto(member));
+	// 	}
+	// 	catch(Exception e){
+	// 		return httpFailure("Error: " + e.getMessage());
+	// 	}
+	// }
 
 
 	/**

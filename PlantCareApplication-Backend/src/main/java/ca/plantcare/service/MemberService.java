@@ -65,7 +65,7 @@ public class MemberService {
 			member.setEmail(email);
 			member.setPassword(password);
 			member.setName(name);
-			member.setNumberOfPlants(0); // initally no plants
+			// member.setNumberOfPlants(0); // initally no plants
 			memberRepository.save(member);
 			return member;
 		}
@@ -139,28 +139,28 @@ public class MemberService {
 		}
 	}
 
-	/**
-	 * Update numberOfPlants owned by a member
-	 * @param username
-	 * @param newNumberOfPlants
-	 * @return the member updated
-	 */
-	@Transactional
-	public Member updateNumberOfPlants( String username, Integer newNumberOfPlants) {
-		Member member = memberRepository.findMemberByUsername(username);
-		if (member == null) {
-			throw new IllegalArgumentException("The member cannot be found.");
-		}
-		else if (newNumberOfPlants < 0){
-			throw new IllegalArgumentException("Number of plants cannot be negative.");
-		}
-		else {
+	// /**
+	//  * Update numberOfPlants owned by a member
+	//  * @param username
+	//  * @param newNumberOfPlants
+	//  * @return the member updated
+	//  */
+	// @Transactional
+	// public Member updateNumberOfPlants( String username, Integer newNumberOfPlants) {
+	// 	Member member = memberRepository.findMemberByUsername(username);
+	// 	if (member == null) {
+	// 		throw new IllegalArgumentException("The member cannot be found.");
+	// 	}
+	// 	else if (newNumberOfPlants < 0){
+	// 		throw new IllegalArgumentException("Number of plants cannot be negative.");
+	// 	}
+	// 	else {
 			
-			member.setNumberOfPlants(newNumberOfPlants);
-			memberRepository.save(member);
-			return member;
-		}
-	}
+	// 		member.setNumberOfPlants(newNumberOfPlants);
+	// 		memberRepository.save(member);
+	// 		return member;
+	// 	}
+	// }
 
 	/**
 	 * Deletes the member

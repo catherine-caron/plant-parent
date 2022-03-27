@@ -69,7 +69,7 @@ public class TestMemberService {
 				plant1.setPlantId(PLANTID1);
 				plants.add(plant1);
 				user.setPlant(plants);
-				user.setNumberOfPlants(plants.size());
+				// user.setNumberOfPlants(plants.size());
 				return user;
 			} 
 			else if (invocation.getArgument(0).equals(USERNAME2)) {
@@ -94,7 +94,7 @@ public class TestMemberService {
 			plant1.setPlantId(PLANTID1);
 			plants.add(plant1);
 			user.setPlant(plants);
-			user.setNumberOfPlants(plants.size());
+			// user.setNumberOfPlants(plants.size());
 
 			Member user2 = new Member();
 			user2.setUsername(USERNAME2);
@@ -297,61 +297,61 @@ public class TestMemberService {
 		assertEquals("Name cannot be empty.", error);
 	}
 
-	/**
-	 * Update number of plants successfully
-	 */
-	@Test
-	public void testUpdateNumberOfPlantsSuccessfully() {
-		assertEquals(memberRepository.findMemberByUsername(USERNAME1).getNumberOfPlants(), 1);
-		int newNumOfPlants = 3;
-		Member user = null; 
-		try {
-			user = memberService.updateNumberOfPlants(USERNAME1, newNumOfPlants);
-		} catch (IllegalArgumentException e) {
-			// Check that no error occurred
-			fail();
-		}
-		assertNotNull(user);
-		assertEquals(USERNAME1, user.getUsername());
-		assertEquals(newNumOfPlants, user.getNumberOfPlants());
-	}
+	// /**
+	//  * Update number of plants successfully
+	//  */
+	// @Test
+	// public void testUpdateNumberOfPlantsSuccessfully() {
+	// 	assertEquals(memberRepository.findMemberByUsername(USERNAME1).getNumberOfPlants(), 1);
+	// 	int newNumOfPlants = 3;
+	// 	Member user = null; 
+	// 	try {
+	// 		user = memberService.updateNumberOfPlants(USERNAME1, newNumOfPlants);
+	// 	} catch (IllegalArgumentException e) {
+	// 		// Check that no error occurred
+	// 		fail();
+	// 	}
+	// 	assertNotNull(user);
+	// 	assertEquals(USERNAME1, user.getUsername());
+	// 	assertEquals(newNumOfPlants, user.getNumberOfPlants());
+	// }
 
-	/**
-	 * Update number of plants username not found
-	 */
-	@Test
-	public void testUpdateNumberOfPlantsUsernameNotFound() {
-		String username = "Joe42";
-		int newNumOfPlants = 3;
-		Member user = null; 
-		String error = null;
-		try {
-			user = memberService.updateNumberOfPlants(username, newNumOfPlants);
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertNull(user);
-		// check error
-		assertEquals("The member cannot be found.", error);
-	}
+	// /**
+	//  * Update number of plants username not found
+	//  */
+	// @Test
+	// public void testUpdateNumberOfPlantsUsernameNotFound() {
+	// 	String username = "Joe42";
+	// 	int newNumOfPlants = 3;
+	// 	Member user = null; 
+	// 	String error = null;
+	// 	try {
+	// 		user = memberService.updateNumberOfPlants(username, newNumOfPlants);
+	// 	} catch (IllegalArgumentException e) {
+	// 		error = e.getMessage();
+	// 	}
+	// 	assertNull(user);
+	// 	// check error
+	// 	assertEquals("The member cannot be found.", error);
+	// }
 
-	/**
-	 * Update number of plants with negative number
-	 */
-	@Test
-	public void testUpdateNumberOfPlantsNegative() {
-		int newNumOfPlants = -3;
-		Member user = null; 
-		String error = null;
-		try {
-			user = memberService.updateNumberOfPlants(USERNAME1, newNumOfPlants);
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertNull(user);
-		// check error
-		assertEquals("Number of plants cannot be negative.", error);
-	}
+	// /**
+	//  * Update number of plants with negative number
+	//  */
+	// @Test
+	// public void testUpdateNumberOfPlantsNegative() {
+	// 	int newNumOfPlants = -3;
+	// 	Member user = null; 
+	// 	String error = null;
+	// 	try {
+	// 		user = memberService.updateNumberOfPlants(USERNAME1, newNumOfPlants);
+	// 	} catch (IllegalArgumentException e) {
+	// 		error = e.getMessage();
+	// 	}
+	// 	assertNull(user);
+	// 	// check error
+	// 	assertEquals("Number of plants cannot be negative.", error);
+	// }
 
 	/**
 	 * Delete member successfully

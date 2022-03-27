@@ -21,11 +21,11 @@ public class MemberDto {
 	}
 	
    @SuppressWarnings("unchecked") // added
-	public MemberDto( String password,String username,  String name, String email, Integer numberOfPlants) {
-		this( password,username, name, email, numberOfPlants, Collections.EMPTY_LIST);
+	public MemberDto( String password,String username,  String name, String email) {
+		this( password,username, name, email, Collections.EMPTY_LIST);
 	} 
 		
-	public MemberDto(String password, String username, String name, String email, Integer numberOfPlants, List<Plant> plants) {
+	public MemberDto(String password, String username, String name, String email, List<Plant> plants) {
 		this.username = username;
 		this.name = name;
 		this.email= email;
@@ -37,7 +37,7 @@ public class MemberDto {
 		}
 		
         // this.phoneNumber = phoneNumber;
-		this.numberOfPlants = numberOfPlants;
+		// this.numberOfPlants = numberOfPlants;
        // this.plantsDTO = arrayList; //error on this line
 	}
 	
@@ -47,7 +47,7 @@ public class MemberDto {
 				member.getUsername(),
 				member.getName(),
 				member.getEmail(),
-				member.getNumberOfPlants(),
+				// member.getNumberOfPlants(),
 				member.getPlant());
 		return memberDto;
 		

@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Member {
 
-	private Integer numberOfPlants;
+	// private Integer numberOfPlants;
 	 private String email;
 	 private String password;
 	private String name;
@@ -18,12 +18,12 @@ public class Member {
 	private List<Plant> plant; 
 	private int token; // for login
 	
-	public Integer getNumberOfPlants() {
-		return numberOfPlants;
-	}
-	public void setNumberOfPlants(Integer numberOfPlants) {
-		this.numberOfPlants = numberOfPlants;
-	}
+	// public Integer getNumberOfPlants() {
+	// 	return numberOfPlants;
+	// }
+	// public void setNumberOfPlants(Integer numberOfPlants) {
+	// 	this.numberOfPlants = numberOfPlants;
+	// }
 	 public String getEmail() {
 	 	return email;
 	 }
