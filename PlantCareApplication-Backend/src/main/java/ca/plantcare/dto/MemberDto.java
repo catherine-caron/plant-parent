@@ -41,7 +41,7 @@ public class MemberDto {
        // this.plantsDTO = arrayList; //error on this line
 	}
 	
-	public static MemberDto converToDto(Member member) {
+	public static MemberDto convertToDto(Member member) {
 		MemberDto memberDto = new MemberDto(
 				member.getPassword(),
 				member.getUsername(),

@@ -24,7 +24,7 @@ public class ReminderDto {
 		this.time = time;
 	}
 	
-	public ReminderDto converToDto(Reminder reminder) {
+	public static ReminderDto convertToDto(Reminder reminder) {
 		ReminderDto reminderDto = new ReminderDto( reminder.getReminderId(),
 				reminder.getMessage(),
 				reminder.getTime(),

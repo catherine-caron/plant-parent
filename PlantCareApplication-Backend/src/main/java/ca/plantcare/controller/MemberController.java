@@ -41,7 +41,7 @@ public class MemberController {
 	@GetMapping(value = { BASE_URL+ "/getMemberByUsername/{username}", BASE_URL+ "/getMemberByUsername/{username}/" })
 	public MemberDto getMemberByUsername(@PathVariable("username") String username) {
 		Member member = memberService.getMemberByUsername(username);
-        return MemberDto.converToDto(member);
+        return MemberDto.convertToDto(member);
 	}
 	
 
@@ -105,7 +105,7 @@ public class MemberController {
 		
 		try {
 			Member member = memberService.createMember(username, name, password, email);
-			return httpSuccess(MemberDto.converToDto(member));
+			return httpSuccess(MemberDto.convertToDto(member));
 
 		}
 		catch(Exception e){
@@ -122,7 +122,7 @@ public class MemberController {
 		List<MemberDto> members = null;
 		try {
 		//	members = memberService.getAllMembers().stream().map(member -> MemberDto.convertToDto(member)).collect(Collectors.toList());
-			members = memberService.getAllMembers().stream().map(member -> MemberDto.converToDto(member)).collect(Collectors.toList());
+			members = memberService.getAllMembers().stream().map(member -> MemberDto.convertToDto(member)).collect(Collectors.toList());
 		} catch (Exception e) {
 			return httpFailureMessage(e.getMessage());
 		}
@@ -154,7 +154,7 @@ public class MemberController {
 		
 		try {
 			Member member = memberService.updateMember(username, newName, newEmail, newPassword);
-			return httpSuccess(MemberDto.converToDto(member));
+			return httpSuccess(MemberDto.convertToDto(member));
 		}
 		catch(Exception e){
 			return httpFailure("Error: " + e.getMessage());
@@ -178,7 +178,7 @@ public class MemberController {
 		
 		try {
 			Member member = memberService.deleteMember(username);
-			return httpSuccess(MemberDto.converToDto(member));
+			return httpSuccess(MemberDto.convertToDto(member));
 		}
 		catch(Exception e){
 			return httpFailure("Error: " + e.getMessage());
@@ -205,7 +205,7 @@ public class MemberController {
 		
 		try {
 			Member member = memberService.loginMember(username, password);
-			return httpSuccess(MemberDto.converToDto(member));
+			return httpSuccess(MemberDto.convertToDto(member));
 		}
 		catch(Exception e){
 			return httpFailure("Error: " + e.getMessage());
@@ -230,7 +230,7 @@ public class MemberController {
 		
 		try {
 			Member member = memberService.logoutMember(username);
-			return httpSuccess(MemberDto.converToDto(member));
+			return httpSuccess(MemberDto.convertToDto(member));
 		}
 		catch(Exception e){
 			return httpFailure("Error: " + e.getMessage());
@@ -254,7 +254,7 @@ public class MemberController {
 		
 		try {
 			Member member = memberService.authenticateMember(username);
-			return httpSuccess(MemberDto.converToDto(member));
+			return httpSuccess(MemberDto.convertToDto(member));
 		}
 		catch(Exception e){
 			return httpFailure("Error: " + e.getMessage());
