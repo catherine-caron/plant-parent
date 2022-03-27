@@ -93,7 +93,7 @@ public class PlantService {
 	@Transactional
 	public Plant createPlant(Integer icon, String givenName, String botanicalName, String commonName,
 			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
-			Integer wateringRecommendation, Integer addedPlantId) {
+			Integer wateringRecommendation, Integer addedPlantId, String memberId) {
 
 		if (icon == null || icon.equals("undefined")) {
 			throw new IllegalArgumentException("Icon cannot be null or empty");

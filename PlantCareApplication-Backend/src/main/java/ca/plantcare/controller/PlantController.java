@@ -48,9 +48,10 @@ public class PlantController {
 			@RequestParam("toxicity") Toxicity toxicity,
 			@RequestParam("bloomTime") BloomTime bloomTime,
 			@RequestParam("wateringRecommendation") Integer wateringRecommendation,
-			@RequestParam("addedPlantId") Integer addedPlantId)  {
+			@RequestParam("addedPlantId") Integer addedPlantId,
+			@RequestParam("memberId") String memberId)  {
 		try {
-			Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation,addedPlantId);
+			Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation,addedPlantId,memberId);
 					return httpSuccess(PlantDto.convertToDto(plant));
 
 		}
@@ -70,6 +71,16 @@ public class PlantController {
 
 		}
 		catch(Exception e){
+			return httpFailure("Error: " + e.getMessage());
+		}
+	}
+	
+	@GetMapping(value = { BASE_URL + "/get-by-member/{memberId}", BASE_URL + "/get-by-member/{memberId}/" })
+	public ResponseEntity<?> getAllLoansByMember(@PathVariable("memberId") String memberId)  {
+		try {
+			List<Plant> plants = plantService.getPlantsByMember(memberId);
+			return httpSuccess(PlantDto.convertToDtos(plants));
+		} catch (Exception e) {
 			return httpFailure("Error: " + e.getMessage());
 		}
 	}

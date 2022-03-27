@@ -1,6 +1,10 @@
 package ca.plantcare.dto;
 
 import ca.plantcare.models.WateringSchedule;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import ca.plantcare.models.Member;
 import ca.plantcare.models.Plant;
 import ca.plantcare.models.Plant.BloomTime;
@@ -23,6 +27,7 @@ public class PlantDto {
 	private Integer plantId;
 	private WateringSchedule wateringSchedule;
 	private Member member;
+	private String memberId;
 	private Integer addedPlantId;
 	//default constructor
 	public PlantDto(){
@@ -31,7 +36,7 @@ public class PlantDto {
 	
 	public PlantDto (Integer icon, String givenName, String botanicalName, String commonName,
 			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
-			WateringSchedule wateringRecommendation,Integer plantId, Member memberId, Integer addedPlantId) {
+			WateringSchedule wateringRecommendation,Integer plantId, Member member, Integer addedPlantId) {
 		this.bloomTime = bloomTime;
 		this.botanicalName = botanicalName;
 		this.commonName = commonName;
@@ -41,10 +46,13 @@ public class PlantDto {
 		this.toxicity = toxicity;
 		this.wateringSchedule = wateringRecommendation;
 		this.setAddedPlantId(addedPlantId);
+		this.member = member;
+		if (member!= null) {
+		this.memberId = member.getUsername();}
 		
 		if(memberId == null || plantId ==null) { //admin plant
 			this.plantId = plantId;
-			this.member = memberId;
+			//this.member = memberId;
 			
 		}
 		else {
@@ -69,6 +77,12 @@ public class PlantDto {
 		return plantDto;
 		
 	}
+	
+	public static List<PlantDto> convertToDtos(List<Plant> plants) {
+		List<PlantDto> plantDtos = plants.stream().map(l -> PlantDto.convertToDto(l)).collect(Collectors.toList());
+		return plantDtos;
+	}
+
 
 	/**
 	 * @return the icon
