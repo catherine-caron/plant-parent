@@ -76,7 +76,7 @@ public class PlantService {
 	 * @param plantId
 	 * @return plant
 	 */
-	//@Transactional
+	@Transactional
 	private Plant getPlantByPlantId(Integer plantId) {
 		if (plantId == null || plantId < 0) {
 			throw new IllegalArgumentException("Id must not be null.");
@@ -183,7 +183,7 @@ public class PlantService {
 		newPlant.setCommonName(plant.getCommonName());
 		newPlant.setGivenName(givenName);
 		newPlant.setIcon(plant.getIcon());
-		newPlant.setMember(memberRepository.findMemberByUsername(memberId));
+		// newPlant.setMember(memberRepository.findMemberByUsername(memberId));
 		newPlant.setSoilType(plant.getSoilType());
 		newPlant.setSunExposure(plant.getSunExposure());
 		newPlant.setToxicity(plant.getToxicity());

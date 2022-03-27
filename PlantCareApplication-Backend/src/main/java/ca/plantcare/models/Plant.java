@@ -47,7 +47,7 @@ public class Plant {
 	private Integer originalPlantId;
 
 	
-	private Member member;
+	// private Member member;
 	private WateringSchedule wateringRecommendation;
 	/**
 	 * Default constructor.
@@ -207,21 +207,21 @@ public class Plant {
 	}
 
 
-	/**
-	 * @return the member
-	 */
-	@ManyToOne(cascade = CascadeType.ALL)
-	public Member getMember() {
-		return member;
-	}
+	// /**
+	//  * @return the member
+	//  */
+	// @ManyToOne(cascade = CascadeType.ALL)
+	// public Member getMember() {
+	// 	return member;
+	// }
 
 
-	/**
-	 * @param member the member to set
-	 */
-	public void setMember(Member member) {
-		this.member = member;
-	}
+	// /**
+	//  * @param member the member to set
+	//  */
+	// public void setMember(Member member) {
+	// 	this.member = member;
+	// }
 
 
 	/**

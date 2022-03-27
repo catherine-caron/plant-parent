@@ -75,7 +75,7 @@ public class PlantController {
 		}
 	}
 	
-	@GetMapping(value = { BASE_URL + "/get-by-member/{memberId}", BASE_URL + "/get-by-member/{memberId}/" })
+	@GetMapping(value = { BASE_URL + "/getByMember/{memberId}", BASE_URL + "/get-by-member/{memberId}/" })
 	public ResponseEntity<?> getAllPlantsByMember(@PathVariable("memberId") String memberId)  {
 		try {
 			List<Plant> plants = plantService.getPlantsByMember(memberId);

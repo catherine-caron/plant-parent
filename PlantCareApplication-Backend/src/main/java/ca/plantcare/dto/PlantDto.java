@@ -14,8 +14,6 @@ import ca.plantcare.models.Plant.Toxicity;
 
 public class PlantDto {
 
-	
-	
 	private Integer icon;
 	private SunExposure sunExposure;
 	private SoilType soilType;
@@ -26,7 +24,7 @@ public class PlantDto {
 	private String commonName;
 	private Integer plantId;
 	private WateringSchedule wateringSchedule;
-	private Member member;
+	// private Member member;
 	private String memberId;
 	private Integer addedPlantId;
 	//default constructor
@@ -36,7 +34,7 @@ public class PlantDto {
 	
 	public PlantDto (Integer icon, String givenName, String botanicalName, String commonName,
 			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
-			WateringSchedule wateringRecommendation,Integer plantId, Member member, Integer addedPlantId) {
+			WateringSchedule wateringRecommendation,Integer plantId, Integer addedPlantId) {
 		this.bloomTime = bloomTime;
 		this.botanicalName = botanicalName;
 		this.commonName = commonName;
@@ -46,14 +44,13 @@ public class PlantDto {
 		this.toxicity = toxicity;
 		this.wateringSchedule = wateringRecommendation;
 		this.setAddedPlantId(addedPlantId);
-		this.member = member;
-		if (member!= null) {
-		this.memberId = member.getUsername();}
+		// this.member = member;
+		// if (member!= null) {
+		// this.memberId = member.getUsername();}
 		
-		if(memberId == null || plantId ==null) { //admin plant
+		if(plantId ==null) { //admin plant used to also have: ( memberId == null || )
 			this.plantId = plantId;
 			//this.member = memberId;
-			
 		}
 		else {
 			this.givenName = givenName;
@@ -70,7 +67,7 @@ public class PlantDto {
 				plant.getBloomtime(),
 				plant.getWateringRecommendation(),
 				plant.getPlantId(),
-				plant.getMember(),
+				// plant.getMember(),
 				plant.getAddedPlantId())
 				;
 		
