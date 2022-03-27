@@ -70,7 +70,7 @@ public class MemberController {
 	// 	Member user = memberService.updateNumberOfPlants(username, numPlants);
 	// 	return MemberDto.converToDto(user);
 	// }
-	@PostMapping(value = { BASE_URL+"/updateNumberOfPlants", BASE_URL+"/updateNumberOfPlants/" })
+	@PutMapping(value = { BASE_URL + "/updateNumberOfPlants", BASE_URL+"/updateNumberOfPlants/" })
 	public ResponseEntity<?>updateNumberOfPlants(
 			@RequestParam("username") String username,
 			@RequestParam("numPlants") int numPlants)
