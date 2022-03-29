@@ -13,8 +13,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-//import com.loopj.android.http.JsonHttpResponseHandler;
-//import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-//import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.Header;
 
 import java.util.ArrayList;
 
@@ -48,15 +48,37 @@ public class HomePage extends AppCompatActivity {
     }
 
     private void refreshErrorMessage() {
-       /*set the error message
-        TextView tvError = (TextView) findViewById(R.id.error);
+       //set the error message
+        TextView tvError = (TextView) findViewById(R.id.error); //error is an id in xml files
         tvError.setText(error);
 
         if (error == null || error.length() == 0) {
             tvError.setVisibility(View.GONE);
         } else {
             tvError.setVisibility(View.VISIBLE);
-        }*/
+        }
 
+    }
+
+    public void addPerson(View v) {
+        error = "";
+       // final TextView username = (TextView) findViewById(R.id.usernameReg);
+        final TextView enterUsername = (TextView) findViewById(R.id.enterUsernameReg);
+        HttpUtils.post("persons/" + enterUsername.getText().toString(), new RequestParams(), new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                refreshErrorMessage();
+                enterUsername.setText("");
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get("message").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+                refreshErrorMessage();
+            }
+        });
     }
 }

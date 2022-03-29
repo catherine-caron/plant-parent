@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.plantcare.dao.WateringScheduleRepository;
@@ -15,6 +16,7 @@ import ca.plantcare.dao.ReminderRepository;
 import ca.plantcare.models.Plant;
 import ca.plantcare.models.Reminder;
 
+@Service
 public class ReminderService {
 
     @Autowired

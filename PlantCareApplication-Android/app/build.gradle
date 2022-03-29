@@ -48,3 +48,11 @@ dependencies {
 task wrapper(type: Wrapper){
     gradleVersion = '7.2'
 }
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'com.loopj.android:android-async-http:1.4.9'
+    runtimeOnly 'org.postgresql:postgresql'
+}
