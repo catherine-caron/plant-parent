@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-621569656/PlantCareApplication-Android.iml" filepath="$PROJECT_DIR$/.idea/modules/-621569656/PlantCareApplication-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/PlantCareApplication-Android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/PlantCareApplication-Android.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-688074639/plant-parent.PlantCareApplication-Android.iml" filepath="$PROJECT_DIR$/.idea/modules/-688074639/plant-parent.PlantCareApplication-Android.iml" />
     </modules>
   </component>
 </project>
