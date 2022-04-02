@@ -201,6 +201,7 @@ public class PlantService {
 		newPlant.setWateringRecommendation(plant.getWateringRecommendation());
 		//newPlant.setPlantId(null); // idk if this works
 		//newPlant.setAddedPlantId(plantIdNew);
+		//newPlant.setMember(memberRepository.findMemberByUsername(memberId));
 		plantRepository.save(newPlant);
 		Member member = memberRepository.findMemberByUsername(memberId);
 		member.getPlant().add(newPlant);
@@ -267,7 +268,10 @@ public class PlantService {
 		if (plant == null) {
 			throw new IllegalArgumentException("Plant does not exist"); // @TODO loooooool
 		}
-		deletePlantForMember(plantId);
+		//plant.setMember(null);
+		plant.setWateringRecommendation(null);
+		
+		//deletePlantForMember(plantId);
 		
 		plantRepository.delete(plant);
 		return plant;
@@ -344,19 +348,19 @@ public class PlantService {
 			return true;
 	}
 
-	public Plant deletePlantForMember(Integer plantId) {
+	/*public Plant deletePlantForMember(Integer plantId) {
 
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
-		List<Member> members = toList(memberRepository.findAll());
-		int counter = 0;
-		for (Member member : members) {
-			counter++;
-			if (member.getPlant() == plant) {
-				member.getPlant().remove(counter);
+		Member member = plant.getMember();
+		
+		for (int i=0; i< member.getPlant().size(); i++) {
+		
+			if (member.getPlant().get(i) == plant) {
+				member.getPlant().get(i).setMember(null);;
 			}
 		}
-		throw new IllegalArgumentException("Member not found.");
-	}
+		return plant;
+	}*/
 
 	/**
 	 * Helper method that converts iterable to list

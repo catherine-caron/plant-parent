@@ -24,7 +24,7 @@ public class PlantDto {
 	private String commonName;
 	private Integer plantId;
 	private WateringSchedule wateringSchedule;
-	// private Member member;
+	private Member member;
 	private String memberId;
 	private Integer addedPlantId;
 	private Integer id;
@@ -46,6 +46,8 @@ public class PlantDto {
 		this.wateringSchedule = wateringRecommendation;
 		this.id = id;
 		this.setAddedPlantId(addedPlantId);
+		this.memberId = memberId;
+		//this.member = member;
 		// this.member = member;
 		// if (member!= null) {
 		// this.memberId = member.getUsername();}
@@ -69,9 +71,10 @@ public class PlantDto {
 				plant.getBloomtime(),
 				plant.getWateringRecommendation(),
 				plant.getPlantId(),
-				// plant.getMember(),
 				plant.getAddedPlantId(),
 				plant.getId())
+				//plant.getMember()
+				
 				
 				;
 		
@@ -251,6 +254,20 @@ public class PlantDto {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return the member
+	 */
+	public Member getMember() {
+		return member;
+	}
+
+	/**
+	 * @param member the member to set
+	 */
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	
 }

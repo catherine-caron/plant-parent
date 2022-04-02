@@ -310,6 +310,8 @@ public class MemberService {
 	public List<Member> getAllMembers() {
 		return toList(memberRepository.findAll());
 	}
+	
+
 
 
 	/**

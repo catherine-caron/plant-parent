@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -111,6 +112,19 @@ public class PlantController {
 			return httpFailureMessage(e.getMessage());
 		}
 		return httpSuccess(plants);
+	}
+	
+	@PutMapping(value = { BASE_URL + "/deleteplant" + "/{id}", BASE_URL + "/deleteplant/" +"/{id}"})
+	public ResponseEntity<?> deletePlant(@PathVariable("id") Integer plantId){
+			try {
+			//Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation);
+				Plant plant = plantService.deletePlant(plantId);
+				return httpSuccess(PlantDto.convertToDto(plant));
+
+		}
+		catch(Exception e){
+			return httpFailure("Error: " + e.getMessage());
+		}
 	}
 	
 	
