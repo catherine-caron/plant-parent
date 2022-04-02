@@ -91,21 +91,21 @@ public class PlantService {
 
 	// create plant by admin needs an admin member id
 	@Transactional
-	public Plant createPlant(Integer icon, String givenName, String botanicalName, String commonName,
+	public Plant createPlant(Integer icon, String botanicalName, String commonName,
 			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
-			Integer wateringRecommendation, Integer addedPlantId, String memberId) {
+			Integer wateringRecommendation) {
 
 		if (icon == null || icon.equals("undefined")) {
 			throw new IllegalArgumentException("Icon cannot be null or empty");
 		}
 
-		if (memberRepository.findById(memberId) == null) {
+	/*	if (memberRepository.findById(memberId) == null) {
 			throw new IllegalArgumentException("Member not found");
-		}
+		
 
 		if (givenName == null || givenName == "") {
 			throw new IllegalArgumentException("Given Name cannot be null or empty");
-		}
+		}}*/
 
 		if (botanicalName == null || botanicalName == "") {
 			throw new IllegalArgumentException("Botanical Name cannot be null or empty");
@@ -152,11 +152,10 @@ public class PlantService {
 		plantRepository.save(plant);
 
 		// add to member's plants
-		Member member = memberRepository.findMemberByUsername(memberId);
-		List <Plant> plants = member.getPlant();
-		plants.add(plant);
-		member.setPlant(plants);
-		memberRepository.save(member);
+		//Member member = memberRepository.findMemberByUsername(memberId);
+
+		//member.setPlant(plants);
+		//memberRepository.save(member);
 
 		return plant;
 
@@ -208,6 +207,9 @@ public class PlantService {
 		memberRepository.save(member);
 		/*memberUpdated.getPlant().add(newPlant);
 		memberRepository.save(memberUpdated);*/
+		List <Plant> plants = member.getPlant();
+		plants.add(newPlant);
+		
 		return newPlant;
 
 	}

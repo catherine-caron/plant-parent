@@ -43,6 +43,7 @@ public class Plant {
 	private String botanicalName;
 	private String commonName;
 	private Integer plantId;
+	private Integer id;
 	private Integer addedPlantId;
 	private Integer originalPlantId;
 
@@ -253,6 +254,22 @@ public class Plant {
 	 */
 	public void setOriginalPlantId(Integer originalPlantId) {
 		this.originalPlantId = originalPlantId;
+	}
+
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 

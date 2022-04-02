@@ -40,18 +40,15 @@ public class PlantController {
 	
 	@PostMapping(value = { BASE_URL + "/create", BASE_URL + "/create/" })
 	public ResponseEntity<?> createPlant(@RequestParam("icon") Integer icon, 
-			@RequestParam("givenName") String givenName, 
 			@RequestParam("botanicalName") String botanicalName, 
 			@RequestParam("commonName") String commonName, 
 			@RequestParam("sunExposure") SunExposure sunExposure,
 			@RequestParam("soilType") SoilType soilType, 
 			@RequestParam("toxicity") Toxicity toxicity,
 			@RequestParam("bloomTime") BloomTime bloomTime,
-			@RequestParam("wateringRecommendation") Integer wateringRecommendation,
-			@RequestParam("addedPlantId") Integer addedPlantId,
-			@RequestParam("memberId") String memberId)  {
+			@RequestParam("wateringRecommendation") Integer wateringRecommendation)  {
 		try {
-			Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation,addedPlantId,memberId);
+			Plant plant = plantService.createPlant(icon, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation);
 					return httpSuccess(PlantDto.convertToDto(plant));
 
 		}
