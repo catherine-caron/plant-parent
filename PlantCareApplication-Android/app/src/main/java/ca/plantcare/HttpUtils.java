@@ -46,6 +46,10 @@ public class HttpUtils {
         client.post(context, getAbsoluteUrl(url), stringEntity, "application/json", responseHandler);
     }
 
+    public static void put(String url, RequestParams params,  AsyncHttpResponseHandler responseHandler) throws UnsupportedEncodingException, UnsupportedEncodingException {
+        client.put(getAbsoluteUrl(url), params, responseHandler);
+          }
+
     public static void getByUrl(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(url, params, responseHandler);
     }

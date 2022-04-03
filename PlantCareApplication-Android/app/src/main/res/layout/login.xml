@@ -72,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
         <EditText
-            android:id="@+id/entergivenname"
+            android:id="@+id/logUsername"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -113,7 +113,7 @@
             app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
         <EditText
-            android:id="@+id/enterbotanicalname"
+            android:id="@+id/logPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -147,7 +147,7 @@
             android:layout_weight="0.1"
             android:backgroundTint="#42501D"
             android:gravity="center"
-            android:onClick="addPerson"
+            android:onClick="logIn"
             android:text="Submit" />
 
 
