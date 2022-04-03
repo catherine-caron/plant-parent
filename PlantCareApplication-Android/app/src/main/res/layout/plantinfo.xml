@@ -367,7 +367,7 @@
             android:layout_weight="0.1"
             android:backgroundTint="#42501D"
             android:gravity="center"
-            android:onClick="backHomePage"
+            android:onClick="addPerson"
             android:text="back" />
 
 

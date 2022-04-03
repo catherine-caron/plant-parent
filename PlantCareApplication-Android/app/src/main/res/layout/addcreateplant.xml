@@ -361,14 +361,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
-        <Button
+       <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.1"
             android:backgroundTint="#42501D"
             android:gravity="center"
-            android:onClick="addPlant"
+            android:onClick="addPerson"
             android:text="Add" />
 
 

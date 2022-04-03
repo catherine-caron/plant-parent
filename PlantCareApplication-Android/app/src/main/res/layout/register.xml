@@ -98,7 +98,7 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/botanicalname"
+            android:id="@+id/passwordReg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -113,7 +113,7 @@
             app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
         <TextView
-            android:id="@+id/enterbotanicalname"
+            android:id="@+id/enterPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -141,7 +141,7 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/nameReg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -156,7 +156,7 @@
             app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
         <TextView
-            android:id="@+id/enterName"
+            android:id="@+id/enternameReg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -184,7 +184,7 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/email"
+            android:id="@+id/emailReg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -199,7 +199,7 @@
             app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
         <TextView
-            android:id="@+id/enterEmail"
+            android:id="@+id/enterEmailReg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -240,7 +240,7 @@
             android:layout_weight="0.1"
             android:backgroundTint="#42501D"
             android:gravity="center"
-            android:onClick="submitRegister"
+            android:onClick="addPerson"
             android:text="register" />
 
 

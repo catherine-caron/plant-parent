@@ -13,6 +13,7 @@
             android:name=".HomePage"
             android:exported="false"
             android:label="@string/home_description" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true" >

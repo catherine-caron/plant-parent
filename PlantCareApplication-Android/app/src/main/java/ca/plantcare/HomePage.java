@@ -44,7 +44,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.register);
     }
 
     private void refreshErrorMessage() {
@@ -63,12 +63,22 @@ public class HomePage extends AppCompatActivity {
     public void addPerson(View v) {
         error = "";
        // final TextView username = (TextView) findViewById(R.id.usernameReg);
+
         final TextView enterUsername = (TextView) findViewById(R.id.enterUsernameReg);
-        HttpUtils.post("persons/" + enterUsername.getText().toString(), new RequestParams(), new JsonHttpResponseHandler() {
+        final TextView name = (TextView) findViewById(R.id.enternameReg);
+        final TextView enterPassword = (TextView) findViewById(R.id.enterPassword);
+        final TextView enterEmail = (TextView) findViewById(R.id.enterEmailReg);
+
+        HttpUtils.post("member/create" + name.getText().toString() + enterUsername.getText().toString() + enterPassword.getText().toString() +
+                        enterEmail.getText().toString(),new RequestParams(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 refreshErrorMessage();
                 enterUsername.setText("");
+                name.setText("");
+                enterPassword.setText("");
+                enterEmail.setText("");
+
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
