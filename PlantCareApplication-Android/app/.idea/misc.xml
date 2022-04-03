@@ -8,12 +8,12 @@
         <entry key="src/main/res/layout/addexistingplant.xml" value="0.14175724637681159" />
         <entry key="src/main/res/layout/addplant.xml" value="0.12771739130434784" />
         <entry key="src/main/res/layout/calendar.xml" value="0.2164855072463768" />
-        <entry key="src/main/res/layout/editplant.xml" value="0.14175724637681159" />
-        <entry key="src/main/res/layout/homebeforelogin.xml" value="0.2164855072463768" />
-        <entry key="src/main/res/layout/homepage.xml" value="0.2868774856346241" />
+        <entry key="src/main/res/layout/editplant.xml" value="0.1" />
+        <entry key="src/main/res/layout/homebeforelogin.xml" value="0.1" />
+        <entry key="src/main/res/layout/homepage.xml" value="0.1" />
         <entry key="src/main/res/layout/login.xml" value="0.12771739130434784" />
         <entry key="src/main/res/layout/plantinfo.xml" value="0.12454710144927536" />
-        <entry key="src/main/res/layout/register.xml" value="0.21875" />
+        <entry key="src/main/res/layout/register.xml" value="0.1" />
         <entry key="src/main/res/layout/reminderpage.xml" value="0.2164855072463768" />
       </map>
     </option>

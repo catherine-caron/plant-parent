@@ -71,7 +71,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
-        <TextView
+        <EditText
             android:id="@+id/entergivenname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             android:layout_weight="0.5"
             android:fontFamily="@font/livvic"
             android:gravity="center"
-            android:text="Enter Username"
+            android:hint="Enter Username"
             android:textColor="@color/black"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +112,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
-        <TextView
+        <EditText
             android:id="@+id/enterbotanicalname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
             android:layout_weight="0.5"
             android:fontFamily="@font/livvic"
             android:gravity="center"
-            android:text="Enter Password"
+            android:hint="Enter Password"
             android:textColor="@color/black"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"

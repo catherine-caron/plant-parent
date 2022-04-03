@@ -100,37 +100,59 @@
             android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/water"
-                android:layout_width="171dp"
-                android:layout_marginTop="120dp"
+<!--            <TextView-->
+<!--                android:id="@+id/water"-->
+<!--                android:layout_width="171dp"-->
+<!--                android:layout_marginTop="120dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="0.5"-->
+<!--                android:fontFamily="@font/livvic"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Log In "-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="30sp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/home_desc" />-->
+<!--           -->
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="0.5"
-                android:fontFamily="@font/livvic"
+                android:layout_marginTop="140dp"
+                android:layout_weight="0.1"
+                android:backgroundTint="#42501D"
                 android:gravity="center"
-                android:text="Log In "
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+                android:onClick="logIn"
+                android:text="Log In" />
 
-            <TextView
-                android:id="@+id/view"
-                android:layout_width="130dp"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="60dp"
-                android:layout_weight="0.5"
-                android:fontFamily="@font/livvic"
+                android:layout_weight="0.1"
+                android:backgroundTint="#42501D"
                 android:gravity="center"
-                android:text="Sign Up"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+                android:onClick="signUp"
+                android:text="Sign Up" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/view"-->
+<!--                android:layout_width="130dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="60dp"-->
+<!--                android:layout_weight="0.5"-->
+<!--                android:fontFamily="@font/livvic"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Sign Up"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="30sp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/home_desc" />-->
 
 
         </LinearLayout>

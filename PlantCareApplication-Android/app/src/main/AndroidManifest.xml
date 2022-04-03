@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ca.plantcare" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,9 +13,16 @@
         android:theme="@style/Theme.PlantCareApplicationAndroid" >
         <activity
             android:name=".HomePage"
-            android:exported="false"
-            android:label="@string/home_description" />
-
+            android:exported="false"/>
+        <activity
+            android:name=".LoggedInView"
+            android:exported="false"/>
+        <activity
+            android:name=".LogIn"
+            android:exported="false" />
+        <activity
+            android:name=".SignUp"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" >
