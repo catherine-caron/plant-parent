@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/beige">
+    android:background="@color/beige"
+    android:padding="10px">
 
     <!--Don't edit this or I will kill you-->
     <androidx.appcompat.widget.AppCompatImageView
@@ -121,10 +122,10 @@
             android:id="@+id/entergivenname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="0.5"
             android:fontFamily="@font/livvic"
             android:gravity="center"
-            android:layout_gravity="center"
             android:text=""
             android:textColor="@color/black"
             android:textSize="20sp"

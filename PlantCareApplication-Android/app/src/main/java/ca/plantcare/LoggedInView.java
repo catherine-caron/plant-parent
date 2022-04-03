@@ -1,12 +1,16 @@
 package ca.plantcare;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +37,9 @@ public class LoggedInView extends AppCompatActivity {
     private ArrayAdapter<String> eventAdapter;
     private List<String> personPasswords = new ArrayList<>();
     private List<String> plants = new ArrayList<>();
+    private  String givenName = "";
+    private  String botanicalName = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +53,7 @@ public class LoggedInView extends AppCompatActivity {
         error = "";
         // final TextView username = (TextView) findViewById(R.id.usernameReg);
 
-        TextView nameHere = (TextView) findViewById(R.id.nameHere);
+        //TextView nameHere = (TextView) findViewById(R.id.nameHere);
 
        SharedPreferences preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
        String memberId = preferences.getString("memberId", null);
@@ -58,16 +65,54 @@ public class LoggedInView extends AppCompatActivity {
                     try {
 
                         JSONArray arr = response.getJSONArray("plants");
-                        nameHere.setText("test1");
-                        for (int i = 0; i < 2; i++) {
+                        LinearLayout llMain = (LinearLayout) findViewById(R.id.linearLayoutScroll);
+                       // nameHere.setText("test1");
+                        for (int i = 0; i < response.length(); i++) {
 
                             JSONObject plants = arr.getJSONObject(i);
 
-                            String givenName = plants.getString("givenName");
-                        String botanicalName = plants.getString("botanicalName");
+                          givenName = plants.getString("givenName");
+                         botanicalName = plants.getString("botanicalName");
+                            Integer plantId = plants.getInt("plantId");
 
                         //String endDateTime = plants.getString("endDateTime");
-                            nameHere.setText(givenName);
+                           // nameHere.setText(givenName);
+                            TextView textNumber = new TextView(LoggedInView.this);
+                            textNumber.setText("Plant Name:");
+
+                            TextView textGiven = new TextView(LoggedInView.this);
+                            textGiven.setText(givenName);
+
+                            Button myButton = new Button(LoggedInView.this);
+                            myButton.setText("Plant Info");
+
+                            Button waterPlant = new Button(LoggedInView.this);
+                            waterPlant.setText("Water");
+
+                            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+
+
+                            textNumber.setTextSize(24);
+                            textNumber.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                            textNumber.setPadding(0,0,0,10);
+                            textGiven.setTextSize(24);
+                            textGiven.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                            textGiven.setPadding(0,0,0,60);
+                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                           LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.MATCH_PARENT
+                            );
+                            textNumber.setLayoutParams(params);
+                            llMain.addView(textNumber);
+
+                            textGiven.setLayoutParams(params);
+                            llMain.addView(textGiven);
+
+                            llMain.addView(myButton, lp);
+                            llMain.addView(waterPlant, lp);
+
+
                         }
 
                         //displayAppointments.add(currServiceName + "\n" + HelperMethods.displayDateTimeFromTo(currStart, currEnd));
@@ -102,4 +147,8 @@ public class LoggedInView extends AppCompatActivity {
              }
         });
     }
+    public void viewPlantDetails(Integer plantId)  {
+
+    }
+
 }

@@ -16,7 +16,8 @@
             android:exported="false"/>
         <activity
             android:name=".LoggedInView"
-            android:exported="false"/>
+            android:exported="false"
+            />
         <activity
             android:name=".LogIn"
             android:exported="false" />

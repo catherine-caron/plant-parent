@@ -23,38 +23,41 @@
         android:layout_width="1600dp"
         android:layout_height="800dp"
         android:layout_marginStart="-570dp"
-        android:layout_marginTop="540dp"
+        android:layout_marginTop="460dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_wifi_bar_24" />
 
+    <!--Nav Bar End -->
+
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="83dp"
-        android:layout_height="91dp"
+        android:id="@+id/appCompatImageView2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginStart="184dp"
-        android:layout_marginTop="640dp"
+        android:layout_marginTop="568dp"
+        android:onClick="viewPlantDetails"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_circle_24" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="284dp"
-        android:layout_marginTop="660dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="260dp"
+        android:layout_marginTop="590dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="660dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="596dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_notifications_active_24" />
-    <!--Nav Bar End -->
 
     <TextView
         android:id="@+id/home"
@@ -85,133 +88,79 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lineHeight="18sp" />
+
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="421dp"
+        android:layout_height="310dp"
+        android:layout_marginBottom="108dp"
+        android:fillViewport="false"
         android:orientation="vertical"
         android:padding="10dp"
-        android:fillViewport="false"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp">
+
         <LinearLayout
-            android:id="@+id/linearLayout1"
+            android:id="@+id/linearLayoutScroll"
             android:layout_width="fill_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="240dp"
+            android:gravity="center"
             android:orientation="vertical">
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
 
-            <TextView
+            <!-- <TextView
                 android:id="@+id/plant_Pic2"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_marginTop="60dp"
+                android:layout_gravity="center"
                 android:fontFamily="@font/livvic"
                 android:text="Picture Plant #1 Here"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="28sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:lineHeight="18sp" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints">
-
-                <TextView
-                    android:id="@+id/givenname"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:fontFamily="@font/livvic"
-                    android:gravity="center"
-                    android:text="Name:"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/home_desc" />
-
-                <TextView
-                    android:id="@+id/nameHere"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:fontFamily="@font/livvic"
-                    android:gravity="center"
-                    android:text="Name Here"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/home_desc" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/water"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/livvic"
+                android:gravity="center"
+                android:text="Water Plant"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
 
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints">
-
-                <TextView
-                    android:id="@+id/water"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:fontFamily="@font/livvic"
-                    android:gravity="center"
-                    android:text="Water Plant"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/home_desc" />
-                         </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout5"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints">
-
-                <TextView
-                    android:id="@+id/view"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:fontFamily="@font/livvic"
-                    android:gravity="center"
-                    android:text="View Plant"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/home_desc" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/view"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/livvic"
+                android:gravity="center"
+                android:text="View Plant"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_desc" />
+-->
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
