@@ -144,7 +144,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
                 <TextView
-                    android:id="@+id/entergivenname"
+                    android:id="@+id/nameHere"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
