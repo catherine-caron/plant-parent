@@ -1,5 +1,8 @@
 package ca.plantcare;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,13 +23,15 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
 public class LogIn extends AppCompatActivity {
-
+    public static final String MyPREFERENCES = "MyPrefs" ;
     private String error = null;
     private List<String> personUsernames = new ArrayList<>();
     private ArrayAdapter<String> personAdapter;
     private ArrayAdapter<String> eventAdapter;
     private List<String> personPasswords = new ArrayList<>();
     private List<String> plants = new ArrayList<>();
+
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +74,18 @@ public class LogIn extends AppCompatActivity {
                     error += e.getMessage();
                 }
                 //refreshErrorMessage();
+
+                Intent intent = new Intent(LogIn.this, LoggedInView.class);
+
+                SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                editor.putString("memberId", enterUsername.getText().toString());
+                editor.putString("password", enterPassword.getText().toString());
+                editor.commit();
                 enterUsername.setText("Test Logged");
                 enterPassword.setText("Test");
-
-
+                startActivity(intent);
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
