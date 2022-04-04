@@ -59,8 +59,8 @@ public class SubmitExistingPlant extends AppCompatActivity {
 
 
         //nameHere.setText(memberId);
-        TextView testEdit = (TextView)findViewById(R.id.chooseReminderTest);
-        testEdit.setText(enterGivenName.getText().toString());
+        //TextView testEdit = (TextView)findViewById(R.id.chooseReminderTest);
+      //  testEdit.setText(enterGivenName.getText().toString());
         HttpUtils.post("plant/addPlant/",body, new JsonHttpResponseHandler() {
 
             private static final String TAG = "";

@@ -21,6 +21,9 @@
             android:name=".WaterPlant"
             android:exported="false"/>
         <activity
+            android:name=".MemberProfile"
+            android:exported="false"/>
+        <activity
             android:name=".SubmitExistingPlant"
             android:exported="false"/>
         <activity

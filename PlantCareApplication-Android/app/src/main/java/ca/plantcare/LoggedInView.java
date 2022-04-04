@@ -146,7 +146,7 @@ public class LoggedInView extends AppCompatActivity {
 
              private void refreshErrorMessage() {
                  //set the error message
-                 TextView tvError = (TextView) findViewById(R.id.error); //error is an id in xml files
+                 TextView tvError = (TextView) findViewById(R.id.emailEnterred); //error is an id in xml files
                  tvError.setText(error);
 
                  if (error == null || error.length() == 0) {
@@ -160,6 +160,10 @@ public class LoggedInView extends AppCompatActivity {
     }
     public void addPlantButton(View v){
         startActivity(new Intent(LoggedInView.this, AddPlant.class));
+    }
+
+    public void goToMember(View v){
+        startActivity(new Intent(LoggedInView.this, MemberProfile.class));
     }
 
 }
