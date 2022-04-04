@@ -1,8 +1,16 @@
 package ca.plantcare.service;
 
 
+import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -385,6 +393,55 @@ public class PlantService {
 		return plant;
 	}*/
 
+	public boolean setLastWateredDate(Integer plantId){
+		boolean isWatered = false;
+		Plant plant = plantRepository.findPlantByPlantId(plantId);
+		if (plant != null){
+			WateringSchedule schedule = plant.getWateringRecommendation();
+			int hoursBetweenWatering = schedule.getHoursBetweenWatering();
+
+			Date lastDate = plant.getLastWateredDate();
+			Time lastTime = plant.getLastWateredTime();
+			if (lastDate == null){ 
+				// no date or time exists, so set it to now
+				java.util.Date date = new java.util.Date();
+				java.sql.Date sqlDate = new Date(date.getTime());
+				lastDate = sqlDate;; // should return current date
+				lastTime = Time.valueOf("10:00:00"); // set a random morning time
+			}
+			// calculate next watering date and time
+			long daysUntilNextWatering = hoursBetweenWatering / 24;
+
+			LocalDateTime nextDateTime = lastDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+			nextDateTime = nextDateTime.plusDays(daysUntilNextWatering);
+			java.util.Date next = Date.from(nextDateTime.atZone(ZoneId.systemDefault()).toInstant());
+			java.sql.Date nextDate = new Date(next.getTime());
+			
+			Time nextTime = lastTime;
+
+		}
+		return isWatered;
+	}
+
+
+	/**
+	 * Water a plant and update the last watered date and time (10am)
+	 * @param plantId
+	 * @return
+	 */
+	public boolean waterPlant(Integer plantId){
+		boolean isWatered = false;
+		Plant plant = plantRepository.findPlantByPlantId(plantId);
+		if (plant != null){
+			java.util.Date date = new java.util.Date();
+			java.sql.Date today = new Date(date.getTime()); // should return current date
+			plant.setLastWateredTime(Time.valueOf("10:00:00")); // set a random morning time
+			plant.setLastWateredDate(today);
+			isWatered = true;
+		}
+		return isWatered;
+	}
+
 	/**
 	 * Helper method that converts iterable to list
 	 * 
@@ -399,4 +456,6 @@ public class PlantService {
 		}
 		return resultList;
 	}
+
+
 }

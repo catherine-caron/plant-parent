@@ -1,5 +1,7 @@
 package ca.plantcare.models;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,8 @@ public class Plant {
 	private Integer id;
 	private Integer addedPlantId;
 	private Integer originalPlantId;
+	private Date lastWateredDate;
+	private Time lastWateredTime;
 
 	
 	// private Member member;
@@ -272,5 +276,36 @@ public class Plant {
 		this.id = id;
 	}
 	
+	/**
+	 * 
+	 * @return date of last water
+	 */
+	public Date getLastWateredDate() {
+		return lastWateredDate;
+	}
+
+	/**
+	 * 
+	 * @param lastWatereDate 
+	 */
+	public void setLastWateredDate(Date lastWateredDate) {
+		this.lastWateredDate = lastWateredDate;
+	}
+
+	/**
+	 * 
+	 * @return time of last water
+	 */
+	public Time getLastWateredTime() {
+		return lastWateredTime;
+	}
+
+	/**
+	 * 
+	 * @param lastWateredTime
+	 */
+	public void setLastWateredTime(Time lastWateredTime) {
+		this.lastWateredTime = lastWateredTime;
+	}
 
 }
