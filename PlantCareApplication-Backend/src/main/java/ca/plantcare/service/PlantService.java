@@ -277,6 +277,29 @@ public class PlantService {
 		return plant;
 
 	}
+	
+	@Transactional
+	public List<Plant>  getAllOriginalPlants() {
+		List<Plant> allPlants = toList(plantRepository.findAll());
+		List<Plant> goodPlants = new ArrayList<Plant>();
+		for (int i=0; i<allPlants.size(); i++) {
+			if (allPlants.get(i).getAddedPlantId() == null) {
+				goodPlants.add(allPlants.get(i));
+			}
+		}
+		return goodPlants;
+
+	}
+	
+	@Transactional
+	public Plant  renamePlant(Integer plantId, String commonName, String botanicalName) {
+		Plant plant = plantRepository.findPlantByPlantId(plantId);
+		plant.setCommonName(commonName);
+		plant.setBotanicalName(botanicalName);
+		plantRepository.save(plant);
+		return plant;
+
+	}
 
 	/* HELPER METHODS */
 

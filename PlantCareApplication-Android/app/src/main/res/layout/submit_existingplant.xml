@@ -23,7 +23,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/londrina_solid"
-        android:text="Add"
+        android:text="Add Plant"
         android:textAlignment="textStart"
         android:textColor="@color/off_white"
         android:textSize="48sp"
@@ -38,7 +38,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="72dp"
         android:fontFamily="@font/livvic"
-        android:text="Add a Plant"
+        android:text="Enter Plant Information"
         android:textAlignment="textStart"
         android:textColor="@color/off_white"
         android:textSize="18sp"
@@ -47,57 +47,82 @@
         app:lineHeight="18sp" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutbuts"
+        android:id="@+id/linearLayoutP"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="248dp"
+        android:layout_marginTop="220dp"
         android:layout_weight="1"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
+        tools:ignore="MissingConstraints">
 
-        <Button
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/myGivenNameP"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.1"
-            android:backgroundTint="#42501D"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/livvic"
             android:gravity="center"
-            android:onClick="addExistingPlantButton"
-            android:text="Choose Existing Plant"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="92dp"
-            tools:layout_editor_absoluteY="291dp" />
+            android:text="Given Name:"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
-        <Button
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/enterGivenNameUser"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="70dp"
-            android:layout_weight="0.1"
-            android:backgroundTint="#42501D"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/livvic"
             android:gravity="center"
-            android:onClick="createPlantButton"
-            android:text="Add Plant"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="145dp"
-            tools:layout_editor_absoluteY="385dp" />
+            android:hint="Enter Given Name"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
-
-        <Button
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/chooseReminderTest"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="200dp"
-            android:layout_weight="0.1"
-
-            android:backgroundTint="#42501D"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/livvic"
             android:gravity="center"
-            android:onClick="goToHomePage"
-            android:text="back" />
-
+            android:text="My Text"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_desc" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="600dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.1"
+            android:backgroundTint="#42501D"
+            android:gravity="center"
+            android:onClick="addExistingPlantToUser"
+            android:text="Submit" />
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

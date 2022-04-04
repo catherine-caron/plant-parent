@@ -85,6 +85,17 @@ public class LoggedInView extends AppCompatActivity {
 
                             Button myButton = new Button(LoggedInView.this);
                             myButton.setText("Plant Info");
+                            myButton.setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+                                    SharedPreferences preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = preferences.edit();
+
+                                    editor.putInt("plantIdView", plantId);
+                                    editor.commit();
+                                    Intent intent = new Intent(LoggedInView.this, ViewPlant.class);
+                                    startActivity(intent);
+                                }
+                            });
 
                             Button waterPlant = new Button(LoggedInView.this);
                             waterPlant.setText("Water");
@@ -147,8 +158,8 @@ public class LoggedInView extends AppCompatActivity {
              }
         });
     }
-    public void viewPlantDetails(Integer plantId)  {
-
+    public void addPlantButton(View v){
+        startActivity(new Intent(LoggedInView.this, AddPlant.class));
     }
 
 }

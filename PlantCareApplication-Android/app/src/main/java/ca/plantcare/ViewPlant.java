@@ -1,5 +1,6 @@
 package ca.plantcare;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +26,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class AddExistingPlant extends AppCompatActivity {
+public class ViewPlant extends AppCompatActivity {
 
     private String error = null;
     private List<String> personUsernames = new ArrayList<>();
@@ -33,87 +34,74 @@ public class AddExistingPlant extends AppCompatActivity {
     private ArrayAdapter<String> eventAdapter;
     private List<String> personPasswords = new ArrayList<>();
     private List<String> plants = new ArrayList<>();
-    private  String commonName = "";
+    private  String givenName = "";
     private  String botanicalName = "";
+    private  String soilType = "";
+    private  String sunType = "";
+    private  String wateringRec = "";
+    private  String bloomTime = "";
+    private  String icon = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.addexistingplant);
-        displayAllPlants();
+        setContentView(R.layout.plantinfo);
+        viewPlant();
     }
 
 
-    public void displayAllPlants(){
+    public void viewPlant()  {
+        error = "";
+        final TextView iconPic = (TextView) findViewById(R.id.iconPic);
+        final TextView plantGivenName = (TextView) findViewById(R.id.plantGivenName);
+        final TextView plantBotanical = (TextView) findViewById(R.id.plantBotanical);
+        final TextView chooseSunlight = (TextView) findViewById(R.id.chooseSunlight);
+        final TextView chooseSoil = (TextView) findViewById(R.id.chooseSoil);
+        final TextView chooseBloom = (TextView) findViewById(R.id.chooseBloom);
+        //final TextView chooseSchedule = (TextView) findViewById(R.id.chooseSchedule);
+        //TextView nameHere = (TextView) findViewById(R.id.nameHere);
+
         SharedPreferences preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        String memberId = preferences.getString("memberId", null);
-        //nameHere.setText(memberId);
-       // TextView testEdit = (TextView)findViewById(R.id.testEdit);
-        //testEdit.setText("test1");
-        HttpUtils.get("plant/ori/",new RequestParams(), new JsonHttpResponseHandler() {
+        int plantId = preferences.getInt("plantIdView",0);
+        String plantIdString = String.valueOf(plantId);
+        HttpUtils.get("plant/"+ plantIdString,new RequestParams(), new JsonHttpResponseHandler() {
 
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
 
-                    //JSONArray arr = response.getJSONArray("plants");
+                    JSONArray arr = response.getJSONArray("plants");
                     LinearLayout llMain = (LinearLayout) findViewById(R.id.linearLayoutScroll);
-                   //String testEdit = findViewById(R.id.testEdit);
-                  // testEdit.setText("test2");
-                    for (int i = 0; i < response.length(); i++) {
+                    // nameHere.setText("test1");
 
-                        JSONObject plants = response.getJSONObject(i);
-
-                        commonName = plants.getString("commonName");
-                        botanicalName = plants.getString("botanicalName");
-                        Integer plantId = plants.getInt("plantId");
+                        givenName = response.getString("givenName");
+                        botanicalName = response.getString("botanicalName");
+                        Integer plantId = response.getInt("plantId");
 
                         //String endDateTime = plants.getString("endDateTime");
                         // nameHere.setText(givenName);
-                        TextView textNumber = new TextView(AddExistingPlant.this);
-                        textNumber.setText("Common Name:");
-                        TextView textGiven = new TextView(AddExistingPlant.this);
-                        textGiven.setText(commonName);
+                        TextView textNumber = new TextView(ViewPlant.this);
+                        textNumber.setText("Plant Name:");
 
-                        TextView botan = new TextView(AddExistingPlant.this);
-                        botan.setText("Botanical Name:");
-                        TextView textBotan = new TextView(AddExistingPlant.this);
-                        textBotan.setText(botanicalName);
+                        TextView textGiven = new TextView(ViewPlant.this);
+                        textGiven.setText(givenName);
 
-                        Button myButton = new Button(AddExistingPlant.this);
-                        myButton.setText("Select Plant");
-                        myButton.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v) {
-                                SharedPreferences preferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = preferences.edit();
+                        Button myButton = new Button(ViewPlant.this);
 
-                                editor.putInt("plantIdAdd", plantId);
-                                editor.commit();
-                                Intent intent = new Intent(AddExistingPlant.this, SubmitExistingPlant.class);
-                                startActivity(intent);
-                                  }
-                        });
 
+                        Button waterPlant = new Button(ViewPlant.this);
+                        waterPlant.setText("Water");
 
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 
 
-                        botan.setTextSize(14);
-                        botan.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                        //textNumber.setPadding(0,0,0,10);
-                        textBotan.setTextSize(14);
-                        textBotan.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                         textGiven.setPadding(0,0,0,30);
-
-                        textNumber.setTextSize(14);
+                        textNumber.setTextSize(24);
                         textNumber.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                        //textNumber.setPadding(0,0,0,10);
-                        textGiven.setTextSize(14);
+                        textNumber.setPadding(0,0,0,10);
+                        textGiven.setTextSize(24);
                         textGiven.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                        // textGiven.setPadding(0,0,0,60);
-
-
+                        textGiven.setPadding(0,0,0,60);
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,
                                 LinearLayout.LayoutParams.MATCH_PARENT
@@ -124,16 +112,11 @@ public class AddExistingPlant extends AppCompatActivity {
                         textGiven.setLayoutParams(params);
                         llMain.addView(textGiven);
 
-                        botan.setLayoutParams(params);
-                        llMain.addView(botan);
-
-                        textBotan.setLayoutParams(params);
-                        llMain.addView(textBotan);
-
                         llMain.addView(myButton, lp);
+                        llMain.addView(waterPlant, lp);
 
 
-                    }
+
 
                     //displayAppointments.add(currServiceName + "\n" + HelperMethods.displayDateTimeFromTo(currStart, currEnd));
                 } catch (JSONException e) {
@@ -165,5 +148,6 @@ public class AddExistingPlant extends AppCompatActivity {
                 }
 
             }
-        }); }
+        });
+    }
 }

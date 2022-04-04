@@ -15,6 +15,24 @@
             android:name=".HomePage"
             android:exported="false"/>
         <activity
+            android:name=".ViewPlant"
+            android:exported="false"/>
+        <activity
+            android:name=".WaterPlant"
+            android:exported="false"/>
+        <activity
+            android:name=".SubmitExistingPlant"
+            android:exported="false"/>
+        <activity
+            android:name=".AddPlant"
+            android:exported="false"/>
+        <activity
+            android:name=".AddExistingPlant"
+            android:exported="false"/>
+        <activity
+            android:name=".createPlant"
+            android:exported="false"/>
+        <activity
             android:name=".LoggedInView"
             android:exported="false"
             />

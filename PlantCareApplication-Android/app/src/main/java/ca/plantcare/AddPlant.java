@@ -26,6 +26,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.plantcare.databinding.AddcreateplantBinding;
 import cz.msebera.android.httpclient.Header;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,21 +40,26 @@ public class AddPlant extends AppCompatActivity {
     private ArrayAdapter<String> eventAdapter;
     private List<String> personPasswords = new ArrayList<>();
     private List<String> plants = new ArrayList<>();
-    private  String givenName = "";
+    private  String commonName = "";
     private  String botanicalName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addplant);
-
+       // displayAllPlants();
     }
 
-    public void addPlantButton(View v){
-        startActivity(new Intent(AddPlant.this, SignUp.class));
+
+    public void addExistingPlantButton(View v){
+        startActivity(new Intent(AddPlant.this, AddExistingPlant.class));
     }
 
     public void createPlantButton(View v){
-        startActivity(new Intent(AddPlant.this, LogIn.class));
+        startActivity(new Intent(AddPlant.this, createPlant.class));
+    }
+
+    public void goToHomePage(View v){
+        startActivity(new Intent(AddPlant.this, LoggedInView.class));
     }
 }

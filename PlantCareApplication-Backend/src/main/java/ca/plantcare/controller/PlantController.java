@@ -114,11 +114,37 @@ public class PlantController {
 		return httpSuccess(plants);
 	}
 	
+	@GetMapping(value = {  BASE_URL + "/ori", BASE_URL + "/get-all-original" })
+	public ResponseEntity<?> getAllGoodPlants() {
+		List<PlantDto> plants = null;
+		try {
+			plants = plantService.getAllOriginalPlants().stream().map(plant -> PlantDto.convertToDto(plant)).collect(Collectors.toList());
+			} catch (Exception e) {
+			return httpFailureMessage(e.getMessage());
+		}
+		return httpSuccess(plants);
+	}
+	
 	@PutMapping(value = { BASE_URL + "/deleteplant" + "/{id}", BASE_URL + "/deleteplant/" +"/{id}"})
 	public ResponseEntity<?> deletePlant(@PathVariable("id") Integer plantId){
 			try {
 			//Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation);
 				Plant plant = plantService.deletePlant(plantId);
+				return httpSuccess(PlantDto.convertToDto(plant));
+
+		}
+		catch(Exception e){
+			return httpFailure("Error: " + e.getMessage());
+		}
+	}
+	
+	@PutMapping(value = { BASE_URL + "/renameplant" + "/{id}", BASE_URL + "/renameplant" +"/{id}/"})
+	public ResponseEntity<?> renamePlant(@PathVariable("id") Integer plantId,
+			@RequestParam("botanicalName") String botanicalName, 
+			@RequestParam("commonName") String commonName){
+			try {
+			//Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation);
+				Plant plant = plantService.renamePlant(plantId, commonName, botanicalName);
 				return httpSuccess(PlantDto.convertToDto(plant));
 
 		}

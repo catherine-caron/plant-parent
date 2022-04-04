@@ -119,7 +119,7 @@
             app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
         <TextView
-            android:id="@+id/entergivenname"
+            android:id="@+id/plantGivenName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -160,7 +160,7 @@
             app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
         <TextView
-            android:id="@+id/enterbotanicalname"
+            android:id="@+id/plantBotanical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -319,14 +319,14 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/reminder"
+            android:id="@+id/bloom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:fontFamily="@font/livvic"
             android:gravity="center"
-            android:text="Reminder:"
+            android:text="Bloom:"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -334,9 +334,9 @@
             app:layout_constraintTop_toBottomOf="@+id/home_desc" />
 
         <TextView
-            android:id="@+id/chooseReminder"
+            android:id="@+id/chooseBloom"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:fontFamily="@font/livvic"

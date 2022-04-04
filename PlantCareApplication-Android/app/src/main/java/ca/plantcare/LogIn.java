@@ -83,8 +83,8 @@ public class LogIn extends AppCompatActivity {
                 editor.putString("memberId", enterUsername.getText().toString());
                 editor.putString("password", enterPassword.getText().toString());
                 editor.commit();
-                enterUsername.setText("Test Logged");
-                enterPassword.setText("Test");
+                enterUsername.setText("");
+                enterPassword.setText("");
                 startActivity(intent);
             }
             @Override

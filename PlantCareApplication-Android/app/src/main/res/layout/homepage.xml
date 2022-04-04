@@ -30,13 +30,14 @@
 
     <!--Nav Bar End -->
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/appCompatImageView2"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="184dp"
         android:layout_marginTop="568dp"
-        android:onClick="viewPlantDetails"
+        android:clickable="true"
+        android:onClick="addPlantButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_circle_24" />
