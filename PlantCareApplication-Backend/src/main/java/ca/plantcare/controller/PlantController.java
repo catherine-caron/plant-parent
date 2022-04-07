@@ -144,7 +144,6 @@ public class PlantController {
 			//Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation);
 				Plant plant = plantService.waterPlant(plantId);
 				return httpSuccess(PlantDto.convertToDto(plant));
-
 		}
 		catch(Exception e){
 			return httpFailure("Error: " + e.getMessage());

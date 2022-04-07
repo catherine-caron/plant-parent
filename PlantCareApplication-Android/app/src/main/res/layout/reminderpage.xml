@@ -44,7 +44,7 @@
         android:layout_marginTop="660dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
+        app:srcCompat="@drawable/ic_baseline_manage_accounts_24" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="64dp"

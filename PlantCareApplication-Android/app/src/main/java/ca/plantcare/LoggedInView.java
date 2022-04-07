@@ -99,11 +99,39 @@ public class LoggedInView extends AppCompatActivity {
 
                             Button waterPlant = new Button(LoggedInView.this);
                             waterPlant.setText("Water");
+                            waterPlant.setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v) {
+                                    RequestParams body = new RequestParams();
+                                    body.add("plantId", plantId.toString());
 
+                                    try {
+                                        HttpUtils.put("plant/waterPlant/",body, new JsonHttpResponseHandler() {
+                                            @Override
+                                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                                try {
+                                                    JSONObject serverResp = new JSONObject(response.toString());
+                                                } catch (JSONException e) {
+                                                    error += e.getMessage();
+                                                }
+                                                error += "Yay! Plant watered!";
+                                            }
+                                            @Override
+                                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                                try {
+                                                    error += errorResponse.get("message").toString();
+                                                } catch (JSONException e) {
+                                                    error += e.getMessage();
+                                                }
+                                                //refreshErrorMessage();
+                                            }
+                                        });
+                                    } catch (UnsupportedEncodingException e) {
+                                        error += e.getMessage();
+                                    }
+                                }
+                            });
                             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-
-
+                            
                             textNumber.setTextSize(24);
                             textNumber.setGravity(View.TEXT_ALIGNMENT_CENTER);
                             textNumber.setPadding(0,0,0,10);

@@ -17,6 +17,8 @@
         <entry key="app/src/main/res/layout-v31/homepage.xml" value="0.20606884057971014" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.1983695652173913" />
+        <entry key="app/src/main/res/layout/addcreateplant.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/addexistingplant.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/addplant.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/calendar.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/editplant.xml" value="0.1983695652173913" />
@@ -25,13 +27,16 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/home_page.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/homebeforelogin.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/homepage.xml" value="0.18795166015624998" />
         <entry key="app/src/main/res/layout/login.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/main2.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/memberprofile.xml" value="0.1203125" />
         <entry key="app/src/main/res/layout/navigation.xml" value="0.1983695652173913" />
         <entry key="app/src/main/res/layout/plantinfo.xml" value="0.1983695652173913" />
+        <entry key="app/src/main/res/layout/register.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/reminderpage.xml" value="0.1983695652173913" />
+        <entry key="app/src/main/res/layout/submit_existingplant.xml" value="0.14175724637681159" />
       </map>
     </option>
   </component>
