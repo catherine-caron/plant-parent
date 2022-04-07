@@ -52,7 +52,7 @@ public class ViewPlant extends AppCompatActivity {
 
     public void viewPlant()  {
         error = "";
-
+        final TextView watering = (TextView) findViewById(R.id.chooseSchedule);
         final TextView iconPic = (TextView) findViewById(R.id.iconPic);
         final TextView plantGivenNameText = (TextView) findViewById(R.id.plantGivenName);
         final TextView plantBotanical = (TextView) findViewById(R.id.plantBotanical);
@@ -93,8 +93,11 @@ public class ViewPlant extends AppCompatActivity {
                     String soilType = response.getString("soilType");
                     String sunExposure = response.getString("sunExposure");
                     String toxicity = response.getString("toxicity");
+                    JSONObject schedule = response.getJSONObject("wateringRecommendation");
+                    String wateringSchedule = schedule.getString("hoursBetweenWatering");
 
-                   // iconPic.setText(icon);
+                    // iconPic.setText(icon);
+                    watering.setText(wateringSchedule);
                     plantGivenNameText.setText(givenName);
                     plantBotanical.setText(botanicalName);
                     chooseSunlight.setText(sunExposure);

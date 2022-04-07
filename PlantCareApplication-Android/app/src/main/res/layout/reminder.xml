@@ -37,10 +37,10 @@
         android:layout_marginStart="184dp"
         android:layout_marginTop="568dp"
         android:clickable="true"
-        android:onClick="addPlantButton"
+        android:onClick="backHomeviewReminder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_circle_24" />
+        app:srcCompat="@drawable/home_icon_white" />
 
     <ImageView
         android:layout_width="56dp"
@@ -48,7 +48,7 @@
         android:layout_marginStart="260dp"
         android:layout_marginTop="590dp"
         android:clickable="true"
-        android:onClick="goToMember"
+        android:onClick="logReminder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_manage_accounts_24" />
@@ -58,8 +58,6 @@
         android:layout_height="50dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="596dp"
-        android:clickable="true"
-        android:onClick="goToReminder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_notifications_active_24" />
@@ -71,7 +69,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/londrina_solid"
-        android:text="@string/home"
+        android:text="Reminders"
         android:textAlignment="textStart"
         android:textColor="@color/off_white"
         android:textSize="48sp"
@@ -106,13 +104,28 @@
         tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
-            android:id="@+id/linearLayoutScroll"
+            android:id="@+id/linearLayoutScrollReminder"
             android:layout_width="fill_parent"
             android:layout_height="240dp"
             android:gravity="center"
             android:orientation="vertical">
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
+
+          <!--  <TextView
+                android:id="@+id/myTest"
+                android:layout_width="245dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="72dp"
+                android:fontFamily="@font/livvic"
+                android:text="Member Profile"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lineHeight="18sp" />-->
 
             <!-- <TextView
                 android:id="@+id/plant_Pic2"

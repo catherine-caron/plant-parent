@@ -283,7 +283,7 @@
             android:layout_weight="0.5"
             android:fontFamily="@font/livvic"
             android:gravity="center"
-            android:text="Watering:"
+            android:text="Watering(hours):"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

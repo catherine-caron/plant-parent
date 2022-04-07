@@ -194,4 +194,8 @@ public class LoggedInView extends AppCompatActivity {
         startActivity(new Intent(LoggedInView.this, MemberProfile.class));
     }
 
+    public void goToReminder(View v){
+        startActivity(new Intent(LoggedInView.this, Reminder.class));
+    }
+
 }
