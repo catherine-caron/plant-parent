@@ -163,9 +163,13 @@ public class PlantService {
 		plant.setSoilType(soilType);
 		plant.setToxicity(toxicity);
 
-		// create a watering schedule
+		// create a simple watering schedule
+		WateringSchedule wateringSchedule = new WateringSchedule();
+		int scheduleId = leftLimit + (int) (Math.random() * (rightLimit - leftLimit));
+		wateringSchedule.setScheduleId(scheduleId);
+		wateringSchedule.setHoursBetweenWatering(hoursBetweenWatering);
+		wateringScheduleRepository.save(wateringSchedule);
 
-		WateringSchedule wateringSchedule = wateringScheduleRepository.findWateringScheduleByScheduleId(wateringRecommendation);
 		plant.setWateringRecommendation(wateringSchedule);
 		plant.setPlantId(plantId);
 		plantRepository.save(plant);
