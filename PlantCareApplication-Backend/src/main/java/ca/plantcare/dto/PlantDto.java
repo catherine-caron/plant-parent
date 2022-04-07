@@ -2,6 +2,8 @@ package ca.plantcare.dto;
 
 import ca.plantcare.models.WateringSchedule;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +30,8 @@ public class PlantDto {
 	private String memberId;
 	private Integer addedPlantId;
 	private Integer id;
+	private Date lastWateredDate;
+	private Time lastWateredTime;
 	//default constructor
 	public PlantDto(){
 		
@@ -35,7 +39,7 @@ public class PlantDto {
 	
 	public PlantDto (Integer icon, String givenName, String botanicalName, String commonName,
 			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
-			WateringSchedule wateringRecommendation,Integer plantId, Integer addedPlantId, Integer id) {
+			WateringSchedule wateringRecommendation,Integer plantId, Integer addedPlantId, Integer id, Date lastWateredDate, Time lastWateredTime) {
 		this.bloomTime = bloomTime;
 		this.botanicalName = botanicalName;
 		this.commonName = commonName;
@@ -45,6 +49,8 @@ public class PlantDto {
 		this.toxicity = toxicity;
 		this.wateringSchedule = wateringRecommendation;
 		this.id = id;
+		this.lastWateredDate = lastWateredDate;
+		this.lastWateredTime = lastWateredTime;
 		this.setAddedPlantId(addedPlantId);
 		this.memberId = memberId;
 		//this.member = member;
@@ -72,9 +78,10 @@ public class PlantDto {
 				plant.getWateringRecommendation(),
 				plant.getPlantId(),
 				plant.getAddedPlantId(),
-				plant.getId())
+				plant.getId(),
 				//plant.getMember()
-				
+				plant.getLastWateredDate(),
+				plant.getLastWateredTime())
 				
 				;
 		
@@ -268,6 +275,22 @@ public class PlantDto {
 	 */
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	public void setLastWateredDate(Date date){
+		this.lastWateredDate = date;
+	}
+
+	public Date getLastWateredDate(){
+		return lastWateredDate;
+	}
+
+	public void setLastWateredTime(Time time){
+		this.lastWateredTime = time;
+	}
+
+	public Time getLastWateredTime(){
+		return lastWateredTime;
 	}
 	
 }

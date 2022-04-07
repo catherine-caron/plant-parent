@@ -47,7 +47,7 @@ public class PlantController {
 			@RequestParam("soilType") SoilType soilType, 
 			@RequestParam("toxicity") Toxicity toxicity,
 			@RequestParam("bloomTime") BloomTime bloomTime,
-			@RequestParam("wateringRecommendation") Integer hoursBetweenWatering)  {
+			@RequestParam("hoursBetweenWatering") Integer hoursBetweenWatering)  {
 		try {
 			Plant plant = plantService.createPlant(icon, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, hoursBetweenWatering);
 					return httpSuccess(PlantDto.convertToDto(plant));
@@ -130,6 +130,19 @@ public class PlantController {
 			try {
 			//Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation);
 				Plant plant = plantService.deletePlant(plantId);
+				return httpSuccess(PlantDto.convertToDto(plant));
+
+		}
+		catch(Exception e){
+			return httpFailure("Error: " + e.getMessage());
+		}
+	}
+
+	@PutMapping(value = { BASE_URL + "/waterPlant" + "/{id}", BASE_URL + "/waterPlant/" +"/{id}"})
+	public ResponseEntity<?> waterPlant(@PathVariable("id") Integer plantId){
+			try {
+			//Plant plant = plantService.createPlant(icon, givenName, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation);
+				Plant plant = plantService.waterPlant(plantId);
 				return httpSuccess(PlantDto.convertToDto(plant));
 
 		}

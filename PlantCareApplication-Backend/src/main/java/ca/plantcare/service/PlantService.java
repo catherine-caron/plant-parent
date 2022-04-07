@@ -451,8 +451,8 @@ public class PlantService {
 	 * Update any reminders
 	 */
 	@Transactional
-	public boolean waterPlant(Integer plantId){
-		boolean isWatered = false;
+	public Plant waterPlant(Integer plantId){
+		
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
 		if (plant != null){
 			WateringSchedule schedule = plant.getWateringRecommendation();
@@ -496,9 +496,8 @@ public class PlantService {
 			}
 			// save plant
 			plantRepository.save(plant);
-			isWatered = true; // all done without error
 		}
-		return isWatered;
+		return plant;
 	}
 
 	/**
