@@ -143,25 +143,31 @@ public class PlantService {
 		}
 		if (hoursBetweenWatering == null) {
 			throw new IllegalArgumentException("Watering Recommendation cannot be null or empty");
-		} // need expection for wrong inputs
+		} 
 
 		int leftLimit = 000001;
 		int rightLimit = 000100;
 		int plantId = leftLimit + (int) (Math.random() * (rightLimit - leftLimit));
 		if (plantId > 100) {
 			throw new IllegalArgumentException("PlantId is too large. Contact Admin");
-		} // need expection for wrong inputs
+		} 
+
+		java.util.Date date = new java.util.Date();
+		java.sql.Date sqlDate = new Date(date.getTime());
+		java.sql.Date lastDate = sqlDate;; // should return current date
+		java.sql.Time lastTime = Time.valueOf("10:00:00"); // set a random morning time
 
 		Plant plant = new Plant();
 		plant.setBloomtime(bloomTime);
 		plant.getBotanicalName();
 		plant.setCommonName(commonName);
 		plant.setBotanicalName(botanicalName);
-		//plant.setGivenName(givenName);
 		plant.setIcon(icon);
 		plant.setSunExposure(sunExposure);
 		plant.setSoilType(soilType);
 		plant.setToxicity(toxicity);
+		plant.setLastWateredDate(lastDate);
+		plant.setLastWateredTime(lastTime);
 
 		// create a simple watering schedule
 		WateringSchedule wateringSchedule = new WateringSchedule();
@@ -170,18 +176,38 @@ public class PlantService {
 		wateringSchedule.setHoursBetweenWatering(hoursBetweenWatering);
 		wateringScheduleRepository.save(wateringSchedule);
 
+		// create a simple reminder for that schedule
+		Reminder reminder = new Reminder();
+		int reminderId = leftLimit + (int) (Math.random() * (rightLimit - leftLimit));
+		reminder.setReminderId(reminderId);
+
+		String message = "Time to water " + plant.getGivenName();
+		reminder.setMessage(message);
+
+		// calculate next watering date and time
+		long daysUntilNextWatering = hoursBetweenWatering / 24;
+		LocalDateTime nextDateTime = lastDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		nextDateTime = nextDateTime.plusDays(daysUntilNextWatering);
+		java.util.Date next = Date.from(nextDateTime.atZone(ZoneId.systemDefault()).toInstant());
+		java.sql.Date nextDate = new Date(next.getTime());
+		Time nextTime = lastTime;
+		reminder.setDate(nextDate);
+		reminder.setTime(nextTime);
+		// save reminder
+		reminderRepository.save(reminder);
+
+		// add reminder to watering schedule and save
+		List <Reminder> reminders = wateringSchedule.getReminder();
+		reminders.add(reminder);
+		wateringSchedule.setReminder(reminders);
+		wateringScheduleRepository.save(wateringSchedule);
+
+		// add watering schedule to plant and save
 		plant.setWateringRecommendation(wateringSchedule);
 		plant.setPlantId(plantId);
 		plantRepository.save(plant);
 
-		// add to member's plants
-		//Member member = memberRepository.findMemberByUsername(memberId);
-
-		//member.setPlant(plants);
-		//memberRepository.save(member);
-
 		return plant;
-
 	}
 
 	/**
