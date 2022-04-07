@@ -47,9 +47,9 @@ public class PlantController {
 			@RequestParam("soilType") SoilType soilType, 
 			@RequestParam("toxicity") Toxicity toxicity,
 			@RequestParam("bloomTime") BloomTime bloomTime,
-			@RequestParam("wateringRecommendation") Integer wateringRecommendation)  {
+			@RequestParam("wateringRecommendation") Integer hoursBetweenWatering)  {
 		try {
-			Plant plant = plantService.createPlant(icon, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, wateringRecommendation);
+			Plant plant = plantService.createPlant(icon, botanicalName, commonName, sunExposure, soilType, toxicity, bloomTime, hoursBetweenWatering);
 					return httpSuccess(PlantDto.convertToDto(plant));
 
 		}

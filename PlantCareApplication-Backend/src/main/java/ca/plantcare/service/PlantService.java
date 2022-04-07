@@ -1,15 +1,13 @@
 package ca.plantcare.service;
 
-
-import java.sql.Time;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+
+import java.sql.Date;
+import java.sql.Time;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +24,6 @@ import ca.plantcare.models.Plant.BloomTime;
 import ca.plantcare.models.Plant.SoilType;
 import ca.plantcare.models.Plant.SunExposure;
 import ca.plantcare.models.Plant.Toxicity;
-
-import ca.plantcare.service.*; // automatically create watering schedule and reminder when creating a plant
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -152,11 +148,17 @@ public class PlantService {
 			throw new IllegalArgumentException("PlantId is too large. Contact Admin");
 		} 
 
-		java.util.Date date = new java.util.Date();
-		java.sql.Date sqlDate = new Date(date.getTime());
-		java.sql.Date lastDate = sqlDate;; // should return current date
-		java.sql.Time lastTime = Time.valueOf("10:00:00"); // set a random morning time
-
+		java.sql.Time lastTime = null;
+		java.sql.Date lastDate = null;
+		try {
+			java.util.Date date = new java.util.Date();
+			java.sql.Date sqlDate = new Date(date.getTime());
+			lastDate = sqlDate;; // should return current date
+			lastTime = Time.valueOf("10:00:00"); // set a random morning time
+		} catch (Exception e) {
+			throw new IllegalArgumentException("problem with dates");
+		}
+	
 		Plant plant = new Plant();
 		plant.setBloomtime(bloomTime);
 		plant.getBotanicalName();
@@ -185,19 +187,30 @@ public class PlantService {
 		reminder.setMessage(message);
 
 		// calculate next watering date and time
-		long daysUntilNextWatering = hoursBetweenWatering / 24;
-		LocalDateTime nextDateTime = lastDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-		nextDateTime = nextDateTime.plusDays(daysUntilNextWatering);
-		java.util.Date next = Date.from(nextDateTime.atZone(ZoneId.systemDefault()).toInstant());
-		java.sql.Date nextDate = new Date(next.getTime());
-		Time nextTime = lastTime;
+		int daysUntilNextWatering = hoursBetweenWatering / 24;
+		Date today = new Date(System.currentTimeMillis()); // should return current date of form 2020-11-05
+		Time time = Time.valueOf("10:00:00"); // random start time
+		plant.setLastWateredDate(today);
+		plant.setLastWateredTime(time);
+
+		if (daysUntilNextWatering == 0){
+			daysUntilNextWatering = 1; // must be at least a day!
+		}
+
+		// 86400000 is number of ms in a day
+		Date nextDate = new Date(today.getTime() + (daysUntilNextWatering * 86400000));  // 86400000 is number of ms in a day
+		Time nextTime = time;
+
 		reminder.setDate(nextDate);
 		reminder.setTime(nextTime);
 		// save reminder
 		reminderRepository.save(reminder);
 
 		// add reminder to watering schedule and save
-		List <Reminder> reminders = wateringSchedule.getReminder();
+		List<Reminder> reminders = wateringSchedule.getReminder();
+		if (reminders == null){
+			reminders = new ArrayList<Reminder>();
+		}
 		reminders.add(reminder);
 		wateringSchedule.setReminder(reminders);
 		wateringScheduleRepository.save(wateringSchedule);
@@ -273,8 +286,7 @@ public class PlantService {
 	 */
 	@Transactional
 	public Plant updatePlant(Integer plantId, String givenName, Integer icon, String botanicalName, String commonName,
-			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
-			WateringSchedule wateringRecommendation) {
+			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime) {
 		if (plantId == null) {
 			throw new IllegalArgumentException("Plant not found.");
 		}
@@ -293,7 +305,7 @@ public class PlantService {
 		plant.setSunExposure(sunExposure);
 		plant.setSoilType(soilType);
 		plant.setToxicity(toxicity);
-		plant.setWateringRecommendation(wateringRecommendation);
+		// plant.setWateringRecommendation(wateringRecommendation);
 		updateBloom(plantId, null);
 		plant.setGivenName(givenName);
 		plantRepository.save(plant);
@@ -450,24 +462,24 @@ public class PlantService {
 			Time lastTime = plant.getLastWateredTime();
 			if (lastDate == null){ 
 				// no date or time exists, so set it to now
-				java.util.Date date = new java.util.Date();
-				java.sql.Date sqlDate = new Date(date.getTime());
-				lastDate = sqlDate;; // should return current date
-				lastTime = Time.valueOf("10:00:00"); // set a random morning time
+				lastDate = new Date(System.currentTimeMillis()); // should return current date of form 2020-11-05
+				lastTime = Time.valueOf("10:00:00"); // random start time
 			}
+			// update plant (watered)
+			Date today = new Date(System.currentTimeMillis()); // should return current date of form 2020-11-05
+			Time time = lastTime; // same time
+			plant.setLastWateredDate(today);
+			plant.setLastWateredTime(time);
+
 			// calculate next watering date and time
-			long daysUntilNextWatering = hoursBetweenWatering / 24;
+			int daysUntilNextWatering = hoursBetweenWatering / 24;
+			if (daysUntilNextWatering == 0){
+				daysUntilNextWatering = 1; // must be at least a day!
+			}
 
-			LocalDateTime nextDateTime = lastDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-			nextDateTime = nextDateTime.plusDays(daysUntilNextWatering);
-			java.util.Date next = Date.from(nextDateTime.atZone(ZoneId.systemDefault()).toInstant());
-			java.sql.Date nextDate = new Date(next.getTime());
-			Time nextTime = lastTime;
-
-			// update plant
-			plant.setLastWateredTime(nextTime);
-			plant.setLastWateredDate(nextDate);
-			plantRepository.save(plant);
+			// 86400000 is number of ms in a day
+			Date nextDate = new Date(today.getTime() + (daysUntilNextWatering * 86400000));  // 86400000 is number of ms in a day
+			Time nextTime = time; // same time
 
 			// update reminders
 			List<Reminder> reminders = schedule.getReminder();
@@ -475,7 +487,6 @@ public class PlantService {
 				// reminders exist
 				// should only be one, but just in case update all
 				for(int i = 0; i < reminders.size(); i++){
-					int id = reminders.get(i).getReminderId();
 					// update reminder
 					reminders.get(i).setDate(nextDate);
 					reminders.get(i).setTime(nextTime);
@@ -483,8 +494,9 @@ public class PlantService {
 					reminderRepository.save(reminders.get(i));
 				}
 			}
-			// all done without error
-			isWatered = true;
+			// save plant
+			plantRepository.save(plant);
+			isWatered = true; // all done without error
 		}
 		return isWatered;
 	}
