@@ -18,12 +18,16 @@ import ca.plantcare.dao.MemberRepository;
 import ca.plantcare.models.Member;
 import ca.plantcare.dao.PlantRepository;
 import ca.plantcare.dao.WateringScheduleRepository;
+import ca.plantcare.dao.ReminderRepository;
+import ca.plantcare.models.Reminder;
 import ca.plantcare.models.Plant;
 import ca.plantcare.models.WateringSchedule;
 import ca.plantcare.models.Plant.BloomTime;
 import ca.plantcare.models.Plant.SoilType;
 import ca.plantcare.models.Plant.SunExposure;
 import ca.plantcare.models.Plant.Toxicity;
+
+import ca.plantcare.service.*; // automatically create watering schedule and reminder when creating a plant
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +39,10 @@ public class PlantService {
 	@Autowired
 	private PlantRepository plantRepository;
 	@Autowired
+	private ReminderRepository reminderRepository;
+	@Autowired
 	private WateringScheduleRepository wateringScheduleRepository;
+
 	/**
 	 * Find all plants owned by specific member
 	 * 
@@ -101,7 +108,7 @@ public class PlantService {
 	@Transactional
 	public Plant createPlant(Integer icon, String botanicalName, String commonName,
 			SunExposure sunExposure, SoilType soilType, Toxicity toxicity, BloomTime bloomTime,
-			Integer wateringRecommendation) {
+			Integer hoursBetweenWatering) {
 
 		if (icon == null || icon.equals("undefined")) {
 			throw new IllegalArgumentException("Icon cannot be null or empty");
@@ -134,7 +141,7 @@ public class PlantService {
 		if (soilType == null) {
 			throw new IllegalArgumentException("Soil Type cannot be null or empty");
 		}
-		if (wateringRecommendation == null) {
+		if (hoursBetweenWatering == null) {
 			throw new IllegalArgumentException("Watering Recommendation cannot be null or empty");
 		} // need expection for wrong inputs
 
@@ -144,6 +151,7 @@ public class PlantService {
 		if (plantId > 100) {
 			throw new IllegalArgumentException("PlantId is too large. Contact Admin");
 		} // need expection for wrong inputs
+
 		Plant plant = new Plant();
 		plant.setBloomtime(bloomTime);
 		plant.getBotanicalName();
@@ -154,6 +162,9 @@ public class PlantService {
 		plant.setSunExposure(sunExposure);
 		plant.setSoilType(soilType);
 		plant.setToxicity(toxicity);
+
+		// create a watering schedule
+
 		WateringSchedule wateringSchedule = wateringScheduleRepository.findWateringScheduleByScheduleId(wateringRecommendation);
 		plant.setWateringRecommendation(wateringSchedule);
 		plant.setPlantId(plantId);
@@ -393,7 +404,12 @@ public class PlantService {
 		return plant;
 	}*/
 
-	public boolean setLastWateredDate(Integer plantId){
+	/**
+	 * Set the last watered date to the current date
+	 * Update any reminders
+	 */
+	@Transactional
+	public boolean waterPlant(Integer plantId){
 		boolean isWatered = false;
 		Plant plant = plantRepository.findPlantByPlantId(plantId);
 		if (plant != null){
@@ -416,27 +432,28 @@ public class PlantService {
 			nextDateTime = nextDateTime.plusDays(daysUntilNextWatering);
 			java.util.Date next = Date.from(nextDateTime.atZone(ZoneId.systemDefault()).toInstant());
 			java.sql.Date nextDate = new Date(next.getTime());
-			
 			Time nextTime = lastTime;
 
-		}
-		return isWatered;
-	}
+			// update plant
+			plant.setLastWateredTime(nextTime);
+			plant.setLastWateredDate(nextDate);
+			plantRepository.save(plant);
 
-
-	/**
-	 * Water a plant and update the last watered date and time (10am)
-	 * @param plantId
-	 * @return
-	 */
-	public boolean waterPlant(Integer plantId){
-		boolean isWatered = false;
-		Plant plant = plantRepository.findPlantByPlantId(plantId);
-		if (plant != null){
-			java.util.Date date = new java.util.Date();
-			java.sql.Date today = new Date(date.getTime()); // should return current date
-			plant.setLastWateredTime(Time.valueOf("10:00:00")); // set a random morning time
-			plant.setLastWateredDate(today);
+			// update reminders
+			List<Reminder> reminders = schedule.getReminder();
+			if (!reminders.isEmpty()){
+				// reminders exist
+				// should only be one, but just in case update all
+				for(int i = 0; i < reminders.size(); i++){
+					int id = reminders.get(i).getReminderId();
+					// update reminder
+					reminders.get(i).setDate(nextDate);
+					reminders.get(i).setTime(nextTime);
+					// save reminder
+					reminderRepository.save(reminders.get(i));
+				}
+			}
+			// all done without error
 			isWatered = true;
 		}
 		return isWatered;
