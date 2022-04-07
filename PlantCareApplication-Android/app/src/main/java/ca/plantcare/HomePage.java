@@ -1,6 +1,8 @@
 package ca.plantcare;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -85,12 +87,22 @@ public class HomePage extends AppCompatActivity {
                 } catch (JSONException e) {
                     error += e.getMessage();
                 }
-                refreshErrorMessage();
+
+                Intent intent = new Intent(HomePage.this, LoggedInView.class);
+
+                SharedPreferences sharedpreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                editor.putString("memberId", enterUsername.getText().toString());
+                editor.putString("password", enterPassword.getText().toString());
+                editor.commit();
+
+               // refreshErrorMessage();
                 enterUsername.setText("");
                 name.setText("");
                 enterPassword.setText("");
                 enterEmail.setText("");
-
+                startActivity(intent);
 
             }
             @Override
